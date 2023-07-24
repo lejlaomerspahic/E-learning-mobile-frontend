@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import styles from "./ProductCartView.style";
+import styles from "./productCartView.style";
 
 const ProductCartView = () => {
   return (
@@ -13,6 +13,17 @@ const ProductCartView = () => {
             }}
             style={styles.image}
           />
+        </View>
+        <View style={styles.details}>
+          <Text style={styles.title} numberOfLines={1}>
+            PROOOOOOOOOOOOOOOOOOOOO
+          </Text>
+          <Text style={styles.title} numberOfLines={1}>
+            Product
+          </Text>
+          <Text style={styles.title} numberOfLines={1}>
+            $240
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

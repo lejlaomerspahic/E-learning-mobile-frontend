@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: COLORS.lightWhite,
   },
+  all: {
+    height: "100%",
+  },
 });
 
 export default styles;

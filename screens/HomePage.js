@@ -8,6 +8,7 @@ import Welcome from "../components/home/Welcome";
 import Carousel from "../components/home/Carousel";
 import Headings from "../components/home/Headings";
 import ProductRow from "../components/products/ProductRow";
+import Blank from "../components/products/Blank";
 
 const HomePage = () => {
   return (
@@ -31,6 +32,8 @@ const HomePage = () => {
         <Carousel></Carousel>
         <Headings></Headings>
         <ProductRow></ProductRow>
+        <ProductRow></ProductRow>
+        <Blank></Blank>
       </ScrollView>
     </SafeAreaView>
   );

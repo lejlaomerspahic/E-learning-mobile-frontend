@@ -1,6 +1,7 @@
 import { View, Text, FlatList } from "react-native";
 import React from "react";
 import styles from "./productRow.style";
+
 import { SIZES } from "../../constants";
 import ProductCartView from "./ProductCartView";
 
@@ -12,7 +13,9 @@ const ProductRow = () => {
         data={products}
         renderItem={({ item }) => <ProductCartView></ProductCartView>}
         horizontal
-        contentContainerStyle={{ columnGap: SIZES.medium }}
+        contentContainerStyle={{
+          marginLeft: SIZES.small - 5,
+        }}
       ></FlatList>
     </View>
   );

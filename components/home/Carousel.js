@@ -17,7 +17,7 @@ const Carousel = () => {
         ImageComponentStyle={{
           borderRadius: 15,
           width: "95%",
-          marginTop: 15,
+          marginTop: 8,
         }}
         autoplay
         circleLoop
