@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SearchPage, HomePage, ProfilePage } from "../screens/Index";
 import { Ionicons } from "@expo/vector-icons";
 
-import { COLORS } from "../constants/index";
+import { COLORS } from "../constants";
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
