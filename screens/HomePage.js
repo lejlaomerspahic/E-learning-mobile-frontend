@@ -5,6 +5,7 @@ import styles from "./home.style";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import Welcome from "../home/Welcome";
+import Carousel from "../home/Carousel";
 
 const HomePage = () => {
   return (
@@ -25,6 +26,7 @@ const HomePage = () => {
       </View>
       <ScrollView>
         <Welcome></Welcome>
+        <Carousel></Carousel>
       </ScrollView>
     </SafeAreaView>
   );
