@@ -3,14 +3,16 @@ import { COLORS, SIZES } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    width: 120,
+    width: 180,
     height: 200,
-    marginEnd: 22,
+    marginEnd: 20,
     borderRadius: SIZES.medium,
     backgroundColor: COLORS.secondary,
   },
 
   imageContainer: {
+    width: 175,
+    height: 120,
     margin: SIZES.xSmall - 7,
     borderRadius: SIZES.small,
     overflow: "hidden",
@@ -22,6 +24,27 @@ const styles = StyleSheet.create({
   details: {
     justifyContent: "center",
     paddingLeft: SIZES.small,
+  },
+  title: {
+    fontFamily: "bold",
+    fontSize: SIZES.large - 5,
+    marginBottom: 2,
+  },
+  supplier: {
+    fontFamily: "regular",
+    fontSize: SIZES.small,
+    marginBottom: 2,
+    color: COLORS.gray,
+  },
+  price: {
+    fontFamily: "bold",
+    fontSize: SIZES.large - 5,
+    color: COLORS.primary,
+  },
+  addBtn: {
+    position: "absolute",
+    bottom: SIZES.xSmall,
+    right: SIZES.xSmall,
   },
 });
 
