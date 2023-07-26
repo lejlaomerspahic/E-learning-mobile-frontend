@@ -5,32 +5,32 @@ import { Ionicons, Fontisto } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const ProductCartView = () => {
+const ProductCartView = ({ item }) => {
   const navigate = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => {
-        navigate.navigate("ProductDetails");
+        navigate.navigate("ProductDetails", { item });
       }}
     >
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <Image
             source={{
-              uri: "https://th.bing.com/th/id/R.b06025af27f12297726f33684d3109a3?rik=gPiWrh2oGN8Mkw&pid=ImgRaw&r=0",
+              uri: item.imageUrl,
             }}
             style={styles.image}
           />
         </View>
         <View style={styles.details}>
           <Text style={styles.title} numberOfLines={1}>
-            PROOOOOOOOOOOOOOOOOOOOO
+            {item.title}
           </Text>
           <Text style={styles.supplier} numberOfLines={1}>
-            Product
+            {item.supplier}
           </Text>
           <Text style={styles.price} numberOfLines={1}>
-            $240
+            {item.price}
           </Text>
         </View>
         <TouchableOpacity style={styles.addBtn}>

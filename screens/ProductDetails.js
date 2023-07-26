@@ -4,8 +4,12 @@ import styles from "./productDetails.style";
 import { Ionicons, SimpleLineIcons, Fontisto } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRoute } from "@react-navigation/native";
 
 const ProductDetails = () => {
+  const route = useRoute();
+  const { item } = route.params;
+  console.log(item);
   const [count, setCount] = useState(1);
   const increment = () => {
     setCount(count + 1);
@@ -26,14 +30,14 @@ const ProductDetails = () => {
       <Image
         style={styles.image}
         source={{
-          uri: "https://th.bing.com/th/id/R.b06025af27f12297726f33684d3109a3?rik=gPiWrh2oGN8Mkw&pid=ImgRaw&r=0",
+          uri: item.imageUrl,
         }}
       ></Image>
       <View style={styles.details}>
         <View style={styles.titleRow}>
-          <Text style={styles.title}>Product</Text>
+          <Text style={styles.title}>{item.title}</Text>
           <View style={styles.priceWrapper}>
-            <Text style={styles.price}>$249.95</Text>
+            <Text style={styles.price}>{item.price}</Text>
           </View>
         </View>
         <View style={styles.ratingRow}>
@@ -57,21 +61,13 @@ const ProductDetails = () => {
         </View>
         <View style={styles.descriptionWrapper}>
           <Text style={styles.description}>Description</Text>
-          <Text style={styles.desc}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Text>
+          <Text style={styles.desc}>{item.description}</Text>
         </View>
         <View style={{ marginLeft: 10, marginRight: 10 }}>
           <View style={styles.location}>
             <View style={{ flexDirection: "row" }}>
               <Ionicons name="location-outline" size={24}></Ionicons>
-              <Text style={{ marginTop: 3 }}>Zenica</Text>
+              <Text style={{ marginTop: 3 }}>{item.product_location}</Text>
             </View>
             <View style={{ flexDirection: "row" }}>
               <MaterialCommunityIcons

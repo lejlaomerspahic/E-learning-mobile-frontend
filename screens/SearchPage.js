@@ -7,6 +7,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 const SearchPage = () => {
   const navigation = useNavigation();
@@ -16,7 +17,6 @@ const SearchPage = () => {
         <View style={styles.searcWrapper}>
           <TextInput
             style={styles.searchInput}
-            value=""
             onPressIn={() => {}}
             placeholder="What are you looking for"
           ></TextInput>
