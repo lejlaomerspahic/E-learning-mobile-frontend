@@ -4,7 +4,7 @@ import styles from "./productDetails.style";
 import { Ionicons, SimpleLineIcons, Fontisto } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const ProductDetails = () => {
   const route = useRoute();
@@ -17,10 +17,12 @@ const ProductDetails = () => {
   const decrement = () => {
     setCount(count - 1);
   };
+
+  const navigate = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.upperRow}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => navigate.goBack()}>
           <Ionicons name="chevron-back-circle" size={30}></Ionicons>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}}>
