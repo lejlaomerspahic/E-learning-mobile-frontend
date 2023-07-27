@@ -13,10 +13,10 @@ const Welcome = () => {
     <View>
       <View style={styles.container}>
         <Text style={styles.welcomeTxt(COLORS.black, SIZES.xSmall + 10)}>
-          Find The Most
+          Embrace the Endless
         </Text>
         <Text style={styles.welcomeTxt(COLORS.primary, -10)}>
-          Luxurious Furniture
+          World of Knowledge
         </Text>
       </View>
       <View style={styles.searchContariner}>
