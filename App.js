@@ -8,6 +8,7 @@ import { Cart } from "./screens/Index";
 import ProductDetails from "./screens/ProductDetails";
 import NewRivals from "./screens/NewRivals";
 import WelcomeScreen from "./screens/Swiper";
+import FirstPage from "./screens/FirstPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
+        <Stack.Screen name="FirstPage" component={FirstPage} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen
           name="Bottom Navigation"
