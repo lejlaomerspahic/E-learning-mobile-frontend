@@ -7,6 +7,7 @@ import BottomTabNavigation from "./navigation/BottomTabNavigation";
 import { Cart } from "./screens/Index";
 import ProductDetails from "./screens/ProductDetails";
 import NewRivals from "./screens/NewRivals";
+import WelcomeScreen from "./screens/Swiper";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +33,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen
           name="Bottom Navigation"
           component={BottomTabNavigation}
