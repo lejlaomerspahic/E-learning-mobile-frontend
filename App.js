@@ -9,6 +9,8 @@ import ProductDetails from "./screens/ProductDetails";
 import NewRivals from "./screens/NewRivals";
 import WelcomeScreen from "./screens/Swiper";
 import FirstPage from "./screens/FirstPage";
+import LoginScreen from "./screens/LoginScreen";
+import SignUpScreen from "./screens/Signup";
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +59,16 @@ export default function App() {
           component={NewRivals}
           options={{ headerShown: false }}
         ></Stack.Screen>
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignupScreen"
+          component={SignUpScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

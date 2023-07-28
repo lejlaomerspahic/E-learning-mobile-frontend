@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useFetch = () => {
   const [data, setData] = useState([]);
@@ -10,9 +11,17 @@ const useFetch = () => {
 
   const fetchData = async () => {
     setIsLoading(true);
-
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
-      const response = await axios.get("http://192.168.0.28:3001/api/products");
+      const response = await axios.get(
+        "http://192.168.0.28:3001/api/products",
+        config
+      );
 
       setData(response.data);
 

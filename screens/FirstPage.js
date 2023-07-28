@@ -11,12 +11,11 @@ import {
 const FirstPage = () => {
   const navigation = useNavigation();
   const handleLogin = () => {
-    // Logika za prijavu korisnika
-    navigation.navigate("Welcome");
+    navigation.navigate("LoginScreen");
   };
 
   const handleRegistration = () => {
-    // Logika za registraciju korisnika
+    navigation.navigate("SignupScreen");
   };
 
   return (

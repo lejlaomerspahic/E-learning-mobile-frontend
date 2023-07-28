@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
 import SearchTile from "./SearchTile";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SearchPage = () => {
   const [searchKey, setSearchKey] = useState("");
@@ -17,9 +18,15 @@ const SearchPage = () => {
 
   const handleSearch = async () => {
     try {
-      console.log(searchKey);
+      const token = await AsyncStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       const response = await axios.get(
-        `http://192.168.0.28:3001/api/products/search/${searchKey}`
+        `http://192.168.0.28:3001/api/products/search/${searchKey}`,
+        config
       );
       setSearchResult(response.data);
     } catch (err) {

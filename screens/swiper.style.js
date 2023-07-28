@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   slide: {
     flex: 1,
@@ -49,3 +50,5 @@ const styles = StyleSheet.create({
     color: "#007bff",
   },
 });
+
+export default styles;
