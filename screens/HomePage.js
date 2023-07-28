@@ -5,10 +5,6 @@ import styles from "./home.style";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import Welcome from "../components/home/Welcome";
-import Carousel from "../components/home/Carousel";
-import Headings from "../components/home/Headings";
-import ProductRow from "../components/products/ProductRow";
-import Blank from "../components/products/Blank";
 
 const HomePage = () => {
   return (
@@ -27,14 +23,7 @@ const HomePage = () => {
           </View>
         </View>
       </View>
-      <ScrollView>
-        <Welcome></Welcome>
-        <Carousel></Carousel>
-        <Headings></Headings>
-        <ProductRow></ProductRow>
-        <ProductRow></ProductRow>
-        <Blank></Blank>
-      </ScrollView>
+      <Welcome></Welcome>
     </SafeAreaView>
   );
 };
