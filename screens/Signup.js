@@ -63,7 +63,6 @@ const SignUpScreen = () => {
         placeholder="Name"
         onChangeText={(text) => setName(text)}
         value={name}
-        keyboardType="name"
         autoCapitalize="none"
       />
       {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
@@ -72,7 +71,6 @@ const SignUpScreen = () => {
         placeholder="Email"
         onChangeText={(text) => setEmail(text)}
         value={email}
-        keyboardType="email-address"
         autoCapitalize="none"
       />
       {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}

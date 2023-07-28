@@ -63,11 +63,13 @@ const ProfilePage = () => {
       <View style={styles.profileImageContainer}>
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.profileImage} />
-        ) : (
+        ) : user.user.imageUrl ? (
           <Image
             source={{ uri: user.user.imageUrl }}
             style={styles.profileImage}
           />
+        ) : (
+          <Ionicons name="person-circle-outline" size={200} color="gray" />
         )}
 
         <View style={styles.iconContainer}>
