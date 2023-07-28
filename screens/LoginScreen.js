@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./login.style";
+import { useUser } from "../hook/useUser";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginScreen = () => {
@@ -18,7 +19,7 @@ const LoginScreen = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
-
+  const { setUser } = useUser();
   const handleLogin = () => {
     setEmailError("");
     setPasswordError("");
@@ -44,6 +45,7 @@ const LoginScreen = () => {
         const token = response.data.token;
         AsyncStorage.setItem("token", token);
         console.log("Login Successful!", response.data);
+        setUser(response.data);
       })
       .catch((error) => {
         setError("User does not exist.");

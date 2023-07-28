@@ -7,18 +7,29 @@ import {
   StyleSheet,
 } from "react-native";
 import axios from "axios";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../hook/useUser";
 const ProfilePage = () => {
+  const { user } = useUser();
   const [imageUrl, setImageUrl] = useState("");
 
-  const handleImageSubmit = () => {
+  const handleImageSubmit = async () => {
     if (!imageUrl) {
       console.log("Please enter the image URL");
       return;
     }
-
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     axios
-      .post("http://192.168.0.28:3001/api/products/upload", { imageUrl })
+      .post(
+        "http://192.168.0.28:3001/api/products/upload",
+        { imageUrl },
+        config
+      )
       .then((response) => {
         console.log("Image URL saved successfully!", response.data);
       })
@@ -38,6 +49,7 @@ const ProfilePage = () => {
       <TouchableOpacity style={styles.button} onPress={handleImageSubmit}>
         <Text style={styles.buttonText}>Save Image URL</Text>
       </TouchableOpacity>
+      <Text>{user.user.name}</Text>
     </View>
   );
 };
