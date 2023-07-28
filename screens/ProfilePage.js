@@ -6,6 +6,7 @@ import { useUser } from "../hook/useUser";
 import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants";
+import styles from "./profile.style";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -20,7 +21,7 @@ const ProfilePage = () => {
     }
 
     const pickerResult = await ImagePicker.launchImageLibraryAsync();
-    if (!pickerResult.cancelled) {
+    if (!pickerResult.canceled) {
       setImageUrl(pickerResult.assets[0].uri);
     }
   };
@@ -63,7 +64,10 @@ const ProfilePage = () => {
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.profileImage} />
         ) : (
-          <Ionicons name="person-circle-outline" size={100} color="gray" />
+          <Image
+            source={{ uri: user.user.imageUrl }}
+            style={styles.profileImage}
+          />
         )}
 
         <View style={styles.iconContainer}>
@@ -94,57 +98,5 @@ const ProfilePage = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-    marginTop: 100,
-  },
-  profileImageContainer: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  profileImage: {
-    width: 180,
-    height: 180,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: "#ddd",
-  },
-  iconContainer: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    marginTop: -100,
-    marginLeft: 160,
-    padding: 5,
-    width: 50,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  chooseIcon: {
-    backgroundColor: COLORS.primary,
-    padding: 5,
-    borderRadius: 5,
-    marginBottom: 5,
-  },
-  uploadIcon: {
-    backgroundColor: COLORS.secondary,
-    padding: 5,
-    borderRadius: 5,
-  },
-  userInfo: {
-    alignItems: "center",
-  },
-  userName: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginTop: 10,
-  },
-  userEmail: {
-    fontSize: 16,
-    color: "gray",
-  },
-});
 
 export default ProfilePage;
