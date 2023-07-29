@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
@@ -7,18 +7,24 @@ import Welcome from "../components/home/Welcome";
 import { COLORS } from "../constants";
 import { useUser } from "../hook/useUser";
 import { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+
 const HomePage = () => {
   const { user } = useUser();
+  const [userImageUrl, setUserImageUrl] = useState("");
+  useFocusEffect(
+    React.useCallback(() => {
+      setUserImageUrl(user.user.imageUrl);
+    }, [user])
+  );
+
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
       <View style={styles.appBar}>
         <View style={styles.userWrapper}>
           <Text style={styles.greeting}>Hello, {user.user.name}</Text>
           <View style={styles.userImageWrapper}>
-            <Image
-              source={{ uri: user.user.imageUrl }}
-              style={styles.userImage}
-            />
+            <Image source={{ uri: userImageUrl }} style={styles.userImage} />
           </View>
         </View>
         <View style={styles.line} />

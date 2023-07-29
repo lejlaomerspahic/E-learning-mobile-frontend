@@ -7,10 +7,12 @@ import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants";
 import styles from "./profile.style";
+import { useEffect } from "react";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useUser();
+  const { setUser } = useUser();
 
   const handleImageSubmit = async () => {
     const permissionResult =
@@ -27,8 +29,6 @@ const ProfilePage = () => {
   };
 
   const handleUploadImage = async () => {
-    console.log("Image URI:", imageUrl);
-
     try {
       if (!imageUrl) {
         console.log("Please select an image first");
@@ -48,6 +48,8 @@ const ProfilePage = () => {
           config
         )
         .then((response) => {
+          user.user.imageUrl = imageUrl;
+          setUser(user);
           console.log("Image URL saved successfully!", response.data);
         })
         .catch((error) => {
