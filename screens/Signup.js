@@ -65,7 +65,7 @@ const SignUpScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.roundedContainer}>
-        <Text style={styles.title}>Sign Up</Text>
+        <Text style={[styles.title, styles.buttonWithShadoww]}>Sign Up</Text>
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
           placeholder="Name"
@@ -214,6 +214,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 8,
     elevation: 5,
+  },
+  buttonWithShadoww: {
+    textShadowColor: "#0082c4",
+    textShadowOffset: { width: 0, height: 0.5 },
+    textShadowRadius: 2,
   },
 });
 

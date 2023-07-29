@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: "100%",
-    height: "70%",
+    width: 400,
+    height: 510,
     marginBottom: 20,
   },
   slideText: {

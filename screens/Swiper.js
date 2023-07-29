@@ -45,9 +45,7 @@ const WelcomeScreen = ({ navigation }) => {
       >
         <View style={styles.slide}>
           <Image
-            source={{
-              uri: "https://i.ytimg.com/vi/HLP14KIsX2E/maxresdefault.jpg",
-            }}
+            source={require("../assets/images/welcomeinfo1.png")}
             style={styles.image}
             resizeMode="cover"
           />
@@ -56,9 +54,7 @@ const WelcomeScreen = ({ navigation }) => {
 
         <View style={styles.slide}>
           <Image
-            source={{
-              uri: "https://i0.wp.com/discoveringbelgium.com/wp-content/uploads/2016/05/voerstreek-teuven-new.jpg?resize=1067%2C800&is-pending-load=1#038;ssl=1",
-            }}
+            source={require("../assets/images/welcomeinfo3.png")}
             style={styles.image}
             resizeMode="cover"
           />
@@ -69,9 +65,7 @@ const WelcomeScreen = ({ navigation }) => {
 
         <View style={styles.slide}>
           <Image
-            source={{
-              uri: "https://live.staticflickr.com/8164/7148811531_ce6c4292e6.jpg",
-            }}
+            source={require("../assets/images/welcomeinfo2.png")}
             style={styles.image}
             resizeMode="cover"
           />

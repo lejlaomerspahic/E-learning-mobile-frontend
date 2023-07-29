@@ -57,7 +57,7 @@ const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.roundedContainer}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={[styles.title, styles.buttonWithShadoww]}>Login</Text>
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
           placeholder="Email"
@@ -81,10 +81,7 @@ const LoginScreen = () => {
         ) : null}
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
-        <TouchableOpacity
-          style={[styles.button, styles.buttonWithShadow]}
-          onPress={handleLogin}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
@@ -93,8 +90,8 @@ const LoginScreen = () => {
           style={styles.registerLink}
         >
           <Text style={styles.registerText}>
-            Don't have an account?{" "}
-            <Text style={styles.boldBlueText}>Register here.</Text>
+            Don't have an account?
+            <Text style={styles.boldBlueText}> Register here.</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -202,6 +199,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 8,
     elevation: 5,
+  },
+  buttonWithShadoww: {
+    textShadowColor: "#0082c4",
+    textShadowOffset: { width: 0, height: 0.5 },
+    textShadowRadius: 2,
   },
 });
 
