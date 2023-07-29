@@ -39,8 +39,16 @@ export default function App() {
     <UseProvider>
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
-          <Stack.Screen name="FirstPage" component={FirstPage} />
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen
+            name="FirstPage"
+            component={FirstPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Welcome"
+            component={WelcomeScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Bottom Navigation"
             component={BottomTabNavigation}

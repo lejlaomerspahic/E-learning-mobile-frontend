@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 import axios from "axios";
-import styles from "./signup.style";
 import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
@@ -44,6 +50,7 @@ const SignUpScreen = () => {
     if (hasError) {
       return;
     }
+
     axios
       .post("http://192.168.0.28:3001/user/signup", { name, email, password })
       .then((response) => {
@@ -57,38 +64,134 @@ const SignUpScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        onChangeText={(text) => setName(text)}
-        value={name}
-        autoCapitalize="none"
-      />
-      {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-        autoCapitalize="none"
-      />
-      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-      {passwordError ? (
-        <Text style={styles.errorText}>{passwordError}</Text>
-      ) : null}
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+      <View style={styles.roundedContainer}>
+        <Text style={styles.title}>Sign Up</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Name"
+          onChangeText={(text) => setName(text)}
+          value={name}
+          autoCapitalize="none"
+        />
+        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          autoCapitalize="none"
+        />
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry
+        />
+        {passwordError ? (
+          <Text style={styles.errorText}>{passwordError}</Text>
+        ) : null}
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("LoginScreen")}
+          style={styles.loginLink}
+        >
+          <Text style={styles.loginText}>
+            Already have an account?{" "}
+            <Text style={styles.boldBlueText}>Login here.</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <ImageBackground
+        source={require("../assets/images/a.png")}
+        style={styles.imageStyle}
+      ></ImageBackground>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  imageStyle: {
+    position: "absolute",
+    bottom: 353,
+    right: 0,
+    left: 180,
+    height: "45%",
+    width: "65%",
+    resizeMode: "contain",
+  },
+  roundedContainer: {
+    backgroundColor: "#f2f9ff",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    width: "85%",
+    height: 500,
+    alignSelf: "center",
+    justifyContent: "center",
+    marginTop: 70,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#0d9eff",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    height: 50,
+    borderColor: "#0d9eff",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    width: "100%",
+  },
+  errorText: {
+    color: "#0d9eff",
+    marginBottom: 8,
+    marginTop: -3,
+    marginLeft: 3,
+  },
+  button: {
+    backgroundColor: "#0d9eff",
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 15,
+    width: "75%",
+    height: 50,
+    alignSelf: "center",
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
+
+    textAlign: "center",
+  },
+  loginLink: {
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  loginText: {
+    fontSize: 14,
+    color: "#999",
+  },
+  boldBlueText: {
+    fontWeight: "bold",
+    color: "#0d9eff",
+  },
+});
 
 export default SignUpScreen;

@@ -5,13 +5,13 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ImageBackground,
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import styles from "./login.style";
 import { useUser } from "../hook/useUser";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +20,7 @@ const LoginScreen = () => {
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
   const { setUser } = useUser();
+
   const handleLogin = () => {
     setEmailError("");
     setPasswordError("");
@@ -55,33 +56,130 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <View style={styles.roundedContainer}>
+        <Text style={styles.title}>Login</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#999"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#999"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry
+        />
+        {passwordError ? (
+          <Text style={styles.errorText}>{passwordError}</Text>
+        ) : null}
+        {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-      {passwordError ? (
-        <Text style={styles.errorText}>{passwordError}</Text>
-      ) : null}
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SignupScreen")}
+          style={styles.registerLink}
+        >
+          <Text style={styles.registerText}>
+            Don't have an account?{" "}
+            <Text style={styles.boldBlueText}>Register here.</Text>
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <ImageBackground
+        source={require("../assets/images/login.png")}
+        style={styles.imageStyle}
+      ></ImageBackground>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  imageStyle: {
+    position: "absolute",
+    bottom: 300,
+    right: 0,
+    left: 130,
+    height: "50%",
+    width: "80%",
+    resizeMode: "contain",
+  },
+  roundedContainer: {
+    marginTop: 100,
+    backgroundColor: "#f2f9ff",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    width: "85%",
+    height: 400,
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#0d9eff",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    height: 50,
+    borderColor: "#0d9eff",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    marginBottom: 10,
+    backgroundColor: "#fff",
+  },
+  errorText: {
+    color: "#0d9eff",
+    marginBottom: 8,
+    marginTop: -3,
+    marginLeft: 3,
+  },
+  button: {
+    backgroundColor: "#0d9eff",
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 15,
+    width: "75%",
+    height: 50,
+    alignSelf: "center",
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+  },
+  registerLink: {
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  registerText: {
+    fontSize: 14,
+    color: "#999",
+  },
+  boldBlueText: {
+    fontWeight: "bold",
+    color: "#0d9eff",
+  },
+});
 
 export default LoginScreen;
