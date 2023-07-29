@@ -33,7 +33,10 @@ const ProductCartView = ({ item }) => {
             {item.price}
           </Text>
         </View>
-        <TouchableOpacity style={styles.addBtn}>
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => navigate.navigate("Course")}
+        >
           <Ionicons
             name="add-circle"
             size={30}

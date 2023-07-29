@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabNavigation from "./navigation/BottomTabNavigation";
-import { Cart } from "./screens/Index";
+import { Cart, HomePage } from "./screens/Index";
 import ProductDetails from "./screens/ProductDetails";
 import NewRivals from "./screens/NewRivals";
 import WelcomeScreen from "./screens/Swiper";
@@ -12,6 +12,7 @@ import FirstPage from "./screens/FirstPage";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/Signup";
 import UseProvider from "./hook/useUser";
+import Course from "./screens/Course";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,11 @@ export default function App() {
           <Stack.Screen
             name="FirstPage"
             component={FirstPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="HomePage"
+            component={HomePage}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -79,6 +85,11 @@ export default function App() {
             component={SignUpScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Course"
+            component={Course}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </UseProvider>
