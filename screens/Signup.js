@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonWithShadoww: {
-    textShadowColor: "#0082c4",
+    textShadowColor: "gray",
     textShadowOffset: { width: 0, height: 0.5 },
     textShadowRadius: 2,
   },

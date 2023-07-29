@@ -5,6 +5,7 @@ import { COLORS, SIZES } from "../constants";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.secondary,
   },
   upperRow: {
     marginHorizontal: 20,
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
   details: {
     marginTop: -40,
-    backgroundColor: COLORS.offwhite,
+    backgroundColor: COLORS.secondary,
     width: SIZES.width,
     borderRadius: 30,
   },
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: COLORS.secondary,
+    backgroundColor: "#f5fcff",
     padding: 8,
     borderRadius: SIZES.large,
   },

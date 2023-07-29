@@ -64,7 +64,7 @@ const FirstPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f9ff",
+    backgroundColor: COLORS.secondary,
     alignItems: "center",
   },
   backgroundImage: {

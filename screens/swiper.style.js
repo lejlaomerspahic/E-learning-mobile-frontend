@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: COLORS.white,
   },
   slide: {
     flex: 1,
@@ -16,14 +16,47 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 400,
-    height: 510,
-    marginBottom: 20,
+    height: 550,
+    marginTop: -50,
   },
-  slideText: {
-    fontSize: 18,
+  slideTextOne: {
+    fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center",
-    paddingHorizontal: 40,
+    marginTop: -30,
+    marginRight: 160,
+    marginLeft: 20,
+    color: "#0d9eff",
+    textShadowColor: "gray",
+    textShadowOffset: { width: 0, height: 0.5 },
+    textShadowRadius: 2,
+  },
+  slideTextTwo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: -30,
+    marginRight: 120,
+    marginLeft: 20,
+    color: "#0d9eff",
+    textShadowColor: "gray",
+    textShadowOffset: { width: 0, height: 0.5 },
+    textShadowRadius: 2,
+  },
+  slideTextThree: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: -30,
+    marginRight: 180,
+    marginLeft: 20,
+    color: "#0d9eff",
+    textShadowColor: "gray",
+    textShadowOffset: { width: 0, height: 0.5 },
+    textShadowRadius: 2,
+  },
+  slideDescription: {
+    marginLeft: 30,
+    marginRight: 30,
+    fontSize: 16,
+    color: COLORS.gray,
   },
   dot: {
     backgroundColor: "#ccc",
@@ -47,7 +80,7 @@ const styles = StyleSheet.create({
   skipButtonText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#007bff",
+    color: "#0d9eff",
   },
 });
 

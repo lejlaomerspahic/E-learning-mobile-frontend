@@ -8,7 +8,7 @@ import Welcome from "../components/home/Welcome";
 
 const HomePage = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "white" }}>
       <View style={styles.appBarWrapper}>
         <View style={styles.appBar}>
           <Ionicons name="location-outline" size={24}></Ionicons>

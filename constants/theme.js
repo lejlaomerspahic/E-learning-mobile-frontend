@@ -1,10 +1,9 @@
-
-import { Dimensions } from 'react-native'
-const { height, width } = Dimensions.get('window');
+import { Dimensions } from "react-native";
+const { height, width } = Dimensions.get("window");
 
 const COLORS = {
-  primary: "#2A4D50",
-  secondary: "#DDF0FF",
+  primary: "#8cd1ff",
+  secondary: "#e6f5ff",
   tertiary: "#FF7754",
 
   gray: "#83829A",
@@ -18,7 +17,6 @@ const COLORS = {
   lightWhite: "#FAFAFC",
 };
 
-
 const SIZES = {
   xSmall: 10,
   small: 12,
@@ -27,9 +25,8 @@ const SIZES = {
   xLarge: 24,
   xxLarge: 44,
   height,
-  width
+  width,
 };
-
 
 const SHADOWS = {
   small: {
@@ -54,5 +51,4 @@ const SHADOWS = {
   },
 };
 
-
-export { COLORS, SIZES , SHADOWS };
+export { COLORS, SIZES, SHADOWS };

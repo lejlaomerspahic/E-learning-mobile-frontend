@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLORS } from "../constants";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -79,7 +80,7 @@ const LoginScreen = () => {
         {passwordError ? (
           <Text style={styles.errorText}>{passwordError}</Text>
         ) : null}
-        {error ? <Text style={styles.error}>{error}</Text> : null}
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonWithShadoww: {
-    textShadowColor: "#0082c4",
+    textShadowColor: "gray",
     textShadowOffset: { width: 0, height: 0.5 },
     textShadowRadius: 2,
   },

@@ -48,9 +48,7 @@ const Welcome = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.welcomeTxt(COLORS.black, SIZES.xSmall + 10)}>
-          Embrace the Endless
-        </Text>
+        <Text style={styles.welcomeTxt(COLORS.black)}>Embrace the Endless</Text>
         <Text style={styles.welcomeTxt(COLORS.primary, -10)}>
           World of Knowledge
         </Text>

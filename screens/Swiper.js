@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import Swiper from "react-native-swiper";
-import { useState } from "react";
 import styles from "./swiper.style";
 
 const WelcomeScreen = ({ navigation }) => {
@@ -49,7 +48,13 @@ const WelcomeScreen = ({ navigation }) => {
             style={styles.image}
             resizeMode="cover"
           />
-          <Text style={styles.slideText}>Dobrodošli na našu aplikaciju!</Text>
+          <Text style={styles.slideTextOne}>Diverse Learning Materials</Text>
+          <Text style={styles.slideDescription}>
+            Explore an extensive collection of books, study notes, and learning
+            resources tailored to your academic needs. From comprehensive
+            textbooks to concise study guides, find everything you need to
+            succeed in your studies.
+          </Text>
         </View>
 
         <View style={styles.slide}>
@@ -58,8 +63,14 @@ const WelcomeScreen = ({ navigation }) => {
             style={styles.image}
             resizeMode="cover"
           />
-          <Text style={styles.slideText}>
-            Ovdje možete učiti različite teme.
+          <Text style={styles.slideTextTwo}>
+            Interactive Learning Experience
+          </Text>
+          <Text style={styles.slideDescription}>
+            Immerse yourself in interactive video lessons and engaging quizzes.
+            Learn at your own pace, track your progress, and reinforce your
+            understanding of various topics through a dynamic and enjoyable
+            learning experience.
           </Text>
         </View>
 
@@ -69,8 +80,12 @@ const WelcomeScreen = ({ navigation }) => {
             style={styles.image}
             resizeMode="cover"
           />
-          <Text style={styles.slideText}>
-            Kupite knjige, skripte i pristupite kursevima.
+          <Text style={styles.slideTextThree}>Expert Tutoring Services</Text>
+          <Text style={styles.slideDescription}>
+            Connect with skilled professors and experienced tutors ready to
+            provide personalized instruction and academic support. Whether you
+            need help with a specific subject or want to enhance your skills,
+            our tutors are here to guide you.
           </Text>
         </View>
       </Swiper>
