@@ -59,7 +59,7 @@ const LoginScreen = () => {
       <View style={styles.roundedContainer}>
         <Text style={styles.title}>Login</Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.inputWithShadow]}
           placeholder="Email"
           placeholderTextColor="#999"
           onChangeText={(text) => setEmail(text)}
@@ -69,7 +69,7 @@ const LoginScreen = () => {
         />
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.inputWithShadow]}
           placeholder="Password"
           placeholderTextColor="#999"
           onChangeText={(text) => setPassword(text)}
@@ -81,7 +81,10 @@ const LoginScreen = () => {
         ) : null}
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonWithShadow]}
+          onPress={handleLogin}
+        >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
@@ -179,6 +182,26 @@ const styles = StyleSheet.create({
   boldBlueText: {
     fontWeight: "bold",
     color: "#0d9eff",
+  },
+  inputWithShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonWithShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 5,
   },
 });
 

@@ -38,13 +38,19 @@ const FirstPage = () => {
           This app contains a wealth of content that will make your learning
           easier
         </Text>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonWithShadow]}
+          onPress={handleLogin}
+        >
           <Text style={styles.buttonText}>Sign in</Text>
           <View style={styles.buttonIcon}>
             <Ionicons name="log-in-outline" size={24} color="#fff" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={handleRegistration}>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonWithShadow]}
+          onPress={handleRegistration}
+        >
           <Text style={styles.buttonText}>Sign up</Text>
           <View style={styles.buttonIcon}>
             <Ionicons name="person-add-outline" size={24} color="#fff" />
@@ -124,6 +130,16 @@ const styles = StyleSheet.create({
     width: 60,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonWithShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 5,
   },
 });
 

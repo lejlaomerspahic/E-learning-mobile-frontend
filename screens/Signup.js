@@ -67,7 +67,7 @@ const SignUpScreen = () => {
       <View style={styles.roundedContainer}>
         <Text style={styles.title}>Sign Up</Text>
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.inputWithShadow]}
           placeholder="Name"
           onChangeText={(text) => setName(text)}
           value={name}
@@ -75,7 +75,7 @@ const SignUpScreen = () => {
         />
         {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.inputWithShadow]}
           placeholder="Email"
           onChangeText={(text) => setEmail(text)}
           value={email}
@@ -83,7 +83,7 @@ const SignUpScreen = () => {
         />
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.inputWithShadow]}
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
           value={password}
@@ -92,7 +92,10 @@ const SignUpScreen = () => {
         {passwordError ? (
           <Text style={styles.errorText}>{passwordError}</Text>
         ) : null}
-        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <TouchableOpacity
+          style={[styles.button, styles.buttonWithShadow]}
+          onPress={handleSignUp}
+        >
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     position: "absolute",
-    bottom: 353,
+    bottom: 357,
     right: 0,
     left: 180,
     height: "45%",
@@ -191,6 +194,26 @@ const styles = StyleSheet.create({
   boldBlueText: {
     fontWeight: "bold",
     color: "#0d9eff",
+  },
+  inputWithShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonWithShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 5,
   },
 });
 
