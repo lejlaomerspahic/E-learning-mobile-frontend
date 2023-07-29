@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: "semibold",
     fontSize: SIZES.xLarge - 2,
+    color: COLORS.gray,
   },
 });
 

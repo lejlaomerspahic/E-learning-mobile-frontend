@@ -12,7 +12,7 @@ const Carousel = () => {
     <View style={styles.carouselContainer}>
       <SliderBox
         images={slides}
-        dotColor={COLORS.primary}
+        dotColor={COLORS.gray}
         inactiveDotColor={COLORS.secondary}
         ImageComponentStyle={{
           borderRadius: 15,

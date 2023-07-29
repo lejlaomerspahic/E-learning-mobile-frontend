@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "bold",
     fontSize: SIZES.large - 5,
-    marginBottom: 2,
+    marginBottom: 2.5,
+    marginTop: 1,
+    color: COLORS.gray,
   },
   supplier: {
     fontFamily: "regular",
@@ -39,7 +41,8 @@ const styles = StyleSheet.create({
   },
   price: {
     fontFamily: "bold",
-    fontSize: SIZES.large - 5,
+    fontSize: SIZES.xSmall + 3,
+    color: COLORS.gray,
   },
   addBtn: {
     position: "absolute",
