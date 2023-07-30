@@ -16,7 +16,8 @@ import { Ionicons } from "@expo/vector-icons";
 const CoursesByCategory = ({ route }) => {
   const [courses, setCourses] = useState([]);
   const { category } = route.params;
-  const navigate = useNavigation();
+  const navigation = useNavigation();
+
   useEffect(() => {
     const handleSearch = async () => {
       try {
@@ -40,22 +41,30 @@ const CoursesByCategory = ({ route }) => {
     handleSearch();
   }, [category]);
 
-  const renderCourseItem = ({ item }) => (
-    <View style={styles.courseContainer}>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: item.imageUrl }} style={styles.courseImage} />
-      </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.courseTitle}>{item.name}</Text>
-        <Text style={styles.courseDescription}>{item.description}</Text>
-      </View>
-    </View>
-  );
+  const renderCourseItem = ({ item }) => {
+    const handleCoursePress = () => {
+      navigation.navigate("Course", { course: item });
+    };
+
+    return (
+      <TouchableOpacity onPress={handleCoursePress}>
+        <View style={styles.courseContainer}>
+          <View style={styles.imageContainer}>
+            <Image source={{ uri: item.imageUrl }} style={styles.courseImage} />
+          </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.courseTitle}>{item.name}</Text>
+            <Text style={styles.courseDescription}>{item.description}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.upperRow}>
-        <TouchableOpacity onPress={() => navigate.goBack()}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
             name="chevron-back-circle"
             size={30}

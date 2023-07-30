@@ -2,8 +2,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import YouTubeIframe from "react-native-youtube-iframe";
 
-const Course = () => {
-  const videoId = "w2ifba5_1qI"; // ID videa s YouTubea
+const Course = ({ route }) => {
+  const { course } = route.params;
+  console.log(course);
+  const videoId = "w2ifba5_1qI";
 
   return (
     <View style={styles.container}>
