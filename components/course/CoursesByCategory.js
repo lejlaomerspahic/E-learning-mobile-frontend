@@ -54,7 +54,9 @@ const CoursesByCategory = ({ route }) => {
           </View>
           <View style={styles.infoContainer}>
             <Text style={styles.courseTitle}>{item.name}</Text>
-            <Text style={styles.courseDescription}>{item.description}</Text>
+            <Text style={styles.courseDescription} numberOfLines={4}>
+              {item.description}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>

@@ -9,7 +9,6 @@ import {
 import { COLORS } from "../../constants";
 
 import { useNavigation } from "@react-navigation/native";
-// ... (ostali importi)
 
 const CourseList = () => {
   const navigation = useNavigation();
