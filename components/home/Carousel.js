@@ -31,7 +31,7 @@ export default Carousel;
 const styles = StyleSheet.create({
   carouselContainer: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 10,
     alignItems: "center",
   },
 });

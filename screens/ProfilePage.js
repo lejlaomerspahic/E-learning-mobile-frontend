@@ -43,7 +43,7 @@ const ProfilePage = () => {
       };
       axios
         .post(
-          "http://192.168.0.28:3001/api/products/upload",
+          "http://192.168.0.28:3001/api/user/upload",
           { imageUrl: imageUrl },
           config
         )

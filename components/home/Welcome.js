@@ -14,6 +14,10 @@ import Carousel from "./Carousel";
 import Headings from "./Headings";
 import ProductRow from "../products/ProductRow";
 import Blank from "../products/Blank";
+import CourseList from "../course/CourseList";
+import HeadingsCourse from "./HeadingsCourse";
+import HeadingsQuiz from "./HeadingsQuiz";
+import QuizList from "../quiz/QuizList";
 
 const Welcome = () => {
   const navigation = useNavigation();
@@ -53,6 +57,7 @@ const Welcome = () => {
           World of Knowledge
         </Text>
       </View>
+
       <View style={styles.searchContariner}>
         <TouchableOpacity
           style={styles.touchableOpacity}
@@ -84,10 +89,14 @@ const Welcome = () => {
       </View>
       {searchResult.length === 0 ? (
         <>
+          <HeadingsCourse></HeadingsCourse>
+          <CourseList></CourseList>
           <Carousel />
+
           <Headings />
           <ProductRow />
-          <ProductRow />
+          <HeadingsQuiz></HeadingsQuiz>
+          <QuizList></QuizList>
           <Blank />
         </>
       ) : (

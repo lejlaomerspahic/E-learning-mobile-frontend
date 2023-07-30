@@ -26,6 +26,7 @@ const ProductRow = () => {
           contentContainerStyle={{
             marginLeft: SIZES.small - 5,
           }}
+          showsHorizontalScrollIndicator={false}
         ></FlatList>
       )}
     </View>

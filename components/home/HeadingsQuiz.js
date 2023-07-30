@@ -5,18 +5,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../../constants";
 
-const Headings = () => {
+const HeadingsQuiz = () => {
   const navigate = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Products</Text>
-        <TouchableOpacity onPress={() => navigate.navigate("ProductList")}>
-          <Ionicons name="ios-grid" size={24} color={COLORS.gray}></Ionicons>
-        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Quiz</Text>
       </View>
     </View>
   );
 };
 
-export default Headings;
+export default HeadingsQuiz;

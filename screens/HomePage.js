@@ -11,10 +11,13 @@ import { useFocusEffect } from "@react-navigation/native";
 
 const HomePage = () => {
   const { user } = useUser();
+  const defaultImageUrl =
+    "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58484.jpg";
   const [userImageUrl, setUserImageUrl] = useState("");
+
   useFocusEffect(
     React.useCallback(() => {
-      setUserImageUrl(user.user.imageUrl);
+      setUserImageUrl(user.user.imageUrl || defaultImageUrl);
     }, [user])
   );
 
@@ -23,19 +26,19 @@ const HomePage = () => {
       <View style={styles.appBar}>
         <View style={styles.userWrapper}>
           <Text style={styles.greeting}>Hello, {user.user.name}</Text>
-          <View style={styles.userImageWrapper}>
-            <Image source={{ uri: userImageUrl }} style={styles.userImage} />
-          </View>
+          {userImageUrl ? (
+            <View style={styles.userImageWrapper}>
+              <Image source={{ uri: userImageUrl }} style={styles.userImage} />
+            </View>
+          ) : null}
         </View>
         <View style={styles.line} />
       </View>
 
-      <Welcome></Welcome>
+      <Welcome />
     </SafeAreaView>
   );
 };
-
-export default HomePage;
 
 const styles = StyleSheet.create({
   container: {
@@ -69,11 +72,13 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   line: {
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.gray2,
+    borderBottomWidth: 2,
+    borderBottomColor: COLORS.secondary,
     width: 370,
-    marginTop: 5,
+    marginTop: 3,
     marginLeft: 25,
     marginRight: 25,
   },
 });
+
+export default HomePage;

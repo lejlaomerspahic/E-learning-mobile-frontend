@@ -13,6 +13,8 @@ import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/Signup";
 import UseProvider from "./hook/useUser";
 import Course from "./screens/Course";
+import CoursesByCategory from "./components/course/CoursesByCategory";
+import CourseList from "./components/course/CourseList";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +65,13 @@ export default function App() {
           <Stack.Screen
             name="Cart"
             component={Cart}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+
+          <Stack.Screen name="CourseList" component={CourseList} />
+          <Stack.Screen
+            name="CoursesByCategory"
+            component={CoursesByCategory}
             options={{ headerShown: false }}
           ></Stack.Screen>
           <Stack.Screen
