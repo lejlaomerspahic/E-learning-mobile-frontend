@@ -50,29 +50,34 @@ const QuizByCategory = ({ route }) => {
       navigation.navigate("Quiz", { quiz: item });
     };
 
+    console.log(quizzes);
     return (
-      <TouchableOpacity onPress={handleCoursePress}>
-        <View style={styles.courseContainer}>
-          <View style={styles.imageContainer}>
-            <Image source={{ uri: item.imageUrl }} style={styles.courseImage} />
-          </View>
-          <View style={styles.infoContainer}>
-            <Text style={styles.courseTitle}>{item.name}</Text>
-            <Text style={styles.courseDescription} numberOfLines={3}>
-              {item.description}
-            </Text>
-          </View>
-          <View style={styles.favoriteContainer}>
-            <Ionicons
-              name={isFavorite ? "heart" : "heart-outline"}
-              size={30}
-              color={isFavorite ? COLORS.red : COLORS.gray}
-              style={{ margin: 10 }}
-              onPress={toggleFavorite}
-            />
+      <View style={styles.courseContainer}>
+        <Image source={{ uri: item.imageUrl }} style={styles.courseImage} />
+        <View style={styles.infoContainer}>
+          <Text style={styles.courseTitle}>{item.name}</Text>
+          <Text style={styles.courseDescription} numberOfLines={3}>
+            {item.description}
+          </Text>
+          <View style={styles.quizInfoContainer}>
+            <View style={styles.quizInfo}>
+              <Ionicons name="time-outline" size={16} color={COLORS.gray} />
+              <Text style={styles.infoText}>150 seconds</Text>
+            </View>
+            <View style={styles.quizInfo}>
+              <Ionicons name="barbell-outline" size={16} color={COLORS.gray} />
+              <Text style={styles.infoText}>{item.difficulty}</Text>
+            </View>
           </View>
         </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.startButton}
+          onPress={handleCoursePress}
+        >
+          <Ionicons name="play" size={24} color={COLORS.white} />
+          <Text style={styles.startButtonText}>Start</Text>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -106,38 +111,57 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   courseContainer: {
-    flexDirection: "row",
     backgroundColor: COLORS.secondary,
     borderRadius: 10,
     marginBottom: 10,
     padding: 10,
     marginTop: 30,
   },
-  imageContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-    overflow: "hidden",
-    margin: 5,
-  },
   courseImage: {
     width: "100%",
-    height: "100%",
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 10,
   },
   infoContainer: {
-    flex: 1,
-    marginLeft: 10,
+    justifyContent: "space-between",
   },
   courseTitle: {
     fontSize: 18,
     fontWeight: "bold",
     color: COLORS.gray,
-    padding: 5,
+    marginBottom: 5,
   },
   courseDescription: {
     color: "gray",
-    paddingLeft: 5,
-    width: 215,
+    marginBottom: 10,
+  },
+  quizInfoContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+  },
+  quizInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  infoText: {
+    fontSize: 14,
+    color: COLORS.gray,
+    marginLeft: 5,
+  },
+  startButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.primary,
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  startButtonText: {
+    color: COLORS.white,
+    marginLeft: 5,
   },
   courses: { marginTop: 50 },
   upperRow: {
