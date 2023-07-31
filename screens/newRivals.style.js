@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.lightWhite,
   },
   upperRow: {
-    width: SIZES.width - 50,
+    width: SIZES.width - 45,
     marginHorizontal: SIZES.large,
     flexDirection: "row",
     justifyContent: "flex-start",

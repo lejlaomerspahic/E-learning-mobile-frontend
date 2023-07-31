@@ -4,11 +4,11 @@ import YouTubeIframe from "react-native-youtube-iframe";
 import { COLORS, SIZES } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import Blank from "../components/course/Blank";
 
 const Course = ({ route }) => {
   const { course } = route.params;
   const [courses, setCourses] = useState(null);
-
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
@@ -30,55 +30,65 @@ const Course = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.videoContainer}>
-        <YouTubeIframe videoId={courses.videoId} webViewStyle={styles.video} />
-      </View>
-      <Text style={styles.courseName}>{courses.name}</Text>
-      <View style={styles.courseInfoContainer}>
-        {courses.instructors.map((instructor, index) => (
-          <View key={index} style={styles.instructorContainer}>
-            <View style={styles.instructorImageContainer}>
-              <Image
-                source={{ uri: instructor.imageUrl }}
-                style={styles.instructorImage}
+      <View style={styles.cont}>
+        <View style={styles.videoContainer}>
+          <YouTubeIframe
+            videoId={courses.videoId}
+            webViewStyle={styles.video}
+          />
+        </View>
+        <Text style={styles.courseName}>{courses.name}</Text>
+        <View style={styles.courseInfoContainer}>
+          {courses.instructors.map((instructor, index) => (
+            <View key={index} style={styles.instructorContainer}>
+              <View style={styles.instructorImageContainer}>
+                <Image
+                  source={{ uri: instructor.imageUrl }}
+                  style={styles.instructorImage}
+                />
+              </View>
+              <View style={styles.instructorDetails}>
+                <Text style={styles.instructorName}>{instructor.name}</Text>
+                <Text style={styles.instructorOccupation}>
+                  {instructor.occupation}
+                </Text>
+                <Text style={styles.instructorLocation}>
+                  {instructor.location}
+                </Text>
+              </View>
+            </View>
+          ))}
+
+          <View style={styles.descriptionContainer}>
+            <Text style={styles.descriptionText}>{courses.description}</Text>
+          </View>
+
+          <View style={styles.additionalInfoContainer}>
+            <View style={styles.additionalInfoBox}>
+              <Ionicons
+                name="stopwatch-outline"
+                size={24}
+                color={COLORS.gray}
               />
-            </View>
-            <View style={styles.instructorDetails}>
-              <Text style={styles.instructorName}>{instructor.name}</Text>
-              <Text style={styles.instructorOccupation}>
-                {instructor.occupation}
-              </Text>
-              <Text style={styles.instructorLocation}>
-                {instructor.location}
+              <Text style={styles.additionalInfoText}>
+                Duration: {courses.duration}
               </Text>
             </View>
-          </View>
-        ))}
-
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionText}>{courses.description}</Text>
-        </View>
-
-        <View style={styles.additionalInfoContainer}>
-          <View style={styles.additionalInfoBox}>
-            <Ionicons name="stopwatch-outline" size={24} color={COLORS.gray} />
-            <Text style={styles.additionalInfoText}>
-              Duration: {courses.duration}
-            </Text>
-          </View>
-          <View style={styles.additionalInfoBox}>
-            <Ionicons name="barbell-outline" size={24} color={COLORS.gray} />
-            <Text style={styles.additionalInfoText}>
-              Level: {courses.level}
-            </Text>
-          </View>
-          <View style={styles.additionalInfoBox}>
-            <Ionicons name="list-outline" size={24} color={COLORS.gray} />
-            <Text style={styles.additionalInfoText}>
-              Category: {courses.category}
-            </Text>
+            <View style={styles.additionalInfoBox}>
+              <Ionicons name="barbell-outline" size={24} color={COLORS.gray} />
+              <Text style={styles.additionalInfoText}>
+                Level: {courses.level}
+              </Text>
+            </View>
+            <View style={styles.additionalInfoBox}>
+              <Ionicons name="list-outline" size={24} color={COLORS.gray} />
+              <Text style={styles.additionalInfoText}>
+                Category: {courses.category}
+              </Text>
+            </View>
           </View>
         </View>
+        <Blank></Blank>
       </View>
     </ScrollView>
   );
@@ -86,11 +96,14 @@ const Course = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.white,
+  },
+  cont: {
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
     backgroundColor: COLORS.white,
+    marginTop: 30,
   },
   videoContainer: {
     height: 210,
@@ -111,23 +124,26 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: COLORS.primary,
-    marginVertical: 20,
+    marginVertical: 10,
     marginTop: 10,
     marginLeft: -80,
   },
   instructorContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 30,
+    marginBottom: 20,
+    backgroundColor: COLORS.lightWhite,
+    borderRadius: 20,
+    padding: 10,
   },
   instructorImageContainer: {
-    width: 70,
-    height: 70,
-    borderRadius: 35,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
     overflow: "hidden",
     marginRight: 10,
-    borderColor: COLORS.gray2,
-    borderWidth: 1,
+    borderColor: COLORS.offwhite,
+    borderWidth: 2,
   },
   instructorImage: {
     width: "100%",
@@ -171,14 +187,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     marginBottom: 10,
-    height: 70,
-    borderColor: COLORS.gray2,
+    height: 60,
+    borderColor: COLORS.lightWhite,
     borderWidth: 1,
   },
   additionalInfoText: {
     fontSize: 16,
     color: COLORS.gray,
     marginLeft: 5,
+    fontFamily: "semibold",
   },
 });
 

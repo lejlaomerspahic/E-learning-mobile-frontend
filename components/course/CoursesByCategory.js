@@ -18,6 +18,10 @@ const CoursesByCategory = ({ route }) => {
   const { category } = route.params;
   const navigation = useNavigation();
 
+  const [isFavorite, setIsFavorite] = useState(false);
+  const toggleFavorite = () => {
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  };
   useEffect(() => {
     const handleSearch = async () => {
       try {
@@ -54,9 +58,18 @@ const CoursesByCategory = ({ route }) => {
           </View>
           <View style={styles.infoContainer}>
             <Text style={styles.courseTitle}>{item.name}</Text>
-            <Text style={styles.courseDescription} numberOfLines={4}>
+            <Text style={styles.courseDescription} numberOfLines={3}>
               {item.description}
             </Text>
+          </View>
+          <View style={styles.favoriteContainer}>
+            <Ionicons
+              name={isFavorite ? "heart" : "heart-outline"}
+              size={30}
+              color={isFavorite ? COLORS.red : COLORS.gray}
+              style={{ margin: 10 }}
+              onPress={toggleFavorite}
+            />
           </View>
         </View>
       </TouchableOpacity>
@@ -71,6 +84,7 @@ const CoursesByCategory = ({ route }) => {
             name="chevron-back-circle"
             size={30}
             color={COLORS.offwhite}
+            style={{ marginLeft: 5 }}
           ></Ionicons>
         </TouchableOpacity>
         <Text style={styles.heading}>{category}</Text>
@@ -90,7 +104,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "white",
-    marginTop: 20,
   },
   courseContainer: {
     flexDirection: "row",
@@ -98,12 +111,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
     padding: 10,
+    marginTop: 30,
   },
   imageContainer: {
     width: 100,
     height: 100,
     borderRadius: 10,
     overflow: "hidden",
+    margin: 5,
   },
   courseImage: {
     width: "100%",
@@ -117,13 +132,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: COLORS.gray,
+    padding: 5,
   },
   courseDescription: {
     color: "gray",
+    paddingLeft: 5,
+    width: 215,
   },
   courses: { marginTop: 50 },
   upperRow: {
-    width: SIZES.width - 50,
+    width: SIZES.width - 45,
     marginHorizontal: SIZES.large,
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -133,6 +151,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.large,
     top: SIZES.large,
     zIndex: 999,
+    marginTop: 20,
   },
   heading: {
     fontFamily: "semibold",

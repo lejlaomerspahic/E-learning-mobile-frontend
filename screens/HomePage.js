@@ -41,11 +41,6 @@ const HomePage = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    marginTop: 10,
-  },
   appBar: {
     marginTop: 10,
     justifyContent: "space-between",

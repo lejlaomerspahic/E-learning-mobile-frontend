@@ -18,6 +18,7 @@ const NewRivals = () => {
               name="chevron-back-circle"
               size={30}
               color={COLORS.offwhite}
+              style={{ marginLeft: 5 }}
             ></Ionicons>
           </TouchableOpacity>
           <Text style={styles.heading}>Products</Text>
