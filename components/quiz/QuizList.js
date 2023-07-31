@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
+import { useNavigation } from "@react-navigation/native";
 
 const data = [
   { id: 1, title: "English", icon: "ios-language" },
@@ -21,15 +22,28 @@ const data = [
 
 const screenWidth = Dimensions.get("window").width;
 
-const HorizontalList = () => {
+const QuizList = () => {
+  const navigation = useNavigation();
+
+  const handleQuizPress = (quiz) => {
+    navigation.navigate("QuizByCategory", { category: quiz.title });
+  };
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => handleQuizPress(item)}
+    >
+      <Ionicons name={item.icon} size={22} color={COLORS.gray} />
+      <Text style={styles.itemText}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
         {data.map((item) => (
-          <TouchableOpacity key={item.id} style={styles.itemContainer}>
-            <Ionicons name={item.icon} size={22} color={COLORS.gray} />
-            <Text style={styles.itemText}>{item.title}</Text>
-          </TouchableOpacity>
+          <React.Fragment key={item.id}>{renderItem({ item })}</React.Fragment>
         ))}
       </View>
     </View>
@@ -68,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HorizontalList;
+export default QuizList;

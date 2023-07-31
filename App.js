@@ -15,6 +15,9 @@ import UseProvider from "./hook/useUser";
 import Course from "./screens/Course";
 import CoursesByCategory from "./components/course/CoursesByCategory";
 import CourseList from "./components/course/CourseList";
+import QuizList from "./components/quiz/QuizList";
+import QuizByCategory from "./components/quiz/QuizByCategory";
+import Quiz from "./screens/Quiz";
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +77,13 @@ export default function App() {
             component={CoursesByCategory}
             options={{ headerShown: false }}
           ></Stack.Screen>
+
+          <Stack.Screen name="QuizList" component={QuizList} />
+          <Stack.Screen
+            name="QuizByCategory"
+            component={QuizByCategory}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
           <Stack.Screen
             name="ProductDetails"
             component={ProductDetails}
@@ -97,6 +107,12 @@ export default function App() {
           <Stack.Screen
             name="Course"
             component={Course}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+
+          <Stack.Screen
+            name="Quiz"
+            component={Quiz}
             options={{ headerShown: false }}
           ></Stack.Screen>
         </Stack.Navigator>

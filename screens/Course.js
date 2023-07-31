@@ -5,6 +5,7 @@ import { COLORS, SIZES } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import Blank from "../components/course/Blank";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Course = ({ route }) => {
   const { course } = route.params;
@@ -12,8 +13,15 @@ const Course = ({ route }) => {
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
+        const token = await AsyncStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/course/${course._id}`
+          `http://192.168.0.28:3001/api/course/${course._id}`,
+          config
         );
         setCourses(response.data);
       } catch (error) {
