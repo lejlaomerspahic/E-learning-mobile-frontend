@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabNavigation from "./navigation/BottomTabNavigation";
-import { Cart, HomePage } from "./screens/Index";
+import { Cart, HomePage, ProfilePage } from "./screens/Index";
 import ProductDetails from "./screens/ProductDetails";
 import NewRivals from "./screens/NewRivals";
 import WelcomeScreen from "./screens/Swiper";
@@ -63,6 +63,12 @@ export default function App() {
           <Stack.Screen
             name="Bottom Navigation"
             component={BottomTabNavigation}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+
+          <Stack.Screen
+            name="Profile"
+            component={ProfilePage}
             options={{ headerShown: false }}
           ></Stack.Screen>
           <Stack.Screen

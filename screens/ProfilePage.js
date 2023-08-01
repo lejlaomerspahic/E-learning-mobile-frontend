@@ -16,7 +16,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
-import bcrypt from "bcryptjs";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -61,12 +60,10 @@ const ProfilePage = () => {
 
   const handleSubmit = async () => {
     try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-
       updateUserOnBackend({
         name: name,
         email: email,
-        password: hashedPassword,
+        password: password,
         location: location,
       });
 
@@ -246,7 +243,6 @@ const ProfilePage = () => {
               onChangeText={setLocation}
               placeholder="Location"
             />
-
             <TouchableOpacity style={styles.modalButton} onPress={handleSubmit}>
               <Text style={styles.modalButtonText}>Submit</Text>
             </TouchableOpacity>
