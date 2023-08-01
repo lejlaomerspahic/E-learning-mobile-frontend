@@ -16,6 +16,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
+import bcrypt from "bcryptjs";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -59,23 +60,25 @@ const ProfilePage = () => {
   };
 
   const handleSubmit = async () => {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    updateUserOnBackend({
-      name: name,
-      email: email,
-      password: password,
-      location: location,
-    });
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-    if (email !== user.user.email || password !== user.user.password) {
-      navigate.navigate("LoginScreen");
+      updateUserOnBackend({
+        name: name,
+        email: email,
+        password: hashedPassword,
+        location: location,
+      });
+
+      if (email !== user.user.email || password !== user.user.password) {
+        navigate.navigate("LoginScreen");
+      }
+
+      toggleModal();
+    } catch (error) {
+      console.error("Error encrypting password:", error.message);
+      Alert.alert("Error", "Failed to update user data. Please try again.");
     }
-
-    toggleModal();
-  };
-
-  const handleEditProfile = () => {
-    toggleModal();
   };
 
   const handleImageSubmit = async () => {
@@ -178,10 +181,7 @@ const ProfilePage = () => {
       </View>
 
       <View style={styles.sectionContainer}>
-        <TouchableOpacity
-          style={styles.sectionItem}
-          onPress={handleEditProfile}
-        >
+        <TouchableOpacity style={styles.sectionItem} onPress={handleSubmit}>
           <Ionicons name="create-outline" size={30} color={COLORS.primary} />
           <Text style={styles.sectionText}>Edit profile</Text>
         </TouchableOpacity>
