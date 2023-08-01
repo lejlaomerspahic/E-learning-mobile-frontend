@@ -14,10 +14,13 @@ const SignUpScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+
   const navigation = useNavigation();
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [locationError, setLocationError] = useState("");
 
   const handleSignUp = () => {
     let hasError = false;
@@ -25,7 +28,7 @@ const SignUpScreen = () => {
     setNameError("");
     setEmailError("");
     setPasswordError("");
-
+    setLocationError("");
     if (!name) {
       setNameError("Name is required.");
       hasError = true;
@@ -47,12 +50,22 @@ const SignUpScreen = () => {
       hasError = true;
     }
 
+    if (!location) {
+      setLocationError("Location is required.");
+      hasError = true;
+    }
+
     if (hasError) {
       return;
     }
 
     axios
-      .post("http://192.168.0.28:3001/user/signup", { name, email, password })
+      .post("http://192.168.0.28:3001/user/signup", {
+        name,
+        email,
+        password,
+        location,
+      })
       .then((response) => {
         navigation.navigate("LoginScreen");
         console.log("Sign Up Successful!", response.data);
@@ -81,6 +94,7 @@ const SignUpScreen = () => {
           value={email}
           autoCapitalize="none"
         />
+
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
@@ -91,6 +105,15 @@ const SignUpScreen = () => {
         />
         {passwordError ? (
           <Text style={styles.errorText}>{passwordError}</Text>
+        ) : null}
+        <TextInput
+          style={[styles.input, styles.inputWithShadow]}
+          placeholder="Location"
+          onChangeText={(text) => setLocation(text)}
+          value={location}
+        />
+        {locationError ? (
+          <Text style={styles.errorText}>{locationError}</Text>
         ) : null}
         <TouchableOpacity
           style={[styles.button, styles.buttonWithShadow]}
@@ -103,8 +126,8 @@ const SignUpScreen = () => {
           style={styles.loginLink}
         >
           <Text style={styles.loginText}>
-            Already have an account?{" "}
-            <Text style={styles.boldBlueText}>Login here.</Text>
+            Already have an account?
+            <Text style={styles.boldBlueText}> Login here.</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -125,9 +148,9 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     position: "absolute",
-    bottom: 357,
+    bottom: 405,
     right: 0,
-    left: 180,
+    left: 185,
     height: "45%",
     width: "65%",
     resizeMode: "contain",
@@ -137,10 +160,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 20,
     width: "85%",
-    height: 500,
+    height: 550,
     alignSelf: "center",
     justifyContent: "center",
-    marginTop: 70,
+    marginTop: 60,
   },
   title: {
     fontSize: 32,
@@ -178,7 +201,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#fff",
-
     textAlign: "center",
   },
   loginLink: {
