@@ -251,7 +251,7 @@ const ProfilePage = () => {
             style={styles.modalCloseButton}
             onPress={toggleModal}
           >
-            <Ionicons name="close" size={30} color="black" />
+            <Ionicons name="close" size={30} color={COLORS.primary} />
           </TouchableOpacity>
         </View>
       </Modal>
