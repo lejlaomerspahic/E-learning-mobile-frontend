@@ -12,7 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 const HomePage = () => {
   const { user } = useUser();
   const defaultImageUrl =
-    "https://image.freepik.com/free-vector/man-profile-cartoon_18591-58484.jpg";
+    "https://th.bing.com/th/id/OIP.PIhM1TUFbG1nHHrwpE9ZHwAAAA?pid=ImgDet&w=360&h=360&rs=1";
   const [userImageUrl, setUserImageUrl] = useState("");
 
   useFocusEffect(

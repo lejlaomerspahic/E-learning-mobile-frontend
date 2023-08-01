@@ -71,7 +71,12 @@ const ProfilePage = () => {
             style={styles.profileImage}
           />
         ) : (
-          <Ionicons name="person-circle-outline" size={200} color="gray" />
+          <Image
+            source={{
+              uri: "https://th.bing.com/th/id/OIP.PIhM1TUFbG1nHHrwpE9ZHwAAAA?pid=ImgDet&w=360&h=360&rs=1",
+            }}
+            style={styles.profileImage}
+          />
         )}
 
         <View style={styles.iconContainer}>

@@ -18,16 +18,31 @@ const ProductDetails = () => {
     setCount(count - 1);
   };
 
+  const [isFavorite, setIsFavorite] = useState(false);
+  const toggleFavorite = () => {
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  };
+
   const navigate = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.upperRow}>
         <TouchableOpacity onPress={() => navigate.goBack()}>
-          <Ionicons name="chevron-back-circle" size={30}></Ionicons>
+          <Ionicons
+            name="chevron-back-circle"
+            size={30}
+            color={COLORS.primary}
+          ></Ionicons>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <Ionicons name="heart" size={30} color={COLORS.primary}></Ionicons>
-        </TouchableOpacity>
+        <View style={styles.favoriteContainer}>
+          <Ionicons
+            name={isFavorite ? "heart" : "heart-outline"}
+            size={30}
+            color={isFavorite ? COLORS.red : COLORS.gray}
+            style={{ marginLeft: 290 }}
+            onPress={toggleFavorite}
+          />
+        </View>
       </View>
       <Image
         style={styles.image}

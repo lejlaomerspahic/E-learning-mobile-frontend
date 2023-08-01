@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   profileImage: {
-    width: 180,
-    height: 180,
+    width: 175,
+    height: 175,
     borderRadius: 100,
-    borderWidth: 2,
-    borderColor: "#ddd",
+    borderWidth: 1,
+    borderColor: COLORS.gray2,
   },
   iconContainer: {
     flexDirection: "column",
