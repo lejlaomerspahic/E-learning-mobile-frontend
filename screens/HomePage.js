@@ -14,10 +14,12 @@ const HomePage = () => {
   const defaultImageUrl =
     "https://th.bing.com/th/id/OIP.PIhM1TUFbG1nHHrwpE9ZHwAAAA?pid=ImgDet&w=360&h=360&rs=1";
   const [userImageUrl, setUserImageUrl] = useState("");
+  const [userName, setUserName] = useState("");
 
   useFocusEffect(
     React.useCallback(() => {
       setUserImageUrl(user.user.imageUrl || defaultImageUrl);
+      setUserName(user.user.name);
     }, [user])
   );
 
@@ -25,7 +27,7 @@ const HomePage = () => {
     <SafeAreaView style={{ backgroundColor: "white" }}>
       <View style={styles.appBar}>
         <View style={styles.userWrapper}>
-          <Text style={styles.greeting}>Hello, {user.user.name}</Text>
+          <Text style={styles.greeting}>Hello, {userName}</Text>
           {userImageUrl ? (
             <View style={styles.userImageWrapper}>
               <Image source={{ uri: userImageUrl }} style={styles.userImage} />

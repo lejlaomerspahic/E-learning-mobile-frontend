@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
-
 import { COLORS, SIZES } from "../constants";
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
-    marginTop: 100,
+    backgroundColor: COLORS.white,
   },
   profileImageContainer: {
+    marginTop: 60,
     alignItems: "center",
     marginBottom: 20,
   },
@@ -41,15 +41,79 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     alignItems: "center",
+    marginTop: 20,
   },
   userName: {
     fontSize: 24,
     fontWeight: "bold",
-    marginTop: 10,
   },
   userEmail: {
+    fontSize: 18,
+    color: COLORS.gray,
+  },
+  sectionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 30,
+    paddingHorizontal: 30,
+  },
+  sectionItem: {
+    alignItems: "center",
+    width: "45%",
+    backgroundColor: COLORS.lightWhite,
+    paddingVertical: 20,
+    borderRadius: 10,
+  },
+  sectionText: {
+    marginTop: 10,
     fontSize: 16,
-    color: "gray",
+    color: COLORS.gray,
+    fontFamily: "semibold",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: COLORS.white,
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+    alignItems: "center",
+  },
+  modalProfileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 20,
+  },
+  modalInput: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: COLORS.gray2,
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  modalButton: {
+    backgroundColor: COLORS.primary,
+    padding: 10,
+    borderRadius: 5,
+    width: "100%",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  modalButtonText: {
+    color: COLORS.white,
+    fontWeight: "bold",
+    fontSize: SIZES.h3,
+  },
+  modalCloseButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 });
 
