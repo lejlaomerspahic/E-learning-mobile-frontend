@@ -46,10 +46,14 @@ const LoginScreen = () => {
         navigation.navigate("Welcome");
         const token = response.data.token;
         AsyncStorage.setItem("token", token);
-        console.log("Login Successful!", response.data);
-        setUser(response.data);
+        setEmail("");
+        setPassword("");
+        setEmailError("");
+        setPasswordError("");
       })
       .catch((error) => {
+        setEmailError("");
+        setPasswordError("");
         setError("User does not exist.");
         console.error("Login Error:", error.message);
       });

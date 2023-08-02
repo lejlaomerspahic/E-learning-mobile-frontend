@@ -17,6 +17,7 @@ import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
 
+import { useFocusEffect } from "@react-navigation/native";
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useUser();
@@ -60,14 +61,22 @@ const ProfilePage = () => {
 
   const handleSubmit = async () => {
     try {
-      updateUserOnBackend({
+      await updateUserOnBackend({
         name: name,
         email: email,
         password: password,
         location: location,
       });
 
+      user.user.name = name;
+      user.user.password = password;
+      user.user.email = email;
+      user.user.location = location;
+
+      setUser(user);
+
       if (email !== user.user.email || password !== user.user.password) {
+        signOutUser();
         navigate.navigate("LoginScreen");
       }
 
@@ -235,7 +244,6 @@ const ProfilePage = () => {
               onChangeText={setPassword}
               secureTextEntry
               placeholder="Password"
-              maxLength={10}
             />
             <TextInput
               style={styles.modalInput}
