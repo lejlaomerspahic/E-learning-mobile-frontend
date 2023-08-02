@@ -21,6 +21,10 @@ const InstructorPage = ({ route }) => {
   const [instructor, setInstructor] = useState(null);
   const navigate = useNavigation();
 
+  const handleCoursePress = (course) => {
+    navigate.navigate("Course", { course: course });
+  };
+
   useEffect(() => {
     const fetchInstructor = async () => {
       try {
@@ -145,7 +149,11 @@ const InstructorPage = ({ route }) => {
         <Text style={styles.titleCourse}>Courses</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {instructor.courses.map((course) => (
-            <TouchableOpacity key={course._id} style={styles.courseCard}>
+            <TouchableOpacity
+              key={course._id}
+              style={styles.courseCard}
+              onPress={() => handleCoursePress(course)}
+            >
               <Image
                 source={{ uri: course.imageUrl }}
                 style={styles.courseImage}
