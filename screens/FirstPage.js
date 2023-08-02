@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -10,9 +10,41 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants/index";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../hook/useUser";
+import { user } from "../hook/useUser";
+import axios from "axios";
 
 const FirstPage = () => {
   const navigation = useNavigation();
+  const { setUser } = useUser();
+  const { user } = useUser();
+  useEffect(() => {
+    const fetchToken = async () => {
+      console.log("token");
+      const token = await AsyncStorage.getItem("token");
+      console.log(token);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      axios
+        .get("http://192.168.0.28:3001/api/user/get", config)
+        .then((response) => {
+          setUser(response.data);
+          navigation.navigate("Bottom Navigation");
+        })
+        .catch((error) => {
+          console.error("Login Error:", error.message);
+        });
+    };
+
+    fetchToken();
+  }, []);
+
   const handleLogin = () => {
     navigation.navigate("LoginScreen");
   };

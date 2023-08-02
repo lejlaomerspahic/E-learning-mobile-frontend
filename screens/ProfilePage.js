@@ -17,7 +17,6 @@ import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
 
-import { useFocusEffect } from "@react-navigation/native";
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useUser();
@@ -68,18 +67,16 @@ const ProfilePage = () => {
         location: location,
       });
 
-      user.user.name = name;
-      user.user.password = password;
-      user.user.email = email;
-      user.user.location = location;
-
-      setUser(user);
-
       if (email !== user.user.email || password !== user.user.password) {
         signOutUser();
         navigate.navigate("LoginScreen");
       }
 
+      user.user.name = name;
+      user.user.password = password;
+      user.user.email = email;
+      user.user.location = location;
+      setUser(user);
       toggleModal();
     } catch (error) {
       console.error("Error encrypting password:", error.message);

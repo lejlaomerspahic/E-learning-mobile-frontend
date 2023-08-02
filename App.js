@@ -18,6 +18,7 @@ import CourseList from "./components/course/CourseList";
 import QuizList from "./components/quiz/QuizList";
 import QuizByCategory from "./components/quiz/QuizByCategory";
 import Quiz from "./screens/Quiz";
+import InstructorPage from "./components/Instructor/Instructor";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,11 @@ export default function App() {
           <Stack.Screen
             name="Bottom Navigation"
             component={BottomTabNavigation}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="InstructorDetails"
+            component={InstructorPage}
             options={{ headerShown: false }}
           ></Stack.Screen>
 

@@ -60,6 +60,10 @@ const Course = ({ route }) => {
     courses.description
   );
 
+  const handleInstructorPress = (instructorId) => {
+    navigate.navigate("InstructorDetails", { instructorId });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperRow}>
@@ -117,7 +121,11 @@ const Course = ({ route }) => {
         </View>
         <Text style={styles.instructor}>Instructor:</Text>
         {courses.instructors.map((instructor, index) => (
-          <View key={index} style={styles.instructorContainer}>
+          <TouchableOpacity
+            key={index}
+            style={styles.instructorContainer}
+            onPress={() => handleInstructorPress(instructor._id)}
+          >
             <View style={styles.instructorImageContainer}>
               <Image
                 source={{ uri: instructor.imageUrl }}
@@ -133,7 +141,7 @@ const Course = ({ route }) => {
                 {instructor.location}
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>

@@ -22,7 +22,7 @@ const LoginScreen = () => {
   const [error, setError] = useState("");
   const { setUser } = useUser();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setEmailError("");
     setPasswordError("");
     let hasError = false;
@@ -40,12 +40,13 @@ const LoginScreen = () => {
       return;
     }
 
-    axios
+    await axios
       .post("http://192.168.0.28:3001/user/signin", { email, password })
       .then((response) => {
         navigation.navigate("Welcome");
         const token = response.data.token;
         AsyncStorage.setItem("token", token);
+        setUser(response.data);
         setEmail("");
         setPassword("");
         setEmailError("");
