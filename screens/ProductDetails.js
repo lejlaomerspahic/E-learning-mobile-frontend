@@ -5,6 +5,7 @@ import { Ionicons, SimpleLineIcons, Fontisto } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
 
 const ProductDetails = () => {
   const route = useRoute();
@@ -25,7 +26,7 @@ const ProductDetails = () => {
 
   const navigate = useNavigation();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.upperRow}>
         <TouchableOpacity onPress={() => navigate.goBack()}>
           <Ionicons
@@ -78,21 +79,28 @@ const ProductDetails = () => {
         </View>
         <View style={styles.descriptionWrapper}>
           <Text style={styles.description}>Description</Text>
-          <Text style={styles.desc}>{item.description}</Text>
+          <Text style={styles.desc} numberOfLines={10}>
+            {item.description}
+          </Text>
         </View>
         <View style={{ marginLeft: 10, marginRight: 10 }}>
           <View style={styles.location}>
             <View style={{ flexDirection: "row" }}>
-              <Ionicons name="location-outline" size={24}></Ionicons>
-              <Text style={{ marginTop: 3 }}>{item.product_location}</Text>
+              <Ionicons name="location" size={24} color={COLORS.red}></Ionicons>
+              <Text style={{ marginTop: 3, color: COLORS.gray }}>
+                {item.product_location}
+              </Text>
             </View>
             <View style={{ flexDirection: "row" }}>
               <MaterialCommunityIcons
                 name="truck-delivery-outline"
                 size={24}
                 marginRight={10}
+                color={COLORS.gray}
               ></MaterialCommunityIcons>
-              <Text style={{ marginTop: 3 }}>Free Delivery</Text>
+              <Text style={{ marginTop: 3, color: COLORS.gray }}>
+                Free Delivery
+              </Text>
             </View>
           </View>
         </View>
@@ -109,7 +117,7 @@ const ProductDetails = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

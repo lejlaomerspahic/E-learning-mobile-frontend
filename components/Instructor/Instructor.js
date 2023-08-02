@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -7,10 +14,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons"; // Import the Ionicons icons
 import { COLORS, SIZES } from "../../constants";
 import Blank from "../products/Blank";
+import { useNavigation } from "@react-navigation/native";
 
 const InstructorPage = ({ route }) => {
   const { instructorId } = route.params;
   const [instructor, setInstructor] = useState(null);
+  const navigate = useNavigation();
 
   useEffect(() => {
     const fetchInstructor = async () => {
@@ -38,6 +47,25 @@ const InstructorPage = ({ route }) => {
     return null;
   }
 
+  const callInstructor = () => {
+    const phoneNumber = instructor.contact?.phone;
+    if (phoneNumber) {
+      Linking.openURL(`tel:${phoneNumber}`);
+    }
+  };
+  const sendEmail = () => {
+    const email = instructor.contact?.email;
+    if (email) {
+      Linking.openURL(`mailto:${email}`);
+    }
+  };
+  const openWebsite = () => {
+    const websiteUrl = instructor.contact?.website;
+    if (websiteUrl) {
+      Linking.openURL(websiteUrl);
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.upperRow}>
@@ -63,23 +91,34 @@ const InstructorPage = ({ route }) => {
             <Text style={styles.occupation}>, {instructor.occupation}</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Ionicons name="location" size={24} color={COLORS.red} />
-            <Text style={styles.infoText}>{instructor.location}</Text>
+            <Ionicons
+              name="location"
+              size={24}
+              color={COLORS.red}
+              style={{ marginLeft: -5 }}
+            />
+            <Text style={styles.locationText}>{instructor.location}</Text>
           </View>
           <View style={styles.iconContainer}>
-            <Ionicons name="call" size={24} color={COLORS.primary} />
-            <Ionicons
-              name="mail"
-              size={24}
-              color={COLORS.primary}
-              style={{ marginLeft: 20 }}
-            />
-            <Ionicons
-              name="globe"
-              size={24}
-              color={COLORS.primary}
-              style={{ marginLeft: 20 }}
-            />
+            <TouchableOpacity onPress={callInstructor}>
+              <Ionicons name="call" size={26} color={COLORS.primary} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={sendEmail}>
+              <Ionicons
+                name="mail"
+                size={26}
+                color={COLORS.primary}
+                style={{ marginLeft: 20 }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={openWebsite}>
+              <Ionicons
+                name="globe"
+                size={26}
+                color={COLORS.primary}
+                style={{ marginLeft: 20 }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -91,17 +130,19 @@ const InstructorPage = ({ route }) => {
 
       <View style={styles.workHourlyContainer}>
         <View style={[styles.section, styles.workModeContainer]}>
-          <Text style={styles.title}>Work Mode</Text>
+          <Text style={styles.subtitle}>Work Mode</Text>
           <Text style={styles.infoText}>{instructor.workingMode}</Text>
         </View>
         <View style={[styles.section, styles.hourlyRateContainer]}>
-          <Text style={styles.title}>Hourly Rate</Text>
-          <Text style={styles.infoText}>${instructor.hourlyRate}</Text>
+          <Text style={styles.subtitle}>Hourly Rate</Text>
+          <Text style={(styles.infoText, styles.price)}>
+            ${instructor.hourlyRate}
+          </Text>
         </View>
       </View>
 
       <View style={[styles.section, styles.coursesSection]}>
-        <Text style={styles.title}>Courses</Text>
+        <Text style={styles.titleCourse}>Courses</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {instructor.courses.map((course) => (
             <TouchableOpacity key={course._id} style={styles.courseCard}>
@@ -109,9 +150,10 @@ const InstructorPage = ({ route }) => {
                 source={{ uri: course.imageUrl }}
                 style={styles.courseImage}
               />
-              <Text style={styles.courseTitle}>{course.name}</Text>
-              <Text style={styles.courseInfo}>Category: {course.category}</Text>
-              <Text style={styles.courseInfo}>Price: ${course.price}</Text>
+              <Text style={styles.courseTitle} numberOfLines={2}>
+                {course.name}
+              </Text>
+              <Text style={styles.courseInfo}>{course.category}</Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -124,7 +166,7 @@ const InstructorPage = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: SIZES.large,
+    padding: 15,
     backgroundColor: COLORS.white,
   },
   upperRow: {
@@ -144,10 +186,11 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   instructorContainer: {
-    marginTop: 100,
+    marginTop: 90,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
+    justifyContent: "center",
   },
   instructorInfo: {
     marginLeft: 16,
@@ -155,8 +198,8 @@ const styles = StyleSheet.create({
   nameContainer: { flexDirection: "row", alignItems: "baseline" },
   occupation: { fontSize: 16 },
   profileImage: {
-    width: 100,
-    height: 100,
+    width: 110,
+    height: 110,
     borderRadius: 50,
   },
   name: {
@@ -164,6 +207,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   infoText: {
+    fontSize: 16,
+    color: COLORS.gray,
+  },
+
+  locationText: {
     fontSize: 16,
     marginTop: 3,
     color: COLORS.gray,
@@ -174,60 +222,76 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 10,
-    padding: 16,
+    padding: 10,
     borderRadius: 16,
   },
   coursesSection: {
-    width: 400,
-    marginLeft: -13,
+    marginTop: -10,
   },
   aboutMeSection: {
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.offwhite,
     marginTop: 20,
   },
   workHourlyContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 16,
-    height: 70,
+    marginBottom: 15,
   },
   workModeContainer: {
     flex: 1,
-    marginRight: 3,
-    backgroundColor: COLORS.offwhite,
+    padding: 10,
+    backgroundColor: COLORS.secondary,
   },
   hourlyRateContainer: {
     flex: 1,
     marginLeft: 8,
-    backgroundColor: COLORS.offwhite,
+    padding: 10,
+    backgroundColor: COLORS.secondary,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 8,
+    marginBottom: 5,
     color: COLORS.gray,
   },
   courseCard: {
     backgroundColor: COLORS.offwhite,
     marginRight: 15,
     borderRadius: 16,
-    width: 170,
-    height: 250,
-    alignItems: "center",
+    width: 160,
+    height: 210,
+    alignItems: "flex-start",
     padding: 10,
   },
   courseImage: {
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 120,
     borderRadius: 8,
     marginBottom: 8,
   },
   courseTitle: {
     fontSize: 16,
     fontWeight: "bold",
+    marginLeft: 15,
   },
   courseInfo: {
     fontSize: 14,
+    color: COLORS.gray,
+    marginLeft: 15,
+  },
+  price: {
+    color: COLORS.red,
+    fontFamily: "semibold",
+  },
+  titleCourse: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: COLORS.gray,
+  },
+  subtitle: {
+    fontSize: 18,
+    fontWeight: "bold",
     color: COLORS.gray,
   },
 });

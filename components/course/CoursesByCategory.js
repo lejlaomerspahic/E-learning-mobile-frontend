@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
     padding: 10,
-    marginTop: 30,
+    marginTop: 10,
   },
   imageContainer: {
     width: 100,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     width: 215,
   },
-  courses: { marginTop: 50 },
+  courses: { marginTop: 70 },
   upperRow: {
     width: SIZES.width - 45,
     marginHorizontal: SIZES.large,

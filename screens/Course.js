@@ -137,9 +137,16 @@ const Course = ({ route }) => {
               <Text style={styles.instructorOccupation}>
                 {instructor.occupation}
               </Text>
-              <Text style={styles.instructorLocation}>
-                {instructor.location}
-              </Text>
+
+              <View style={styles.iconContainer}>
+                <Ionicons
+                  name="location"
+                  size={22}
+                  color={COLORS.red}
+                  style={{ marginLeft: -5 }}
+                />
+                <Text>{instructor.location}</Text>
+              </View>
             </View>
           </TouchableOpacity>
         ))}
@@ -260,8 +267,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   instructorImageContainer: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
     borderRadius: 45,
     overflow: "hidden",
     marginRight: 10,
@@ -295,6 +302,7 @@ const styles = StyleSheet.create({
     fontFamily: "semibold",
     color: COLORS.gray,
   },
+  iconContainer: { flexDirection: "row", alignItems: "center" },
 });
 
 export default Course;

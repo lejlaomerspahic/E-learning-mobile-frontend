@@ -37,10 +37,12 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "bold",
     fontSize: SIZES.large,
+    color: COLORS.gray,
   },
   price: {
     fontFamily: "semibold",
     fontSize: SIZES.large,
+    color: COLORS.gray,
   },
   priceWrapper: {
     padding: 7,
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
   count: {
     marginLeft: 5,
     marginRight: 5,
+    color: COLORS.gray,
   },
   descriptionWrapper: {
     marginTop: SIZES.large * 2,
@@ -74,20 +77,22 @@ const styles = StyleSheet.create({
   description: {
     fontFamily: "medium",
     fontSize: SIZES.large - 2,
+    color: COLORS.gray,
   },
   desc: {
     fontFamily: "regular",
     fontSize: SIZES.small,
     textAlign: "justify",
     marginBottom: SIZES.small,
+    color: COLORS.gray,
   },
   location: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#f5fcff",
     padding: 8,
-    borderRadius: SIZES.large,
+    borderRadius: 15,
+    color: COLORS.gray,
   },
   cartRow: {
     paddingBottom: SIZES.small,
@@ -97,13 +102,13 @@ const styles = StyleSheet.create({
     width: SIZES.width - 44,
   },
   cartBtn: {
-    width: SIZES.width * 0.7,
+    width: 310,
     height: 45,
-    backgroundColor: COLORS.black,
     padding: SIZES.small,
-    borderRadius: SIZES.large + 10,
+    borderRadius: 20,
     marginLeft: 12,
     marginTop: 10,
+    backgroundColor: COLORS.primary,
   },
   cartTitle: {
     fontFamily: "bold",
@@ -115,11 +120,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 50,
     margin: SIZES.small,
-    backgroundColor: COLORS.black,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    marginLeft: 50,
+    marginLeft: 10,
+    backgroundColor: COLORS.primary,
   },
 });
 
