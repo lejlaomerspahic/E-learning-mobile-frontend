@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Alert,
-  TextInput,
-  Modal,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "../hook/useUser";
@@ -16,72 +8,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
+import EditModal from "./EditModal";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useUser();
   const { setUser } = useUser();
-  const { signOutUser } = useUser();
   const navigate = useNavigation();
-  const [email, setEmail] = useState(user.user.email);
-  const [password, setPassword] = useState(user.user.password);
-  const [location, setLocation] = useState(user.user.location);
-  const [name, setName] = useState(user.user.name);
   const [showModal, setShowModal] = useState(false);
-
-  const updateUserOnBackend = async (newData) => {
-    try {
-      const token = await AsyncStorage.getItem("token");
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      const updatedUser = await axios.put(
-        "http://192.168.0.28:3001/api/user/update",
-        newData,
-        config
-      );
-
-      setUser((prevUser) => ({
-        ...prevUser,
-        user: { ...prevUser.user, ...updatedUser.data.user },
-      }));
-    } catch (error) {
-      console.error("Error updating user:", error.message);
-      Alert.alert("Error", "Failed to update user data. Please try again.");
-    }
-  };
 
   const toggleModal = () => {
     setShowModal(!showModal);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      await updateUserOnBackend({
-        name: name,
-        email: email,
-        password: password,
-        location: location,
-      });
-
-      if (email !== user.user.email || password !== user.user.password) {
-        signOutUser();
-        navigate.navigate("LoginScreen");
-      }
-
-      user.user.name = name;
-      user.user.password = password;
-      user.user.email = email;
-      user.user.location = location;
-      setUser(user);
-      toggleModal();
-    } catch (error) {
-      console.error("Error encrypting password:", error.message);
-      Alert.alert("Error", "Failed to update user data. Please try again.");
-    }
   };
 
   const handleImageSubmit = async () => {
@@ -184,7 +121,10 @@ const ProfilePage = () => {
       </View>
 
       <View style={styles.sectionContainer}>
-        <TouchableOpacity style={styles.sectionItem} onPress={handleSubmit}>
+        <TouchableOpacity
+          style={styles.sectionItem}
+          onPress={() => setShowModal(true)}
+        >
           <Ionicons name="create-outline" size={30} color={COLORS.primary} />
           <Text style={styles.sectionText}>Edit profile</Text>
         </TouchableOpacity>
@@ -211,55 +151,7 @@ const ProfilePage = () => {
         </TouchableOpacity>
       </View>
 
-      <Modal visible={showModal} animationType="slide" transparent={true}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Image
-              source={{
-                uri:
-                  user.user.imageUrl ||
-                  "https://th.bing.com/th/id/OIP.PIhM1TUFbG1nHHrwpE9ZHwAAAA?pid=ImgDet&w=360&h=360&rs=1",
-              }}
-              style={styles.modalProfileImage}
-            />
-
-            <TextInput
-              style={styles.modalInput}
-              value={name}
-              onChangeText={setName}
-              placeholder="Name"
-            />
-            <TextInput
-              style={styles.modalInput}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Email"
-            />
-            <TextInput
-              style={styles.modalInput}
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              placeholder="Password"
-            />
-            <TextInput
-              style={styles.modalInput}
-              value={location}
-              onChangeText={setLocation}
-              placeholder="Location"
-            />
-            <TouchableOpacity style={styles.modalButton} onPress={handleSubmit}>
-              <Text style={styles.modalButtonText}>Submit</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            style={styles.modalCloseButton}
-            onPress={toggleModal}
-          >
-            <Ionicons name="close" size={30} color={COLORS.primary} />
-          </TouchableOpacity>
-        </View>
-      </Modal>
+      <EditModal isVisible={showModal} onClose={toggleModal} user={user} />
     </View>
   );
 };
