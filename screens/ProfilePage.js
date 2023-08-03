@@ -20,11 +20,11 @@ const ProfilePage = () => {
   const [showModalScore, setShowModalScore] = useState(false);
 
   const toggleModalEdit = () => {
-    setShowModalEdit(!showModalScore);
+    setShowModalEdit(!showModalEdit);
   };
 
   const toggleModalScore = () => {
-    setShowModalScore(!showModalEdit);
+    setShowModalScore(!showModalScore);
   };
 
   const handleImageSubmit = async () => {
@@ -73,7 +73,7 @@ const ProfilePage = () => {
     }
   };
   console.log("userScores");
-  console.log(user);
+  console.log(user.user.scores);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>
