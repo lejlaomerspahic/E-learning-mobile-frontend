@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
-import styles from "./profile.style";
+import styles from "../screens/profile.style";
 import { useUser } from "../hook/useUser";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";

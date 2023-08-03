@@ -8,17 +8,23 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
-import EditModal from "./EditModal";
+import EditModal from "../modal/EditModal";
+import ScoreModal from "../modal/ScoreModal";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useUser();
   const { setUser } = useUser();
   const navigate = useNavigation();
-  const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalScore, setShowModalScore] = useState(false);
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
+  const toggleModalEdit = () => {
+    setShowModalEdit(!showModalScore);
+  };
+
+  const toggleModalScore = () => {
+    setShowModalScore(!showModalEdit);
   };
 
   const handleImageSubmit = async () => {
@@ -66,7 +72,8 @@ const ProfilePage = () => {
       console.error("Error uploading image:", error.message);
     }
   };
-
+  console.log("userScores");
+  console.log(user);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>
@@ -123,7 +130,7 @@ const ProfilePage = () => {
       <View style={styles.sectionContainer}>
         <TouchableOpacity
           style={styles.sectionItem}
-          onPress={() => setShowModal(true)}
+          onPress={() => setShowModalEdit(true)}
         >
           <Ionicons name="create-outline" size={30} color={COLORS.primary} />
           <Text style={styles.sectionText}>Edit profile</Text>
@@ -145,13 +152,25 @@ const ProfilePage = () => {
           <Text style={styles.sectionText}>Completed Purchases</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.sectionItem}>
+        <TouchableOpacity
+          style={styles.sectionItem}
+          onPress={() => setShowModalScore(true)}
+        >
           <Ionicons name="trophy-outline" size={30} color={COLORS.primary} />
           <Text style={styles.sectionText}>Quiz</Text>
         </TouchableOpacity>
       </View>
 
-      <EditModal isVisible={showModal} onClose={toggleModal} user={user} />
+      <EditModal
+        isVisible={showModalEdit}
+        onClose={toggleModalEdit}
+        user={user}
+      />
+      <ScoreModal
+        isVisible={showModalScore}
+        onClose={toggleModalScore}
+        scores={user.user.scores}
+      />
     </View>
   );
 };
