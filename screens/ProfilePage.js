@@ -10,6 +10,8 @@ import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
 import EditModal from "../modal/EditModal";
 import ScoreModal from "../modal/ScoreModal";
+import FavouriteModal from "../modal/FavouriteModal";
+import { useEffect } from "react";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -19,6 +21,8 @@ const ProfilePage = () => {
   const navigate = useNavigation();
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalScore, setShowModalScore] = useState(false);
+  const [showModalFavourites, setShowModalFavourites] = useState(false);
+  const [favourites, setFavorites] = useState([]);
 
   const toggleModalEdit = () => {
     setShowModalEdit(!showModalEdit);
@@ -26,6 +30,10 @@ const ProfilePage = () => {
 
   const toggleModalScore = () => {
     setShowModalScore(!showModalScore);
+  };
+
+  const toggleModalFavourites = () => {
+    setShowModalFavourites(!showModalFavourites);
   };
 
   const handleImageSubmit = async () => {
@@ -73,8 +81,31 @@ const ProfilePage = () => {
       console.error("Error uploading image:", error.message);
     }
   };
-  console.log("userScores");
-  console.log(user.user.scores);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await axios.get(
+          "http://192.168.0.28:3001/api/favourites",
+          config
+        );
+
+        setFavorites(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.log(err);
+        console.log("Failed to get favorites");
+      }
+    };
+    fetchFavorites();
+  }, []);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>
@@ -137,7 +168,10 @@ const ProfilePage = () => {
           <Text style={styles.sectionText}>Edit profile</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.sectionItem}>
+        <TouchableOpacity
+          style={styles.sectionItem}
+          onPress={() => setShowModalFavourites(true)}
+        >
           <Ionicons name="heart-outline" size={30} color={COLORS.primary} />
           <Text style={styles.sectionText}>Favorites</Text>
         </TouchableOpacity>
@@ -182,6 +216,11 @@ const ProfilePage = () => {
         isVisible={showModalScore}
         onClose={toggleModalScore}
         scores={user.user.scores}
+      />
+      <FavouriteModal
+        isVisible={showModalFavourites}
+        onClose={toggleModalFavourites}
+        favorites={favourites}
       />
     </View>
   );

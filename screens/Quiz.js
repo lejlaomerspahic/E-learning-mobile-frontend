@@ -64,7 +64,7 @@ const Quiz = ({ route }) => {
     let score = 0;
     questions.forEach((question, index) => {
       if (userAnswers[index] === question.correctOptionIndex) {
-        score += 1;
+        score += 2;
       }
     });
 
