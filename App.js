@@ -71,7 +71,6 @@ export default function App() {
             component={InstructorPage}
             options={{ headerShown: false }}
           ></Stack.Screen>
-
           <Stack.Screen
             name="Profile"
             component={ProfilePage}
@@ -82,14 +81,12 @@ export default function App() {
             component={Cart}
             options={{ headerShown: false }}
           ></Stack.Screen>
-
           <Stack.Screen name="CourseList" component={CourseList} />
           <Stack.Screen
             name="CoursesByCategory"
             component={CoursesByCategory}
             options={{ headerShown: false }}
           ></Stack.Screen>
-
           <Stack.Screen name="QuizList" component={QuizList} />
           <Stack.Screen
             name="QuizByCategory"

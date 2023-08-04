@@ -6,11 +6,15 @@ import { COLORS, SIZES } from "../constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
 
 const ProductDetails = () => {
   const route = useRoute();
   const { item } = route.params;
   const [count, setCount] = useState(1);
+
   const increment = () => {
     setCount(count + 1);
   };
@@ -19,9 +23,62 @@ const ProductDetails = () => {
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
-  const toggleFavorite = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  const id = item._id;
+
+  const toggleFavorite = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const data = {
+      id: item._id,
+    };
+    try {
+      if (isFavorite) {
+        await axios.delete(
+          `http://192.168.0.28:3001/api/favourites/remove/${id}`,
+          config
+        );
+        setIsFavorite(false);
+      } else {
+        await axios.post(
+          `http://192.168.0.28:3001/api/favourites`,
+          data,
+          config
+        );
+        setIsFavorite(true);
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
   };
+
+  useEffect(() => {
+    const checkFavorite = async () => {
+      const token = await AsyncStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      try {
+        const response = await axios.get(
+          `http://192.168.0.28:3001/api/favourites/check/${id}`,
+          config
+        );
+        setIsFavorite(response.data.isFavorite);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error checking favorite:", error);
+      }
+    };
+
+    checkFavorite();
+  }, []);
 
   const navigate = useNavigation();
   return (

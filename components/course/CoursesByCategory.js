@@ -18,10 +18,8 @@ const CoursesByCategory = ({ route }) => {
   const { category } = route.params;
   const navigation = useNavigation();
 
-  const [isFavorite, setIsFavorite] = useState(false);
-  const toggleFavorite = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
-  };
+  const [favorites, setFavorites] = useState({});
+
   useEffect(() => {
     const handleSearch = async () => {
       try {
@@ -35,6 +33,30 @@ const CoursesByCategory = ({ route }) => {
           `http://192.168.0.28:3001/api/course/search/${category}`,
           config
         );
+
+        const favoriteStatus = {};
+
+        const checkFavoriteStatus = async (id) => {
+          try {
+            const response = await axios.get(
+              `http://192.168.0.28:3001/api/favourites/check/${id}`,
+              config
+            );
+
+            console.log(response.data.isFavorite);
+            return response.data.isFavorite;
+          } catch (error) {
+            console.error("Error checking favorite:", error);
+            return false;
+          }
+        };
+
+        for (const course of response.data) {
+          const isFavorite = await checkFavoriteStatus(course._id);
+          favoriteStatus[course._id] = isFavorite;
+        }
+
+        setFavorites(favoriteStatus);
         setCourses(response.data);
         console.log(response.data);
       } catch (err) {
@@ -44,6 +66,43 @@ const CoursesByCategory = ({ route }) => {
     };
     handleSearch();
   }, [category]);
+
+  const toggleFavorite = async (id) => {
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const data = {
+      id,
+    };
+    try {
+      if (favorites[id]) {
+        await axios.delete(
+          `http://192.168.0.28:3001/api/favourites/remove/${id}`,
+          config
+        );
+        setFavorites((prevFavorites) => ({
+          ...prevFavorites,
+          [id]: false,
+        }));
+      } else {
+        await axios.post(
+          `http://192.168.0.28:3001/api/favourites`,
+          data,
+          config
+        );
+        setFavorites((prevFavorites) => ({
+          ...prevFavorites,
+          [id]: true,
+        }));
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
 
   const renderCourseItem = ({ item }) => {
     const handleCoursePress = () => {
@@ -65,11 +124,11 @@ const CoursesByCategory = ({ route }) => {
           </View>
           <View style={styles.favoriteContainer}>
             <Ionicons
-              name={isFavorite ? "heart" : "heart-outline"}
+              name={favorites[item._id] ? "heart" : "heart-outline"}
               size={30}
-              color={isFavorite ? COLORS.red : COLORS.gray}
+              color={favorites[item._id] ? COLORS.red : COLORS.gray}
               style={{ margin: 10 }}
-              onPress={toggleFavorite}
+              onPress={() => toggleFavorite(item._id)}
             />
           </View>
         </View>

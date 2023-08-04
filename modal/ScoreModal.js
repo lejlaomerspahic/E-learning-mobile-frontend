@@ -11,7 +11,6 @@ import {
 import { COLORS } from "../constants/index";
 import { Ionicons } from "@expo/vector-icons";
 const ScoreModal = ({ isVisible, onClose, scores }) => {
-  console.log(scores);
   const renderItem = ({ item }) => (
     <View style={styles.quizContainer}>
       <Image source={{ uri: item.quizId.imageUrl }} style={styles.image} />

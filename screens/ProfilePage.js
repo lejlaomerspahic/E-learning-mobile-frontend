@@ -15,6 +15,7 @@ const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user } = useUser();
   const { setUser } = useUser();
+  const { signOutUser } = useUser();
   const navigate = useNavigation();
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalScore, setShowModalScore] = useState(false);
@@ -160,6 +161,17 @@ const ProfilePage = () => {
           <Text style={styles.sectionText}>Quiz</Text>
         </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        onPress={() => {
+          signOutUser();
+          navigate.navigate("LoginScreen");
+        }}
+      >
+        <View>
+          <Text>Logout</Text>
+        </View>
+      </TouchableOpacity>
 
       <EditModal
         isVisible={showModalEdit}
