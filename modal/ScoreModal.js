@@ -53,6 +53,9 @@ const ScoreModal = ({ isVisible, onClose, scores }) => {
   return (
     <Modal visible={isVisible} transparent animationType="slide">
       <View style={styles.modalContainer}>
+        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <Ionicons name="close" size={30} color={COLORS.primary} />
+        </TouchableOpacity>
         <View style={styles.modalContent}>
           <FlatList
             data={scores}
@@ -60,9 +63,6 @@ const ScoreModal = ({ isVisible, onClose, scores }) => {
             keyExtractor={(item) => item._id}
             contentContainerStyle={{ paddingBottom: 20 }}
           />
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Ionicons name="close" size={30} color={COLORS.primary} />
-          </TouchableOpacity>
         </View>
       </View>
     </Modal>

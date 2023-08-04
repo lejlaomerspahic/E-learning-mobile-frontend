@@ -23,47 +23,98 @@ const FavouriteModal = ({ isVisible, onClose, favorites }) => {
   const navigateToProductDetails = (productId) => {};
 
   const renderFavoriteItem = ({ item }) => {
-    console.log(item);
+    console.log(item.instructors);
+    const isCourse = item.videoId !== undefined;
     return (
       <TouchableOpacity
-        style={styles.favoriteItem}
         onPress={() =>
-          item.__t === "Course"
+          isCourse
             ? navigateToCourseDetails(item._id)
             : navigateToProductDetails(item._id)
         }
       >
-        <Image
-          source={{ uri: item.imageUrl }}
-          style={styles.courseImage}
-          resizeMode="cover"
-        />
-        <View style={styles.courseInfo}>
-          <Text style={styles.courseTitle}>{item.name}</Text>
-          <Text style={styles.courseDescription}>{item.category}</Text>
-          {item.__t === "Course" && (
-            <Text style={styles.courseType}>Course</Text>
-          )}
-          {item.__t === "Product" && (
-            <Text style={styles.courseType}>Product</Text>
-          )}
-        </View>
+        {isCourse ? (
+          <View style={styles.courseContainer}>
+            <View style={styles.imageContainer}>
+              <Image
+                source={{ uri: item.imageUrl }}
+                style={styles.courseImage}
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <Text style={styles.courseTitle}>{item.name}</Text>
+              <Text style={styles.courseDescription} numberOfLines={3}>
+                {item.description}
+              </Text>
+              {item.instructors.map((instructor, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.instructorContainer}
+                >
+                  <View style={styles.instructorImageContainer}>
+                    <Image
+                      source={{ uri: instructor.imageUrl }}
+                      style={styles.instructorImage}
+                    />
+                  </View>
+                  <View style={styles.instructorDetails}>
+                    <Text style={styles.instructorName}>{instructor.name}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        ) : (
+          <View style={styles.courseContainer}>
+            <View style={styles.imageContainer}>
+              <Image
+                source={{ uri: item.imageUrl }}
+                style={styles.courseImage}
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <Text style={styles.courseTitle}>{item.title}</Text>
+              <Text style={styles.courseDescription} numberOfLines={3}>
+                {item.description}
+              </Text>
+              <View style={styles.iconContainer}>
+                <Ionicons name="cash-outline" size={24} color={COLORS.gray} />
+                <Text
+                  style={{
+                    marginLeft: 5,
+                    color: COLORS.red,
+                    fontFamily: "bold",
+                    fontSize: 16,
+                  }}
+                >
+                  {item.price}
+                </Text>
+              </View>
+            </View>
+          </View>
+        )}
       </TouchableOpacity>
     );
   };
 
   return (
-    <Modal visible={isVisible} animationType="slide" transparent={true}>
+    <Modal
+      visible={isVisible}
+      animationType="slide"
+      transparent={true}
+      style={{ backgroundColor: COLORS.white }}
+    >
       <View style={styles.modalContainer}>
+        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <Ionicons name="close" size={30} color={COLORS.primary} />
+        </TouchableOpacity>
         <View style={styles.modalContent}>
-          <ScrollView style={styles.modalScrollView}>
-            <FlatList
-              style={styles.items}
-              data={favorites.courses.concat(favorites.products)}
-              keyExtractor={(item) => item._id.toString()}
-              renderItem={renderFavoriteItem}
-            />
-          </ScrollView>
+          <FlatList
+            style={styles.items}
+            data={favorites?.courses?.concat(favorites?.products) || []}
+            keyExtractor={(item) => item._id.toString()}
+            renderItem={renderFavoriteItem}
+          />
         </View>
       </View>
     </Modal>
@@ -81,43 +132,66 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     padding: 20,
     borderRadius: 10,
-    width: "85%",
-    alignItems: "center",
+    width: "90%",
   },
-  modalScrollView: {
-    maxHeight: SIZES.height * 0.7,
-  },
-  favoriteItem: {
+  courseContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.lightGray,
+    marginVertical: 10,
+    borderRadius: 8,
+    backgroundColor: COLORS.secondary,
+    padding: 10,
   },
-  courseImage: {
-    width: 70,
-    height: 70,
-    borderRadius: 5,
+  imageContainer: {
     marginRight: 10,
   },
-  courseInfo: {
+  courseImage: {
+    width: 100,
+    height: 100,
+    resizeMode: "cover",
+    borderRadius: 8,
+  },
+  infoContainer: {
     flex: 1,
+    justifyContent: "center",
   },
   courseTitle: {
     fontSize: 16,
     fontWeight: "bold",
-    color: COLORS.black,
     marginBottom: 5,
   },
   courseDescription: {
+    fontSize: 14,
     color: COLORS.gray,
     marginBottom: 5,
   },
-  courseType: {
-    color: COLORS.primary,
+  instructorContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  instructorImageContainer: {
+    marginRight: 10,
+  },
+  instructorImage: {
+    width: 30,
+    height: 30,
+    resizeMode: "cover",
+    borderRadius: 20,
+  },
+  instructorDetails: {
+    justifyContent: "center",
+  },
+  instructorName: {
+    fontSize: 14,
     fontWeight: "bold",
   },
-  modalCloseButton: {
+  iconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  closeButton: {
     position: "absolute",
     top: 10,
     right: 10,

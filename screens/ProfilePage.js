@@ -153,12 +153,10 @@ const ProfilePage = () => {
           </TouchableOpacity>
         </View>
       </View>
-
       <View style={styles.userInfo}>
         <Text style={styles.userName}>{user.user.name}</Text>
         <Text style={styles.userEmail}>{user.user.email}</Text>
       </View>
-
       <View style={styles.sectionContainer}>
         <TouchableOpacity
           style={styles.sectionItem}
@@ -176,7 +174,6 @@ const ProfilePage = () => {
           <Text style={styles.sectionText}>Favorites</Text>
         </TouchableOpacity>
       </View>
-
       <View style={styles.sectionContainer}>
         <TouchableOpacity style={styles.sectionItem}>
           <Ionicons
@@ -195,15 +192,16 @@ const ProfilePage = () => {
           <Text style={styles.sectionText}>Quiz</Text>
         </TouchableOpacity>
       </View>
-
       <TouchableOpacity
+        style={styles.logoutButton}
         onPress={() => {
           signOutUser();
           navigate.navigate("LoginScreen");
         }}
       >
-        <View>
-          <Text>Logout</Text>
+        <Text style={styles.logoutText}>Logout</Text>
+        <View style={styles.whiteIconContainer}>
+          <Ionicons name="log-out-outline" size={24} color={COLORS.gray2} />
         </View>
       </TouchableOpacity>
 

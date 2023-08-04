@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   sectionItem: {
     alignItems: "center",
-    width: "45%",
+    width: "48%",
     backgroundColor: COLORS.lightWhite,
     paddingVertical: 20,
     borderRadius: 10,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: COLORS.white,
-    padding: 20,
+    padding: 30,
     borderRadius: 10,
     width: "80%",
     alignItems: "center",
@@ -114,6 +114,30 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     right: 10,
+  },
+  logoutButton: {
+    backgroundColor: COLORS.gray2,
+    borderRadius: 7,
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    marginTop: 30,
+    marginRight: 30,
+    paddingLeft: 10,
+  },
+  whiteIconContainer: {
+    backgroundColor: COLORS.lightWhite,
+    borderRadius: 5,
+    padding: 12,
+    marginLeft: 15,
+  },
+  blueIcon: {
+    color: COLORS.blue,
+  },
+  logoutText: {
+    margin: 12,
+    color: COLORS.white,
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
