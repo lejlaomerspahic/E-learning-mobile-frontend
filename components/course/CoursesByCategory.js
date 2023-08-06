@@ -35,11 +35,10 @@ const CoursesByCategory = ({ route }) => {
         );
 
         const favoriteStatus = {};
-
         const checkFavoriteStatus = async (id) => {
           try {
             const response = await axios.get(
-              `http://192.168.0.28:3001/api/favourites/check/${id}`,
+              `http://192.168.0.28:3001/api/favorites/check/${id}`,
               config
             );
 
@@ -81,7 +80,7 @@ const CoursesByCategory = ({ route }) => {
     try {
       if (favorites[id]) {
         await axios.delete(
-          `http://192.168.0.28:3001/api/favourites/remove/${id}`,
+          `http://192.168.0.28:3001/api/favorites/remove/${id}`,
           config
         );
         setFavorites((prevFavorites) => ({
@@ -90,7 +89,7 @@ const CoursesByCategory = ({ route }) => {
         }));
       } else {
         await axios.post(
-          `http://192.168.0.28:3001/api/favourites`,
+          `http://192.168.0.28:3001/api/favorites`,
           data,
           config
         );

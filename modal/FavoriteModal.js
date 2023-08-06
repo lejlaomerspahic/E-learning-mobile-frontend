@@ -15,7 +15,7 @@ import { COLORS, SIZES } from "../constants/index";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-const FavouriteModal = ({ isVisible, onClose, favorites }) => {
+const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigation = useNavigation();
 
   const navigateToCourseDetails = (courseId) => {};
@@ -198,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FavouriteModal;
+export default FavoriteModal;

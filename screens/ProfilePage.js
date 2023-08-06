@@ -10,19 +10,18 @@ import styles from "./profile.style";
 import { useNavigation } from "@react-navigation/native";
 import EditModal from "../modal/EditModal";
 import ScoreModal from "../modal/ScoreModal";
-import FavouriteModal from "../modal/FavouriteModal";
+import FavoriteModal from "../modal/FavoriteModal";
 import { useEffect } from "react";
+import { useFavorites } from "../hook/useFavorites";
 
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
-  const { user } = useUser();
-  const { setUser } = useUser();
-  const { signOutUser } = useUser();
+  const { user, setUser, signOutUser } = useUser();
   const navigate = useNavigation();
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalScore, setShowModalScore] = useState(false);
-  const [showModalFavourites, setShowModalFavourites] = useState(false);
-  const [favourites, setFavorites] = useState([]);
+  const [showModalFavorites, setShowModalFavorites] = useState(false);
+  const { favorites } = useFavorites();
 
   const toggleModalEdit = () => {
     setShowModalEdit(!showModalEdit);
@@ -32,8 +31,8 @@ const ProfilePage = () => {
     setShowModalScore(!showModalScore);
   };
 
-  const toggleModalFavourites = () => {
-    setShowModalFavourites(!showModalFavourites);
+  const toggleModalFavorites = () => {
+    setShowModalFavorites(!showModalFavorites);
   };
 
   const handleImageSubmit = async () => {
@@ -81,30 +80,6 @@ const ProfilePage = () => {
       console.error("Error uploading image:", error.message);
     }
   };
-
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const response = await axios.get(
-          "http://192.168.0.28:3001/api/favourites",
-          config
-        );
-
-        setFavorites(response.data);
-        console.log(response.data);
-      } catch (err) {
-        console.log(err);
-        console.log("Failed to get favorites");
-      }
-    };
-    fetchFavorites();
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -168,7 +143,7 @@ const ProfilePage = () => {
 
         <TouchableOpacity
           style={styles.sectionItem}
-          onPress={() => setShowModalFavourites(true)}
+          onPress={() => setShowModalFavorites(true)}
         >
           <Ionicons name="heart-outline" size={30} color={COLORS.primary} />
           <Text style={styles.sectionText}>Favorites</Text>
@@ -215,10 +190,10 @@ const ProfilePage = () => {
         onClose={toggleModalScore}
         scores={user.user.scores}
       />
-      <FavouriteModal
-        isVisible={showModalFavourites}
-        onClose={toggleModalFavourites}
-        favorites={favourites}
+      <FavoriteModal
+        isVisible={showModalFavorites}
+        onClose={toggleModalFavorites}
+        favorites={favorites}
       />
     </View>
   );

@@ -19,7 +19,7 @@ import HeadingsCourse from "./HeadingsCourse";
 import HeadingsQuiz from "./HeadingsQuiz";
 import QuizList from "../quiz/QuizList";
 
-const Welcome = () => {
+const Welcome = ({ favoriteList }) => {
   const navigation = useNavigation();
   const [searchKey, setSearchKey] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -91,7 +91,7 @@ const Welcome = () => {
         <>
           <HeadingsCourse></HeadingsCourse>
           <CourseList></CourseList>
-          <Carousel />
+          <Carousel favoriteList={favoriteList} />
 
           <Headings />
           <ProductRow />

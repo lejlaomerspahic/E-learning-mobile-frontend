@@ -8,9 +8,16 @@ import { COLORS } from "../constants";
 import { useUser } from "../hook/useUser";
 import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
+import { useFavorites } from "../hook/useFavorites";
 const HomePage = () => {
   const { user } = useUser();
+  const { favorites, setFavorites } = useFavorites();
+  const [favoriteList, setFavoriteList] = useState([]);
+  const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
+
   const defaultImageUrl =
     "https://th.bing.com/th/id/OIP.PIhM1TUFbG1nHHrwpE9ZHwAAAA?pid=ImgDet&w=360&h=360&rs=1";
   const [userImageUrl, setUserImageUrl] = useState("");
@@ -22,6 +29,54 @@ const HomePage = () => {
       setUserName(user.user.name);
     }, [user])
   );
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await axios.get(
+          "http://192.168.0.28:3001/api/favorites",
+          config
+        );
+
+        setFavorites(response.data);
+        setIsFavoritesLoaded(true);
+      } catch (err) {
+        console.log(err);
+        console.log("Failed to get favorites");
+      }
+    };
+    fetchFavorites();
+  }, []);
+
+  useEffect(() => {
+    if (isFavoritesLoaded) {
+      const sendFavoritesToBackend = async () => {
+        const token = await AsyncStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        try {
+          const response = await axios.post(
+            "http://192.168.0.28:3001/api/favorites/personalization",
+            { favorites: favorites },
+            config
+          );
+          setFavoriteList(response.data);
+        } catch (error) {
+          console.error("Error", error);
+        }
+      };
+      sendFavoritesToBackend();
+    }
+  }, [isFavoritesLoaded]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
@@ -37,7 +92,7 @@ const HomePage = () => {
         <View style={styles.line} />
       </View>
 
-      <Welcome />
+      <Welcome favoriteList={favoriteList} />
     </SafeAreaView>
   );
 };

@@ -39,13 +39,13 @@ const ProductDetails = () => {
     try {
       if (isFavorite) {
         await axios.delete(
-          `http://192.168.0.28:3001/api/favourites/remove/${id}`,
+          `http://192.168.0.28:3001/api/favorites/remove/${id}`,
           config
         );
         setIsFavorite(false);
       } else {
         await axios.post(
-          `http://192.168.0.28:3001/api/favourites`,
+          `http://192.168.0.28:3001/api/favorites`,
           data,
           config
         );
@@ -67,7 +67,7 @@ const ProductDetails = () => {
 
       try {
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/favourites/check/${id}`,
+          `http://192.168.0.28:3001/api/favorites/check/${id}`,
           config
         );
         setIsFavorite(response.data.isFavorite);

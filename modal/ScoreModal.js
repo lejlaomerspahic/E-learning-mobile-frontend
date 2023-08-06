@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { COLORS } from "../constants/index";
 import { Ionicons } from "@expo/vector-icons";
+
 const ScoreModal = ({ isVisible, onClose, scores }) => {
   const renderItem = ({ item }) => (
     <View style={styles.quizContainer}>

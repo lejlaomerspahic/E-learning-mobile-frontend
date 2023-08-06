@@ -12,6 +12,7 @@ import FirstPage from "./screens/FirstPage";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/Signup";
 import UseProvider from "./hook/useUser";
+import { FavoritesProvider } from "./hook/useFavorites";
 import Course from "./screens/Course";
 import CoursesByCategory from "./components/course/CoursesByCategory";
 import CourseList from "./components/course/CourseList";
@@ -44,88 +45,90 @@ export default function App() {
 
   return (
     <UseProvider>
-      <NavigationContainer>
-        <Stack.Navigator headerMode="none">
-          <Stack.Screen
-            name="FirstPage"
-            component={FirstPage}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="HomePage"
-            component={HomePage}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Welcome"
-            component={WelcomeScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Bottom Navigation"
-            component={BottomTabNavigation}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="InstructorDetails"
-            component={InstructorPage}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="Profile"
-            component={ProfilePage}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="Cart"
-            component={Cart}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen name="CourseList" component={CourseList} />
-          <Stack.Screen
-            name="CoursesByCategory"
-            component={CoursesByCategory}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen name="QuizList" component={QuizList} />
-          <Stack.Screen
-            name="QuizByCategory"
-            component={QuizByCategory}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="ProductDetails"
-            component={ProductDetails}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="ProductList"
-            component={NewRivals}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SignupScreen"
-            component={SignUpScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Course"
-            component={Course}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
+      <FavoritesProvider>
+        <NavigationContainer>
+          <Stack.Navigator headerMode="none">
+            <Stack.Screen
+              name="FirstPage"
+              component={FirstPage}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="HomePage"
+              component={HomePage}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Welcome"
+              component={WelcomeScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Bottom Navigation"
+              component={BottomTabNavigation}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="InstructorDetails"
+              component={InstructorPage}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Profile"
+              component={ProfilePage}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Cart"
+              component={Cart}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen name="CourseList" component={CourseList} />
+            <Stack.Screen
+              name="CoursesByCategory"
+              component={CoursesByCategory}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen name="QuizList" component={QuizList} />
+            <Stack.Screen
+              name="QuizByCategory"
+              component={QuizByCategory}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="ProductDetails"
+              component={ProductDetails}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="ProductList"
+              component={NewRivals}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="LoginScreen"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignupScreen"
+              component={SignUpScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Course"
+              component={Course}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
 
-          <Stack.Screen
-            name="Quiz"
-            component={Quiz}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen
+              name="Quiz"
+              component={Quiz}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesProvider>
     </UseProvider>
   );
 }
