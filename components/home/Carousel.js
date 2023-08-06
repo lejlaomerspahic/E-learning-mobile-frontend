@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { SliderBox } from "react-native-image-slider-box";
 import { COLORS } from "../../constants";
 
+import { useFocusEffect } from "@react-navigation/native";
 const Carousel = ({ favoriteList }) => {
   const imageUrls = [];
-
   favoriteList.forEach((item) => {
     imageUrls.push(item.imageUrl);
   });

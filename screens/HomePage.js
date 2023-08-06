@@ -30,53 +30,60 @@ const HomePage = () => {
     }, [user])
   );
 
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const response = await axios.get(
-          "http://192.168.0.28:3001/api/favorites",
-          config
-        );
-
-        setFavorites(response.data);
-        setIsFavoritesLoaded(true);
-      } catch (err) {
-        console.log(err);
-        console.log("Failed to get favorites");
-      }
-    };
-    fetchFavorites();
-  }, []);
-
-  useEffect(() => {
-    if (isFavoritesLoaded) {
-      const sendFavoritesToBackend = async () => {
-        const token = await AsyncStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchFavorites = async () => {
         try {
-          const response = await axios.post(
-            "http://192.168.0.28:3001/api/favorites/personalization",
-            { favorites: favorites },
+          const token = await AsyncStorage.getItem("token");
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          const response = await axios.get(
+            "http://192.168.0.28:3001/api/favorites",
             config
           );
-          setFavoriteList(response.data);
-        } catch (error) {
-          console.error("Error", error);
+
+          setFavorites(response.data);
+          setIsFavoritesLoaded(true);
+        } catch (err) {
+          console.log(err);
+          console.log("Failed to get favorites");
         }
       };
-      sendFavoritesToBackend();
-    }
-  }, [isFavoritesLoaded]);
+      fetchFavorites();
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (isFavoritesLoaded) {
+        const sendFavoritesToBackend = async () => {
+          const token = await AsyncStorage.getItem("token");
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          try {
+            const response = await axios.post(
+              "http://192.168.0.28:3001/api/favorites/personalization",
+              { favorites: favorites },
+              config
+            );
+            setFavoriteList(response.data);
+          } catch (error) {
+            console.error(
+              "An error occurred while fetching personalized favorites.",
+              error
+            );
+          }
+        };
+        sendFavoritesToBackend();
+      }
+    }, [favorites, isFavoritesLoaded])
+  );
 
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>

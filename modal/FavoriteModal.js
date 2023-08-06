@@ -23,7 +23,6 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigateToProductDetails = (productId) => {};
 
   const renderFavoriteItem = ({ item }) => {
-    console.log(item.instructors);
     const isCourse = item.videoId !== undefined;
     return (
       <TouchableOpacity
