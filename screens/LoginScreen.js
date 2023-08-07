@@ -20,7 +20,7 @@ const LoginScreen = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
 
   const handleLogin = async () => {
     setEmailError("");
@@ -59,7 +59,6 @@ const LoginScreen = () => {
         console.error("Login Error:", error.message);
       });
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.roundedContainer}>

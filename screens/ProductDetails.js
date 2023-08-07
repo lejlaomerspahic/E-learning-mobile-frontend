@@ -9,12 +9,15 @@ import { ScrollView } from "react-native-gesture-handler";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
+import { useUser } from "../hook/useUser";
 
 const ProductDetails = () => {
   const route = useRoute();
   const { item } = route.params;
   const [count, setCount] = useState(1);
+  const navigate = useNavigation();
 
+  const { user } = useUser();
   const increment = () => {
     setCount(count + 1);
   };
@@ -80,7 +83,35 @@ const ProductDetails = () => {
     checkFavorite();
   }, []);
 
-  const navigate = useNavigation();
+  const [cart, setCart] = useState([]);
+
+  const saveCartToStorage = async (userId, cart) => {
+    try {
+      const cartWithUserId = { userId, cart };
+      const cartJson = JSON.stringify(cartWithUserId);
+      await AsyncStorage.setItem("cart", cartJson);
+      console.log("Cart successfully saved to AsyncStorage.");
+    } catch (error) {
+      console.error("Error saving cart to AsyncStorage:", error);
+    }
+  };
+
+  const handleAddToCart = async (product, count) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingProductIndex !== -1) {
+      updatedCart[existingProductIndex].count += count;
+    } else {
+      updatedCart.push({ ...product, count });
+    }
+
+    setCart(updatedCart);
+    await saveCartToStorage(user.user._id, updatedCart);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.upperRow}>
@@ -161,10 +192,16 @@ const ProductDetails = () => {
           </View>
         </View>
         <View style={styles.cartRow}>
-          <TouchableOpacity onPress={() => {}} style={styles.cartBtn}>
-            <Text style={styles.cartTitle}>BUY NOW</Text>
+          <TouchableOpacity
+            onPress={() => handleAddToCart(item, count)}
+            style={styles.cartBtn}
+          >
+            <Text style={styles.cartTitle}>ADD TO CART</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}} style={styles.addCart}>
+          <TouchableOpacity
+            onPress={() => handleAddToCart(item, count)}
+            style={styles.addCart}
+          >
             <Fontisto
               name="shopping-bag"
               size={22}
