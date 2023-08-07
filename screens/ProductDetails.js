@@ -10,6 +10,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import { useUser } from "../hook/useUser";
+import { executeNativeBackPress } from "react-native-screens";
 
 const ProductDetails = () => {
   const route = useRoute();
@@ -83,24 +84,32 @@ const ProductDetails = () => {
     checkFavorite();
   }, []);
 
-  const [cart, setCart] = useState([]);
-
   const saveCartToStorage = async (userId, cart) => {
     try {
       const cartWithUserId = { userId, cart };
       const cartJson = JSON.stringify(cartWithUserId);
       await AsyncStorage.setItem("cart", cartJson);
+      console.log("cartJson");
+      console.log(cartJson);
       console.log("Cart successfully saved to AsyncStorage.");
     } catch (error) {
       console.error("Error saving cart to AsyncStorage:", error);
     }
   };
 
+  const [cart, setCart] = useState([]);
+
   const handleAddToCart = async (product, count) => {
     const updatedCart = [...cart];
     const existingProductIndex = updatedCart.findIndex(
-      (item) => item.id === product.id
+      (item) => item.id === product._id
     );
+
+    console.log("existingProductIndex");
+    console.log(existingProductIndex);
+
+    console.log("updatedCart");
+    console.log(updatedCart);
 
     if (existingProductIndex !== -1) {
       updatedCart[existingProductIndex].count += count;
@@ -109,7 +118,7 @@ const ProductDetails = () => {
     }
 
     setCart(updatedCart);
-    await saveCartToStorage(user.user._id, updatedCart);
+    saveCartToStorage(user.user._id, updatedCart);
   };
 
   return (

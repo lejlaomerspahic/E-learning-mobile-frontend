@@ -26,10 +26,6 @@ const Cart = () => {
     }, [])
   );
 
-  useEffect(() => {
-    console.log("cart");
-    console.log(cart);
-  }, [cart]);
   const calculateTotalPrice = (price, count) => {
     return price * count;
   };
