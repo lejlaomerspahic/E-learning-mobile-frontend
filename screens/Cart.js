@@ -16,6 +16,9 @@ const Cart = () => {
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
         setCart(cartObj.cart);
+
+        console.log("cart");
+        console.log(cartObj.cart);
       }
     } catch (error) {
       console.error("Error getting cart from AsyncStorage:", error);
@@ -28,19 +31,29 @@ const Cart = () => {
     }, [])
   );
 
+  const handleRemoveItem = async (itemId) => {
+    try {
+      const itemIndex = cart.findIndex((item) => item._id === itemId);
+
+      if (itemIndex !== -1) {
+        const updatedCart = [...cart];
+        updatedCart.splice(itemIndex, 1);
+        setCart(updatedCart);
+
+        console.log("updatedCart");
+        console.log(updatedCart);
+        await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
+      }
+    } catch (error) {
+      console.error(`Error removing data with key ${itemId}:`, error);
+    }
+  };
+
   const calculateTotalPrice = (priceWithSign, count) => {
     const price = parseFloat(priceWithSign.replace("$", ""));
     return price * count;
   };
 
-  const handleRemoveItem = async (item) => {
-    try {
-      await AsyncStorage.removeItem(item);
-      console.log(`Successfully removed data with key: ${item}`);
-    } catch (error) {
-      console.error(`Error removing data with key ${item}:`, error);
-    }
-  };
   const calculateDeliveryCost = (cart, userLocation) => {
     const deliveryItems = cart.filter(
       (item) => item.product_location !== userLocation
@@ -67,105 +80,110 @@ const Cart = () => {
 
   return (
     <View style={styles.container}>
-      {cart.map((item) => (
-        <View style={styles.itemContainer} key={item._id}>
-          <Image
-            source={{ uri: item.imageUrl }}
-            style={styles.image}
-            resizeMode="contain"
-          />
-          <View style={styles.infoContainer}>
-            <TouchableOpacity
-              onPress={() => handleRemoveItem(item)}
-              style={styles.closeButton}
-            >
-              <Ionicons name="close" style={styles.closeIcon}></Ionicons>
-            </TouchableOpacity>
-            <View style={styles.iteminfoContainer}>
-              <Text style={styles.name}>{item.title}</Text>
-              <View style={styles.iconContainer}>
-                <Text
-                  style={{
-                    marginLeft: 5,
-                    color: COLORS.gray,
-                    fontFamily: "bold",
-                    fontSize: 16,
-                  }}
-                >
-                  {item.price}
+      {cart !== undefined ? (
+        cart.map((item) => (
+          <View style={styles.itemContainer} key={item._id}>
+            <Image
+              source={{ uri: item.imageUrl }}
+              style={styles.image}
+              resizeMode="contain"
+            />
+            <View style={styles.infoContainer}>
+              <TouchableOpacity
+                onPress={() => handleRemoveItem(item._id)}
+                style={styles.closeButton}
+              >
+                <Ionicons name="close" style={styles.closeIcon}></Ionicons>
+              </TouchableOpacity>
+              <View style={styles.iteminfoContainer}>
+                <Text style={styles.name}>{item.title}</Text>
+                <View style={styles.iconContainer}>
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      color: COLORS.gray,
+                      fontFamily: "bold",
+                      fontSize: 16,
+                    }}
+                  >
+                    {item.price}
+                  </Text>
+                </View>
+              </View>
+              <Text style={styles.count}>Quantity: {item.count}</Text>
+
+              <View style={styles.iconContainerLocation}>
+                <Ionicons
+                  name="location"
+                  size={22}
+                  color={COLORS.red}
+                  style={{ marginLeft: -5 }}
+                />
+                <Text style={{ color: COLORS.gray }}>
+                  {item.product_location}
                 </Text>
               </View>
-            </View>
-            <Text style={styles.count}>Quantity: {item.count}</Text>
-
-            <View style={styles.iconContainerLocation}>
-              <Ionicons
-                name="location"
-                size={22}
-                color={COLORS.red}
-                style={{ marginLeft: -5 }}
-              />
-              <Text style={{ color: COLORS.gray }}>
-                {item.product_location}
-              </Text>
-            </View>
-            <View style={styles.line} />
-            <View style={styles.iconContainer}>
-              <Text>Total price:</Text>
-              <View style={styles.cardContainer}>
-                <Ionicons name="card-outline" size={20} color={COLORS.gray} />
-                <Text
-                  style={{
-                    marginLeft: 5,
-                    color: COLORS.red,
-                    fontFamily: "bold",
-                    fontSize: 16,
-                  }}
-                >
-                  ${calculateTotalPrice(item.price, item.count)}
-                </Text>
+              <View style={styles.line} />
+              <View style={styles.iconContainer}>
+                <Text>Total price:</Text>
+                <View style={styles.cardContainer}>
+                  <Ionicons name="card-outline" size={20} color={COLORS.gray} />
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      color: COLORS.red,
+                      fontFamily: "bold",
+                      fontSize: 16,
+                    }}
+                  >
+                    ${calculateTotalPrice(item.price, item.count)}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      ))}
+        ))
+      ) : (
+        <Text>No products found in cart</Text>
+      )}
+      {cart !== undefined && cart.length > 0 && (
+        <View style={styles.containerDPT}>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Delivery</Text>
+            <Text style={styles.sectionValue}>
+              ${calculateDeliveryCost(cart, user.user.location)}
+            </Text>
+          </View>
 
-      <View style={styles.containerDPT}>
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Delivery</Text>
-          <Text style={styles.sectionValue}>
-            ${calculateDeliveryCost(cart, user.user.location)}
-          </Text>
-        </View>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Price</Text>
+            <Text style={styles.sectionValue}>
+              ${calculateTotalItemPrice(cart)}
+            </Text>
+          </View>
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Price</Text>
-          <Text style={styles.sectionValue}>
-            ${calculateTotalItemPrice(cart)}
-          </Text>
-        </View>
+          <View style={styles.separator} />
 
-        <View style={styles.separator} />
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Total price</Text>
+            <Text style={styles.sectionValue}>
+              ${calculateTotalOrderPrice(cart, user.user.location)}
+            </Text>
+          </View>
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Total price</Text>
-          <Text style={styles.sectionValue}>
-            ${calculateTotalOrderPrice(cart, user.user.location)}
-          </Text>
+          <View style={{ alignItems: "flex-end" }}>
+            <TouchableOpacity style={styles.checkoutButton}>
+              <View style={styles.buttonContent}>
+                <Ionicons name="cart-outline" size={24} color="white" />
+                <Text style={styles.checkoutButtonText}>Checkout</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={{ alignItems: "flex-end" }}>
-          <TouchableOpacity style={styles.checkoutButton}>
-            <View style={styles.buttonContent}>
-              <Ionicons name="cart-outline" size={24} color="white" />
-              <Text style={styles.checkoutButtonText}>Checkout</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+      )}
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -276,7 +294,7 @@ const styles = StyleSheet.create({
   checkoutButton: {
     backgroundColor: COLORS.primary,
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: "center",
     marginTop: 30,
     width: 130,
