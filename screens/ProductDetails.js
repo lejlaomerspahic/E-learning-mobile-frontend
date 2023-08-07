@@ -75,7 +75,6 @@ const ProductDetails = () => {
           config
         );
         setIsFavorite(response.data.isFavorite);
-        console.log(response.data);
       } catch (error) {
         console.error("Error checking favorite:", error);
       }
@@ -84,41 +83,31 @@ const ProductDetails = () => {
     checkFavorite();
   }, []);
 
-  const saveCartToStorage = async (userId, cart) => {
+  const saveCartToStorage = async (userId, cartStorage) => {
     try {
-      const cartWithUserId = { userId, cart };
+      const cartJson = await AsyncStorage.getItem("cart");
+      const cartObj = JSON.parse(cartJson);
+      if (cartObj == null) throw new Exception();
+      const index = cartObj.cart.findIndex(
+        (item) => item._id === cartStorage._id
+      );
+      if (index !== -1) {
+        cartObj.cart[index].count += cartStorage.count;
+      } else {
+        cartObj.cart.push(cartStorage);
+      }
+
+      await AsyncStorage.setItem("cart", JSON.stringify(cartObj));
+    } catch (error) {
+      const cartWithUserId = { userId, cart: [cartStorage] };
       const cartJson = JSON.stringify(cartWithUserId);
       await AsyncStorage.setItem("cart", cartJson);
-      console.log("cartJson");
-      console.log(cartJson);
-      console.log("Cart successfully saved to AsyncStorage.");
-    } catch (error) {
-      console.error("Error saving cart to AsyncStorage:", error);
     }
+    console.log("Cart successfully saved to AsyncStorage.");
   };
 
-  const [cart, setCart] = useState([]);
-
-  const handleAddToCart = async (product, count) => {
-    const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex(
-      (item) => item.id === product._id
-    );
-
-    console.log("existingProductIndex");
-    console.log(existingProductIndex);
-
-    console.log("updatedCart");
-    console.log(updatedCart);
-
-    if (existingProductIndex !== -1) {
-      updatedCart[existingProductIndex].count += count;
-    } else {
-      updatedCart.push({ ...product, count });
-    }
-
-    setCart(updatedCart);
-    saveCartToStorage(user.user._id, updatedCart);
+  const handleAddToCart = (product, count) => {
+    saveCartToStorage(user.user._id, { ...product, count });
   };
 
   return (
@@ -191,11 +180,15 @@ const ProductDetails = () => {
               <MaterialCommunityIcons
                 name="truck-delivery-outline"
                 size={24}
-                marginRight={10}
+                marginRight={5}
                 color={COLORS.gray}
               ></MaterialCommunityIcons>
-              <Text style={{ marginTop: 3, color: COLORS.gray }}>
-                Free Delivery
+              <Text
+                style={{ marginTop: 3, color: COLORS.gray, fontFamily: "bold" }}
+              >
+                {item.product_location === user.user.location
+                  ? "Free Delivery"
+                  : "$10"}
               </Text>
             </View>
           </View>
