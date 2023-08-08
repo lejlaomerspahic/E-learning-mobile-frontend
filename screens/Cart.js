@@ -144,7 +144,11 @@ const Cart = () => {
           </View>
         ))
       ) : (
-        <Text>No products found in cart</Text>
+        <View style={styles.centerContainer}>
+          <Text style={styles.noItemsText}>
+            ...no items currently available in your shopping cart
+          </Text>
+        </View>
       )}
       {cart !== undefined && cart.length > 0 && (
         <View style={styles.containerDPT}>
@@ -310,6 +314,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     flex: 1,
     marginLeft: 5,
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noItemsText: {
+    fontSize: 18,
+    textAlign: "center",
+    color: COLORS.gray,
   },
 });
 

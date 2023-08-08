@@ -18,9 +18,13 @@ import { Ionicons } from "@expo/vector-icons";
 const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigation = useNavigation();
 
-  const navigateToCourseDetails = (courseId) => {};
+  const navigateToCourseDetails = (item) => {
+    navigation.navigate("Course", { course: item });
+  };
 
-  const navigateToProductDetails = (productId) => {};
+  const navigateToProductDetails = (item) => {
+    navigation.navigate("ProductDetails", { product: item });
+  };
 
   const renderFavoriteItem = ({ item }) => {
     const isCourse = item.videoId !== undefined;
@@ -28,8 +32,8 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
       <TouchableOpacity
         onPress={() =>
           isCourse
-            ? navigateToCourseDetails(item._id)
-            : navigateToProductDetails(item._id)
+            ? navigateToCourseDetails(item)
+            : navigateToProductDetails(item)
         }
       >
         {isCourse ? (

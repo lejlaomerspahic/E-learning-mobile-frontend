@@ -12,7 +12,6 @@ import { FlatList } from "react-native-gesture-handler";
 
 const ProductList = () => {
   const { data, isLoading, error } = useFetch();
-  console.log(data);
 
   if (isLoading) {
     return (
@@ -30,10 +29,7 @@ const ProductList = () => {
         data={data}
         numColumns={2}
         renderItem={({ item }) => (
-          <ProductCartView
-            style={{ marginTop: 50 }}
-            item={item}
-          ></ProductCartView>
+          <ProductCartView item={item}></ProductCartView>
         )}
       ></FlatList>
     </View>

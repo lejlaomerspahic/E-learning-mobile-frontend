@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    paddingTop: SIZES.xxLarge + 30,
-    paddingLeft: SIZES.small / 2,
+    paddingTop: 60,
+    paddingHorizontal: 15,
   },
 });
 

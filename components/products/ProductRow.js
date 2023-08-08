@@ -2,7 +2,7 @@ import { View, Text, FlatList } from "react-native";
 import React from "react";
 import styles from "./productRow.style";
 
-import { SIZES } from "../../constants";
+import { COLORS, SIZES } from "../../constants";
 import ProductCartView from "./ProductCartView";
 import useFetch from "../../hook/useFetch";
 import { ActivityIndicator } from "react-native";
@@ -10,7 +10,7 @@ import { ActivityIndicator } from "react-native";
 const ProductRow = () => {
   const { data, isLoading, error } = useFetch();
   return (
-    <View style={{ marginTop: SIZES.small - 10 }}>
+    <View style={{ marginTop: -10, marginLeft: 5 }}>
       {isLoading ? (
         <ActivityIndicator></ActivityIndicator>
       ) : error ? (

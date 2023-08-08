@@ -26,7 +26,7 @@ const Carousel = ({ favoriteList }) => {
           circleLoop
         />
       ) : (
-        <Text>..Loading</Text>
+        <Text style={styles.loading}>...</Text>
       )}
     </View>
   );
@@ -39,5 +39,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 10,
     alignItems: "center",
+  },
+  loading: {
+    fontSize: 24,
+    color: COLORS.gray2,
   },
 });

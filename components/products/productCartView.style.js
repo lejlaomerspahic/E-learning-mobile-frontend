@@ -3,16 +3,16 @@ import { COLORS, SIZES } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    width: 180,
+    width: 175,
     height: 200,
-    marginEnd: 20,
-    marginTop: 10,
+    marginEnd: 10,
+    marginTop: 20,
     borderRadius: SIZES.medium,
     backgroundColor: COLORS.secondary,
   },
 
   imageContainer: {
-    width: 175,
+    width: 170,
     height: 120,
     margin: SIZES.xSmall - 7,
     borderRadius: SIZES.small,
