@@ -28,7 +28,11 @@ const ProductDetails = () => {
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
+  const id = item._id;
 
+  const data = {
+    id: item._id,
+  };
   const toggleFavorite = async () => {
     const token = await AsyncStorage.getItem("token");
     const config = {
@@ -36,11 +40,7 @@ const ProductDetails = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const id = item._id;
 
-    const data = {
-      id: item._id,
-    };
     try {
       if (isFavorite) {
         await axios.delete(`${ipAddress}/api/favorites/remove/${id}`, config);
