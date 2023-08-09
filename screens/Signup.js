@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import ipAddress from "../variable";
 
 const SignUpScreen = () => {
   const [name, setName] = useState("");
@@ -60,7 +61,7 @@ const SignUpScreen = () => {
     }
 
     axios
-      .post("http://192.168.0.28:3001/user/signup", {
+      .post(`${ipAddress}/user/signup`, {
         name,
         email,
         password,

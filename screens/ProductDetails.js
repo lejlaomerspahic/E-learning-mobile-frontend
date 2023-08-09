@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useUser } from "../hook/useUser";
 import { executeNativeBackPress } from "react-native-screens";
 
+import ipAddress from "../variable";
 const ProductDetails = () => {
   const route = useRoute();
   const { item } = route.params;
@@ -42,17 +43,10 @@ const ProductDetails = () => {
     };
     try {
       if (isFavorite) {
-        await axios.delete(
-          `http://192.168.0.28:3001/api/favorites/remove/${id}`,
-          config
-        );
+        await axios.delete(`${ipAddress}/api/favorites/remove/${id}`, config);
         setIsFavorite(false);
       } else {
-        await axios.post(
-          `http://192.168.0.28:3001/api/favorites`,
-          data,
-          config
-        );
+        await axios.post(`${ipAddress}/api/favorites`, data, config);
         setIsFavorite(true);
       }
     } catch (error) {
@@ -71,7 +65,7 @@ const ProductDetails = () => {
 
       try {
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/favorites/check/${id}`,
+          `${ipAddress}/api/favorites/check/${id}`,
           config
         );
         setIsFavorite(response.data.isFavorite);

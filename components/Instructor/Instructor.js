@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import ipAddress from "../../variable";
 import { ScrollView } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons"; // Import the Ionicons icons
 import { COLORS, SIZES } from "../../constants";
@@ -35,7 +36,7 @@ const InstructorPage = ({ route }) => {
           },
         };
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/instructor/${instructorId}`,
+          `${ipAddress}/api/instructor/${instructorId}`,
           config
         );
         setInstructor(response.data);

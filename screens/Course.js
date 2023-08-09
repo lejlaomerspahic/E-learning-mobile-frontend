@@ -15,6 +15,7 @@ import Blank from "../components/course/Blank";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
+import ipAddress from "../variable";
 import { SafeAreaView } from "react-native-safe-area-context";
 const Course = ({ route }) => {
   const { course } = route.params;
@@ -36,7 +37,7 @@ const Course = ({ route }) => {
           },
         };
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/course/${course._id}`,
+          `${ipAddress}/api/course/${course._id}`,
           config
         );
         setCourses(response.data);

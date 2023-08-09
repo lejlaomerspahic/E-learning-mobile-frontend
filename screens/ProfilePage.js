@@ -14,6 +14,7 @@ import FavoriteModal from "../modal/FavoriteModal";
 import { useEffect } from "react";
 import { useFavorites } from "../hook/useFavorites";
 
+import ipAddress from "../variable";
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user, setUser, signOutUser } = useUser();
@@ -63,11 +64,7 @@ const ProfilePage = () => {
         },
       };
       axios
-        .post(
-          "http://192.168.0.28:3001/api/user/upload",
-          { imageUrl: imageUrl },
-          config
-        )
+        .post(`${ipAddress}/api/user/upload`, { imageUrl: imageUrl }, config)
         .then((response) => {
           user.user.imageUrl = imageUrl;
           setUser(user);

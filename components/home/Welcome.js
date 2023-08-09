@@ -18,6 +18,7 @@ import CourseList from "../course/CourseList";
 import HeadingsCourse from "./HeadingsCourse";
 import HeadingsQuiz from "./HeadingsQuiz";
 import QuizList from "../quiz/QuizList";
+import ipAddress from "../../variable";
 
 const Welcome = ({ favoriteList }) => {
   const navigation = useNavigation();
@@ -34,7 +35,7 @@ const Welcome = ({ favoriteList }) => {
         },
       };
       const response = await axios.get(
-        `http://192.168.0.28:3001/api/products/search/${searchKey}`,
+        `${ipAddress}/api/products/search/${searchKey}`,
         config
       );
       setSearchResult(response.data);

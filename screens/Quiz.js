@@ -12,6 +12,7 @@ import { COLORS } from "../constants/index";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ipAddress from "../variable";
 
 const Quiz = ({ route }) => {
   const { quiz } = route.params;
@@ -87,7 +88,7 @@ const Quiz = ({ route }) => {
         },
       };
       const response = await axios.post(
-        "http://192.168.0.28:3001/api/user/update/scores",
+        `${ipAddress}/api/user/update/scores`,
         { quizId, score },
         config
       );

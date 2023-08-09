@@ -9,12 +9,11 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS, SIZES } from "../constants/index";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
+import ipAddress from "../variable";
 const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigation = useNavigation();
 

@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS, SIZES } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-
+import ipAddress from "../../variable";
 const CoursesByCategory = ({ route }) => {
   const [courses, setCourses] = useState([]);
   const { category } = route.params;
@@ -30,7 +30,7 @@ const CoursesByCategory = ({ route }) => {
           },
         };
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/course/search/${category}`,
+          `${ipAddress}/api/course/search/${category}`,
           config
         );
 
@@ -38,7 +38,7 @@ const CoursesByCategory = ({ route }) => {
         const checkFavoriteStatus = async (id) => {
           try {
             const response = await axios.get(
-              `http://192.168.0.28:3001/api/favorites/check/${id}`,
+              `${ipAddress}/api/favorites/check/${id}`,
               config
             );
 
@@ -79,20 +79,13 @@ const CoursesByCategory = ({ route }) => {
     };
     try {
       if (favorites[id]) {
-        await axios.delete(
-          `http://192.168.0.28:3001/api/favorites/remove/${id}`,
-          config
-        );
+        await axios.delete(`${ipAddress}/api/favorites/remove/${id}`, config);
         setFavorites((prevFavorites) => ({
           ...prevFavorites,
           [id]: false,
         }));
       } else {
-        await axios.post(
-          `http://192.168.0.28:3001/api/favorites`,
-          data,
-          config
-        );
+        await axios.post(`${ipAddress}/api/favorites`, data, config);
         setFavorites((prevFavorites) => ({
           ...prevFavorites,
           [id]: true,

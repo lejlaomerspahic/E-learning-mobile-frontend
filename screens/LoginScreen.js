@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS } from "../constants";
+import ipAddress from "../variable";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -41,7 +42,7 @@ const LoginScreen = () => {
     }
 
     await axios
-      .post("http://192.168.0.28:3001/user/signin", { email, password })
+      .post(`${ipAddress}/user/signin`, { email, password })
       .then((response) => {
         navigation.navigate("Welcome");
         const token = response.data.token;

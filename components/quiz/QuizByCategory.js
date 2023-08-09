@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLORS, SIZES } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-
+import ipAddress from "../../variable";
 const QuizByCategory = ({ route }) => {
   const [quizzes, setQuizzes] = useState([]);
   const { category } = route.params;
@@ -32,7 +32,7 @@ const QuizByCategory = ({ route }) => {
           },
         };
         const response = await axios.get(
-          `http://192.168.0.28:3001/api/quiz/search/${category}`,
+          `${ipAddress}/api/quiz/search/${category}`,
           config
         );
         setQuizzes(response.data);

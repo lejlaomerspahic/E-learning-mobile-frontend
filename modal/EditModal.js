@@ -15,6 +15,7 @@ import { useUser } from "../hook/useUser";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";
 
+import ipAddress from "../variable";
 const EditProfile = ({ isVisible, onClose, user }) => {
   const { setUser, signOutUser } = useUser();
   const navigate = useNavigation();
@@ -33,7 +34,7 @@ const EditProfile = ({ isVisible, onClose, user }) => {
       };
 
       const updatedUser = await axios.put(
-        "http://192.168.0.28:3001/api/user/update",
+        `${ipAddress}/api/user/update`,
         newData,
         config
       );

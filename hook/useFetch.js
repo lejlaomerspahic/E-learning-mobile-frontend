@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import ipAddress from "../variable";
 const useFetch = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,10 +18,7 @@ const useFetch = () => {
       },
     };
     try {
-      const response = await axios.get(
-        "http://192.168.0.28:3001/api/products",
-        config
-      );
+      const response = await axios.get(`${ipAddress}/api/products`, config);
 
       setData(response.data);
 

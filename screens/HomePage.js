@@ -11,6 +11,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
+import ipAddress from "../variable";
 import { useFavorites } from "../hook/useFavorites";
 const HomePage = () => {
   const { user } = useUser();
@@ -41,7 +42,7 @@ const HomePage = () => {
             },
           };
           const response = await axios.get(
-            "http://192.168.0.28:3001/api/favorites",
+            `${ipAddress}/api/favorites`,
             config
           );
 
@@ -68,7 +69,7 @@ const HomePage = () => {
           };
           try {
             const response = await axios.post(
-              "http://192.168.0.28:3001/api/favorites/personalization",
+              `${ipAddress}/api/favorites/personalization`,
               { favorites: favorites },
               config
             );

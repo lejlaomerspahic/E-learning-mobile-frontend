@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "../hook/useUser";
 import { user } from "../hook/useUser";
 import axios from "axios";
+import ipAddress from "../variable";
 
 const FirstPage = () => {
   const navigation = useNavigation();
@@ -32,7 +33,7 @@ const FirstPage = () => {
       };
 
       axios
-        .get("http://192.168.0.28:3001/api/user/get", config)
+        .get(`${ipAddress}/api/user/get`, config)
         .then((response) => {
           setUser(response.data);
           navigation.navigate("Bottom Navigation");
