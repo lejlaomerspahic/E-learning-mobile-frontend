@@ -39,8 +39,6 @@ const EditProfile = ({ isVisible, onClose, user }) => {
         config
       );
 
-      console.log("novi user");
-      console.log(updatedUser.data.user);
       setUser((prevUser) => ({
         ...prevUser,
         user: { ...prevUser.user, ...updatedUser.data.user },

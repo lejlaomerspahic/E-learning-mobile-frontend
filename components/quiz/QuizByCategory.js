@@ -36,7 +36,6 @@ const QuizByCategory = ({ route }) => {
           config
         );
         setQuizzes(response.data);
-        console.log(response.data);
       } catch (err) {
         console.log(err);
         console.log("Failed to get courses");
@@ -50,7 +49,6 @@ const QuizByCategory = ({ route }) => {
       navigation.navigate("Quiz", { quiz: item });
     };
 
-    console.log(quizzes);
     return (
       <View style={styles.courseContainer}>
         <Image source={{ uri: item.imageUrl }} style={styles.courseImage} />

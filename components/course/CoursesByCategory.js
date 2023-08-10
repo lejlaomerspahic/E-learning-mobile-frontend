@@ -98,7 +98,6 @@ const CoursesByCategory = ({ route }) => {
 
   const renderCourseItem = ({ item }) => {
     const handleCoursePress = () => {
-      console.log(item);
       navigation.navigate("Course", { course: item });
     };
 

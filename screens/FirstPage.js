@@ -22,9 +22,7 @@ const FirstPage = () => {
   const { user } = useUser();
   useEffect(() => {
     const fetchToken = async () => {
-      console.log("token");
       const token = await AsyncStorage.getItem("token");
-      console.log(token);
 
       const config = {
         headers: {
