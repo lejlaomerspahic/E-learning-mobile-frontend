@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -6,9 +13,11 @@ import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../constants";
 
 import { Ionicons } from "@expo/vector-icons";
+import PaymentHandler from "./PaymentHandler";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const { user } = useUser();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getCartFromStorage = async () => {
     try {
@@ -176,12 +185,26 @@ const Cart = () => {
           </View>
 
           <View style={{ alignItems: "flex-end" }}>
-            <TouchableOpacity style={styles.checkoutButton}>
+            <TouchableOpacity
+              style={styles.checkoutButton}
+              onPress={() => setIsModalVisible(true)}
+            >
               <View style={styles.buttonContent}>
                 <Ionicons name="cart-outline" size={24} color="white" />
                 <Text style={styles.checkoutButtonText}>Checkout</Text>
               </View>
             </TouchableOpacity>
+            <Modal
+              visible={isModalVisible}
+              animationType="slide"
+              transparent={true}
+            >
+              <PaymentHandler
+                cart={cart}
+                onClose={() => setIsModalVisible(false)}
+                calculateTotalOrderPrice={calculateTotalOrderPrice}
+              />
+            </Modal>
           </View>
         </View>
       )}
@@ -324,6 +347,75 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     color: COLORS.gray,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    padding: 20,
+    backgroundColor: COLORS.white,
+    borderRadius: 10,
+    width: "85%",
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 30,
+    color: COLORS.gray,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  inputIcon: {
+    marginRight: 8,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: COLORS.gray2,
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    color: COLORS.black,
+  },
+  inputRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  expiryInput: {
+    flex: 1,
+    marginRight: 20,
+  },
+  cvcInput: {
+    flex: 1,
+    marginLeft: 8,
+  },
+  inputNoIcon: {
+    marginLeft: 0,
+  },
+  payButton: {
+    backgroundColor: COLORS.primary,
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 20,
+    width: 150,
+  },
+  payButtonText: {
+    color: COLORS.white,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  closeButtonVisible: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 });
 

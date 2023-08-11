@@ -20,6 +20,8 @@ import QuizList from "./components/quiz/QuizList";
 import QuizByCategory from "./components/quiz/QuizByCategory";
 import Quiz from "./screens/Quiz";
 import InstructorPage from "./components/Instructor/Instructor";
+import { StripeProvider } from "@stripe/stripe-react-native";
+import { useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
 
