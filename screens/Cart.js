@@ -5,15 +5,19 @@ import {
   Image,
   TouchableOpacity,
   Modal,
+  Button,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import { COLORS } from "../constants";
-
+import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
+import { useStripe } from "@stripe/stripe-react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PaymentHandler from "./PaymentHandler";
+import ipAddress from "../variable";
+import axios from "axios";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const { user } = useUser();
@@ -85,6 +89,94 @@ const Cart = () => {
     const deliveryCost = calculateDeliveryCost(cart, userLocation);
     const totalOrderPrice = totalItemPrice + deliveryCost;
     return totalOrderPrice;
+  };
+
+  // const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  // const [loading, setLoading] = useState(false);
+  // const [items, setItems] = useState([]);
+  // const fetchPaymentSheetParams = async () => {
+  //   const response = await fetch(`${ipAddress}/api/stripe/payment`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+
+  //   const { paymentIntent, ephemeralKey, customer } = await response.json();
+
+  //   return {
+  //     paymentIntent: paymentIntent,
+  //     ephemeralKey,
+  //     customer: customer,
+  //   };
+  // };
+
+  // const initializePaymentSheet = async () => {
+  //   const { paymentIntent, ephemeralKey, customer } =
+  //     await fetchPaymentSheetParams();
+
+  //   const { error } = await initPaymentSheet({
+  //     merchantDisplayName: "Merchant",
+  //     customerId: customer,
+  //     customerEphemeralKeySecret: ephemeralKey,
+  //     paymentIntentClientSecret: paymentIntent,
+  //   });
+
+  //   if (!error) {
+  //     setLoading(true);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   initializePaymentSheet();
+  // }, []);
+
+  // const openPaymentSheet = async () => {
+  //   const { error } = await presentPaymentSheet();
+
+  //   if (error) {
+  //     Alert.alert(`Error code: ${error.code}`, error.message);
+  //   } else {
+  //     Alert.alert("Success", "Your order is confirmed!");
+  //   }
+  // };
+
+  const { confirmPayment, loading } = useConfirmPayment();
+  const fetchPaymentIntentClientSecret = async () => {
+    const response = await fetch(`${ipAddress}/api/stripe/payment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currency: "usd",
+      }),
+    });
+    const { clientSecret } = await response.json();
+
+    return clientSecret;
+  };
+
+  const handlePayPress = async () => {
+    console.log("usao");
+    const billingDetails = {
+      email: "jenny.rosen@example.com",
+    };
+
+    const clientSecret = await fetchPaymentIntentClientSecret();
+
+    const { paymentIntent, error } = await confirmPayment(clientSecret, {
+      paymentMethodType: "Card",
+      paymentMethodData: {
+        billingDetails,
+      },
+    });
+
+    if (error) {
+      console.log("Payment confirmation error", error);
+    } else if (paymentIntent) {
+      console.log("Success from promise", paymentIntent);
+    }
   };
 
   return (
@@ -185,26 +277,34 @@ const Cart = () => {
           </View>
 
           <View style={{ alignItems: "flex-end" }}>
-            <TouchableOpacity
-              style={styles.checkoutButton}
-              onPress={() => setIsModalVisible(true)}
-            >
+            <TouchableOpacity style={styles.checkoutButton} onPress={() => {}}>
               <View style={styles.buttonContent}>
                 <Ionicons name="cart-outline" size={24} color="white" />
                 <Text style={styles.checkoutButtonText}>Checkout</Text>
               </View>
             </TouchableOpacity>
-            <Modal
-              visible={isModalVisible}
-              animationType="slide"
-              transparent={true}
-            >
-              <PaymentHandler
-                cart={cart}
-                onClose={() => setIsModalVisible(false)}
-                calculateTotalOrderPrice={calculateTotalOrderPrice}
-              />
-            </Modal>
+          </View>
+          <View>
+            <CardField
+              postalCodeEnabled={true}
+              placeholders={{
+                number: "4242 4242 4242 4242",
+              }}
+              cardStyle={{
+                backgroundColor: "#FFFFFF",
+                textColor: "#000000",
+              }}
+              style={{
+                width: "100%",
+                height: 50,
+                marginVertical: 30,
+              }}
+            />
+            <Button
+              onPress={() => handlePayPress()}
+              title="Pay"
+              disabled={loading}
+            />
           </View>
         </View>
       )}
