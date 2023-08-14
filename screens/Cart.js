@@ -26,7 +26,6 @@ const Cart = () => {
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
         setCart(cartObj.cart);
-        console.log(cartObj.cart);
       }
     } catch (error) {
       console.error("Error getting cart from AsyncStorage:", error);
@@ -49,15 +48,17 @@ const Cart = () => {
         setCart(updatedCart);
 
         await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
+        await getCartFromStorage();
       }
     } catch (error) {
       console.error(`Error removing data with key ${itemId}:`, error);
     }
   };
 
-  const navigation = useNavigation();
-  const handleRemoveItem = async (itemId) => {
+  const handleRemoveItem = (itemId) => {
     try {
+      console.log("itemId");
+      console.log(itemId);
       Alert.alert(
         "Delete Product",
         "Are you sure you want to delete this product?",
@@ -69,11 +70,8 @@ const Cart = () => {
           {
             text: "OK",
             onPress: () => {
-              remove();
+              remove(itemId);
               alert("Product successfully deleted");
-              setTimeout(() => {
-                navigation.goBack();
-              }, 2000);
             },
           },
         ]
@@ -112,17 +110,8 @@ const Cart = () => {
     return totalOrderPrice;
   };
 
-  const [displayText, setDisplayText] = useState("");
-
-  useFocusEffect(
-    React.useCallback(() => {
-      if (cart === undefined || cart.length === 0) {
-        console.log(cart);
-        setDisplayText("...no items currently available in your shopping cart");
-      }
-    }, [cart])
-  );
-
+  console.log("cart");
+  console.log(cart);
   return (
     <View style={styles.container}>
       {cart !== undefined ? (
@@ -190,7 +179,9 @@ const Cart = () => {
         ))
       ) : (
         <View style={styles.centerContainer}>
-          <Text style={styles.noItemsText}>{displayText}</Text>
+          <Text style={styles.noItemsText}>
+            ...no items currently available in your shopping cart
+          </Text>
         </View>
       )}
       {cart !== undefined && cart.length > 0 && (

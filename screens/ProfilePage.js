@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { useFavorites } from "../hook/useFavorites";
 
 import ipAddress from "../variable";
+import CompletedPurchaseModal from "../modal/CompletedPurchaseModal";
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user, setUser, signOutUser } = useUser();
@@ -22,7 +23,12 @@ const ProfilePage = () => {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalScore, setShowModalScore] = useState(false);
   const [showModalFavorites, setShowModalFavorites] = useState(false);
+  const [showModalPurchase, setShowModalPurchase] = useState(false);
   const { favorites } = useFavorites();
+
+  const toggleModalPurchase = () => {
+    setShowModalPurchase(!showModalPurchase);
+  };
 
   const toggleModalEdit = () => {
     setShowModalEdit(!showModalEdit);
@@ -91,7 +97,7 @@ const ProfilePage = () => {
       <View style={styles.profileImageContainer}>
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.profileImage} />
-        ) : user.user.imageUrl ? (
+        ) : user.user && user.user.imageUrl ? (
           <Image
             source={{ uri: user.user.imageUrl }}
             style={styles.profileImage}
@@ -126,8 +132,12 @@ const ProfilePage = () => {
         </View>
       </View>
       <View style={styles.userInfo}>
-        <Text style={styles.userName}>{user.user.name}</Text>
-        <Text style={styles.userEmail}>{user.user.email}</Text>
+        {user && user.user && user.user.name ? (
+          <Text style={styles.userName}>{user.user.name}</Text>
+        ) : null}
+        {user && user.user && user.user.email ? (
+          <Text style={styles.userEmail}>{user.user.email}</Text>
+        ) : null}
       </View>
       <View style={styles.sectionContainer}>
         <TouchableOpacity
@@ -147,7 +157,10 @@ const ProfilePage = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.sectionContainer}>
-        <TouchableOpacity style={styles.sectionItem}>
+        <TouchableOpacity
+          style={styles.sectionItem}
+          onPress={() => toggleModalPurchase()}
+        >
           <Ionicons
             name="checkmark-done-outline"
             size={30}
@@ -176,22 +189,31 @@ const ProfilePage = () => {
           <Ionicons name="log-out-outline" size={24} color={COLORS.gray2} />
         </View>
       </TouchableOpacity>
+      {user.user ? (
+        <>
+          <EditModal
+            isVisible={showModalEdit}
+            onClose={toggleModalEdit}
+            user={user}
+          />
 
-      <EditModal
-        isVisible={showModalEdit}
-        onClose={toggleModalEdit}
-        user={user}
-      />
-      <ScoreModal
-        isVisible={showModalScore}
-        onClose={toggleModalScore}
-        scores={user.user.scores}
-      />
-      <FavoriteModal
-        isVisible={showModalFavorites}
-        onClose={toggleModalFavorites}
-        favorites={favorites}
-      />
+          <ScoreModal
+            isVisible={showModalScore}
+            onClose={toggleModalScore}
+            scores={user.user.scores}
+          />
+          <FavoriteModal
+            isVisible={showModalFavorites}
+            onClose={toggleModalFavorites}
+            favorites={favorites}
+          />
+          <CompletedPurchaseModal
+            isVisible={showModalPurchase}
+            onClose={toggleModalPurchase}
+            user={user}
+          />
+        </>
+      ) : null}
     </View>
   );
 };

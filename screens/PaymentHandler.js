@@ -29,8 +29,8 @@ const PaymentHandler = ({
   const [cardHolderName, setCardHolderName] = useState("");
   const { user } = useUser();
   const { confirmPayment, loading } = useConfirmPayment();
-
   const navigation = useNavigation();
+  const price = calculateTotalOrderPrice(cart, user.user.location);
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
       alert("Card number must have 16 digits");
@@ -65,7 +65,7 @@ const PaymentHandler = ({
       },
       body: JSON.stringify({
         currency: "usd",
-        price: calculateTotalOrderPrice(cart, user.user.location),
+        price: price,
       }),
     });
 
@@ -99,34 +99,42 @@ const PaymentHandler = ({
       };
 
       const productIds = cart.map((item) => item._id);
+      const counts = cart.map((item) => item.count);
+      const currentDate = new Date();
+
       try {
         const response = await axios
-          .put(`${ipAddress}/api/user/update/products`, { productIds }, config)
+          .put(
+            `${ipAddress}/api/user/update/products`,
+            {
+              productIds,
+              date: currentDate.toISOString(),
+              counts,
+              price,
+            },
+            config
+          )
           .then((response) => {
             const data = response.data;
-            console.log("Proizvodi uspešno ažurirani:", data.user);
-          })
-          .catch((error) => {
-            console.log("Greška prilikom ažuriranja proizvoda");
+
+            const updatedCart = cart.filter(
+              (item) => !productIds.includes(item._id)
+            );
+            setCart(updatedCart);
+
+            productIds.forEach((productId) => {
+              remove(productId);
+            });
+
+            alert("Purchase successful!");
+            onClose();
+            setTimeout(() => {
+              navigation.goBack();
+            }, 2000);
           });
       } catch (error) {
-        console.error("Greška prilikom slanja zahteva:", error);
+        console.error("Error:", error);
       }
-      const updatedCart = cart.filter((item) => !productIds.includes(item._id));
-      setCart(updatedCart);
-
-      productIds.forEach((productId) => {
-        remove(productId);
-      });
-      alert("Purchase successful!");
-      onClose();
-      setTimeout(() => {
-        navigation.goBack();
-      }, 2000);
-
-      console.log("Success from promise");
-    } else {
-      console.log("Payment confirmation error");
     }
   };
 

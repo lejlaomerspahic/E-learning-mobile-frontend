@@ -26,8 +26,10 @@ const HomePage = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      setUserImageUrl(user.user.imageUrl || defaultImageUrl);
-      setUserName(user.user.name);
+      if (user.user) {
+        setUserImageUrl(user.user.imageUrl || defaultImageUrl);
+        setUserName(user.user.name);
+      }
     }, [user])
   );
 
@@ -41,6 +43,7 @@ const HomePage = () => {
               Authorization: `Bearer ${token}`,
             },
           };
+
           const response = await axios.get(
             `${ipAddress}/api/favorites`,
             config
@@ -56,7 +59,6 @@ const HomePage = () => {
       fetchFavorites();
     }, [])
   );
-
   useFocusEffect(
     React.useCallback(() => {
       if (isFavoritesLoaded) {
