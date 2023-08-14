@@ -19,6 +19,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const { user } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
+
   const getCartFromStorage = async () => {
     try {
       const cartJson = await AsyncStorage.getItem("cart");
