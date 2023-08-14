@@ -42,7 +42,6 @@ const CoursesByCategory = ({ route }) => {
               config
             );
 
-            console.log(response.data.isFavorite);
             return response.data.isFavorite;
           } catch (error) {
             console.error("Error checking favorite:", error);
@@ -57,7 +56,6 @@ const CoursesByCategory = ({ route }) => {
 
         setFavorites(favoriteStatus);
         setCourses(response.data);
-        console.log(response.data);
       } catch (err) {
         console.log(err);
         console.log("Failed to get courses");

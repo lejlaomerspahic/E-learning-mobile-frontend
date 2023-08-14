@@ -39,7 +39,6 @@ const Welcome = ({ favoriteList }) => {
         config
       );
       setSearchResult(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
       console.log("Failed to get product");
