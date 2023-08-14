@@ -6,11 +6,12 @@ import {
   TouchableOpacity,
   Modal,
   Button,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
 import PaymentHandler from "./PaymentHandler";
@@ -18,13 +19,13 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const { user } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const getCartFromStorage = async () => {
     try {
       const cartJson = await AsyncStorage.getItem("cart");
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
         setCart(cartObj.cart);
+        console.log(cartObj.cart);
       }
     } catch (error) {
       console.error("Error getting cart from AsyncStorage:", error);
@@ -37,7 +38,7 @@ const Cart = () => {
     }, [])
   );
 
-  const handleRemoveItem = async (itemId) => {
+  const remove = async (itemId) => {
     try {
       const itemIndex = cart.findIndex((item) => item._id === itemId);
 
@@ -50,6 +51,34 @@ const Cart = () => {
       }
     } catch (error) {
       console.error(`Error removing data with key ${itemId}:`, error);
+    }
+  };
+
+  const navigation = useNavigation();
+  const handleRemoveItem = async (itemId) => {
+    try {
+      Alert.alert(
+        "Delete Product",
+        "Are you sure you want to delete this product?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          {
+            text: "OK",
+            onPress: () => {
+              remove();
+              alert("Product successfully deleted");
+              setTimeout(() => {
+                navigation.goBack();
+              }, 2000);
+            },
+          },
+        ]
+      );
+    } catch (error) {
+      console.error(`Error showing alert:`, error);
     }
   };
 
@@ -81,6 +110,17 @@ const Cart = () => {
     const totalOrderPrice = totalItemPrice + deliveryCost;
     return totalOrderPrice;
   };
+
+  const [displayText, setDisplayText] = useState("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (cart === undefined || cart.length === 0) {
+        console.log(cart);
+        setDisplayText("...no items currently available in your shopping cart");
+      }
+    }, [cart])
+  );
 
   return (
     <View style={styles.container}>
@@ -149,9 +189,7 @@ const Cart = () => {
         ))
       ) : (
         <View style={styles.centerContainer}>
-          <Text style={styles.noItemsText}>
-            ...no items currently available in your shopping cart
-          </Text>
+          <Text style={styles.noItemsText}>{displayText}</Text>
         </View>
       )}
       {cart !== undefined && cart.length > 0 && (
@@ -199,6 +237,8 @@ const Cart = () => {
               cart={cart}
               onClose={() => setIsModalVisible(false)}
               calculateTotalOrderPrice={calculateTotalOrderPrice}
+              remove={remove}
+              setCart={setCart}
             />
           </Modal>
         </View>
@@ -206,6 +246,7 @@ const Cart = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

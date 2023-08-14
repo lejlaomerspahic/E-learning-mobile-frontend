@@ -15,7 +15,14 @@ import { useUser } from "../hook/useUser";
 import ipAddress from "../variable";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const PaymentHandler = ({ cart, calculateTotalOrderPrice, onClose }) => {
+import { useNavigation } from "@react-navigation/native";
+const PaymentHandler = ({
+  cart,
+  calculateTotalOrderPrice,
+  onClose,
+  remove,
+  setCart,
+}) => {
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [cvc, setCVC] = useState("");
@@ -23,6 +30,7 @@ const PaymentHandler = ({ cart, calculateTotalOrderPrice, onClose }) => {
   const { user } = useUser();
   const { confirmPayment, loading } = useConfirmPayment();
 
+  const navigation = useNavigation();
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
       alert("Card number must have 16 digits");
@@ -104,8 +112,18 @@ const PaymentHandler = ({ cart, calculateTotalOrderPrice, onClose }) => {
       } catch (error) {
         console.error("Greška prilikom slanja zahteva:", error);
       }
+      const updatedCart = cart.filter((item) => !productIds.includes(item._id));
+      setCart(updatedCart);
+
+      productIds.forEach((productId) => {
+        remove(productId);
+      });
       alert("Purchase successful!");
       onClose();
+      setTimeout(() => {
+        navigation.goBack();
+      }, 2000);
+
       console.log("Success from promise");
     } else {
       console.log("Payment confirmation error");
