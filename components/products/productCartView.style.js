@@ -7,12 +7,13 @@ const styles = StyleSheet.create({
     height: 200,
     marginEnd: 10,
     marginTop: 20,
+    padding: 5,
     borderRadius: SIZES.medium,
     backgroundColor: COLORS.secondary,
   },
 
   imageContainer: {
-    width: 170,
+    width: 160,
     height: 120,
     margin: SIZES.xSmall - 7,
     borderRadius: SIZES.small,
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
   },
   details: {
     justifyContent: "center",
-    paddingLeft: SIZES.small,
+    marginTop: 5,
+    marginHorizontal: 5,
   },
   title: {
     fontFamily: "bold",
@@ -43,12 +45,9 @@ const styles = StyleSheet.create({
     fontFamily: "bold",
     fontSize: SIZES.xSmall + 3,
     color: COLORS.gray,
+    marginLeft: 5,
   },
-  addBtn: {
-    position: "absolute",
-    bottom: SIZES.xSmall,
-    right: SIZES.xSmall,
-  },
+  addBtn: { marginLeft: 65, marginTop: -5 },
 });
 
 export default styles;

@@ -23,6 +23,7 @@ const Cart = () => {
   const getCartFromStorage = async () => {
     try {
       const cartJson = await AsyncStorage.getItem("cart");
+
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
         setCart(cartObj.cart);
@@ -31,7 +32,6 @@ const Cart = () => {
       console.error("Error getting cart from AsyncStorage:", error);
     }
   };
-
   useFocusEffect(
     React.useCallback(() => {
       getCartFromStorage();
@@ -48,7 +48,7 @@ const Cart = () => {
         setCart(updatedCart);
 
         await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
-        await getCartFromStorage();
+        //getCartFromStorage();
       }
     } catch (error) {
       console.error(`Error removing data with key ${itemId}:`, error);
@@ -57,8 +57,6 @@ const Cart = () => {
 
   const handleRemoveItem = (itemId) => {
     try {
-      console.log("itemId");
-      console.log(itemId);
       Alert.alert(
         "Delete Product",
         "Are you sure you want to delete this product?",
@@ -110,8 +108,6 @@ const Cart = () => {
     return totalOrderPrice;
   };
 
-  console.log("cart");
-  console.log(cart);
   return (
     <View style={styles.container}>
       {cart !== undefined ? (

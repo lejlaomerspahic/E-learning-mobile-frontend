@@ -92,7 +92,6 @@ const Quiz = ({ route }) => {
         { quizId, score },
         config
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error);
       console.log("Failed to save score");

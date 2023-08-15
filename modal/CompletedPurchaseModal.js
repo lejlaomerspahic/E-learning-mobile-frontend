@@ -18,8 +18,6 @@ import { COLORS } from "../constants";
 
 import ipAddress from "../variable";
 const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
-  console.log(products[0]);
-
   const formatDate = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
     const formattedDate = dateTime.toLocaleDateString();

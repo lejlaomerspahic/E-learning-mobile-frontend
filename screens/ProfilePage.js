@@ -84,7 +84,6 @@ const ProfilePage = () => {
     }
   };
 
-  console.log(user.user);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>
