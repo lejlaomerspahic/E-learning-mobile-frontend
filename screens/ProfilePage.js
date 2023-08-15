@@ -84,6 +84,7 @@ const ProfilePage = () => {
     }
   };
 
+  console.log(user.user);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>
@@ -210,7 +211,7 @@ const ProfilePage = () => {
           <CompletedPurchaseModal
             isVisible={showModalPurchase}
             onClose={toggleModalPurchase}
-            user={user}
+            products={user.user.products}
           />
         </>
       ) : null}
