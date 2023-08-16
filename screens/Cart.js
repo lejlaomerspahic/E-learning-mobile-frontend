@@ -11,6 +11,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
@@ -23,15 +24,16 @@ const Cart = () => {
   const getCartFromStorage = async () => {
     try {
       const cartJson = await AsyncStorage.getItem("cart");
-
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
-        setCart(cartObj.cart);
+        const updatedCart = cartObj.cart ? cartObj.cart : cartObj;
+        setCart(updatedCart);
       }
     } catch (error) {
       console.error("Error getting cart from AsyncStorage:", error);
     }
   };
+
   useFocusEffect(
     React.useCallback(() => {
       getCartFromStorage();
@@ -46,9 +48,22 @@ const Cart = () => {
         const updatedCart = [...cart];
         updatedCart.splice(itemIndex, 1);
         setCart(updatedCart);
+        // const cartjson = await AsyncStorage.getItem("cart");
+        // const cartObject = JSON.parse(cartjson);
+        // cartObject.cart = updatedCart;
 
-        await AsyncStorage.setItem("cart", JSON.stringify(updatedCart));
-        //getCartFromStorage();
+        console.log("updatedCart");
+        console.log(updatedCart);
+        const object = { userId: user.user._id, cart: [...updatedCart] };
+        await AsyncStorage.setItem("cart", JSON.stringify(object));
+
+        const cartJson = await AsyncStorage.getItem("cart");
+        if (cartJson !== null) {
+          const cartObj = JSON.parse(cartJson);
+          console.log("cartObj");
+          console.log(cartObj);
+          setCart(cartObj.cart);
+        }
       }
     } catch (error) {
       console.error(`Error removing data with key ${itemId}:`, error);
@@ -67,8 +82,8 @@ const Cart = () => {
           },
           {
             text: "OK",
-            onPress: () => {
-              remove(itemId);
+            onPress: async () => {
+              await remove(itemId);
               alert("Product successfully deleted");
             },
           },
@@ -78,7 +93,6 @@ const Cart = () => {
       console.error(`Error showing alert:`, error);
     }
   };
-
   const calculateTotalPrice = (priceWithSign, count) => {
     const price = parseFloat(priceWithSign.replace("$", ""));
     return price * count;
