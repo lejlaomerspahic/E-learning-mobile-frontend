@@ -106,7 +106,9 @@ const CoursesByCategory = ({ route }) => {
             <Image source={{ uri: item.imageUrl }} style={styles.courseImage} />
           </View>
           <View style={styles.infoContainer}>
-            <Text style={styles.courseTitle}>{item.name}</Text>
+            <Text style={styles.courseTitle} numberOfLines={2}>
+              {item.name}
+            </Text>
             <Text style={styles.courseDescription} numberOfLines={3}>
               {item.description}
             </Text>
@@ -164,18 +166,19 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: 100,
-    height: 100,
+    height: 110,
     borderRadius: 10,
     overflow: "hidden",
     margin: 5,
   },
   courseImage: {
-    width: "100%",
-    height: "100%",
+    width: 100,
+    height: 110,
   },
   infoContainer: {
     flex: 1,
     marginLeft: 10,
+    height: 60,
   },
   courseTitle: {
     fontSize: 18,

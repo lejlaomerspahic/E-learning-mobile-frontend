@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "90%",
     alignItems: "center",
-    padding: 20,
+    padding: 15,
   },
   closeButton: {
     position: "absolute",
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   productImage: {
-    width: 90,
-    height: 90,
+    width: 70,
+    height: 100,
     borderRadius: 10,
     margin: 15,
   },

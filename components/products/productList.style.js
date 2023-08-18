@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     paddingTop: 60,
-    paddingHorizontal: 15,
+    paddingBottom: 30,
   },
 });
 

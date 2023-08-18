@@ -25,24 +25,22 @@ const ProductCartView = ({ item }) => {
         </View>
         <View style={styles.details}>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
           >
-            <Text style={styles.title} numberOfLines={1}>
-              {item.title}
-            </Text>
-            <View style={{ flexDirection: "row" }}>
-              <Ionicons name="cash-outline" size={20}></Ionicons>
-              <Text style={styles.price} numberOfLines={1}>
-                {item.price}
-              </Text>
-            </View>
+            <Text style={styles.title}>{item.title}</Text>
           </View>
 
-          <View style={{ flexDirection: "row", marginLeft: -5 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <Ionicons name="location" size={20} color={COLORS.red}></Ionicons>
-            <Text style={{ color: COLORS.gray, marginTop: 2 }}>
-              {item.product_location}
-            </Text>
+            <Text style={{ color: COLORS.gray }}>{item.product_location}</Text>
             <TouchableOpacity
               style={styles.addBtn}
               onPress={() => navigate.navigate("ProductDetails", { item })}

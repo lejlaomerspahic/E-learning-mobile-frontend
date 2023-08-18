@@ -6,10 +6,11 @@ import { Feather } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants/index";
 import { TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const SearchTile = ({ item }) => {
   const navigate = useNavigation();
   return (
-    <View>
+    <View style={{ margin: 10, alignItems: "center" }}>
       <TouchableOpacity
         style={styles.productContainer}
         onPress={() => navigate.navigate("ProductDetails", { item })}
@@ -24,8 +25,33 @@ const SearchTile = ({ item }) => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.productTitle}>{item.title}</Text>
-          <Text style={styles.supplierandprice}>{item.supplier}</Text>
-          <Text style={styles.supplierandprice}>{item.price}</Text>
+
+          <View style={{ flexDirection: "row" }}>
+            <MaterialCommunityIcons
+              name="truck-delivery-outline"
+              size={24}
+              marginRight={5}
+              color={COLORS.gray}
+            ></MaterialCommunityIcons>
+            <Text
+              style={{
+                marginTop: 3,
+                color: COLORS.gray,
+                fontFamily: "regular",
+              }}
+            >
+              {item.supplier}
+            </Text>
+          </View>
+          <View style={styles.iconPrice}>
+            <Ionicons
+              name="cash-outline"
+              size={20}
+              color={COLORS.gray}
+              style={{ marginTop: 3, marginLeft: 3 }}
+            />
+            <Text style={styles.price}>{item.price}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </View>

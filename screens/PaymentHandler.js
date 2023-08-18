@@ -20,7 +20,6 @@ const PaymentHandler = ({
   cart,
   calculateTotalOrderPrice,
   onClose,
-  remove,
   setCart,
   getCartFromStorage,
 }) => {
@@ -35,6 +34,10 @@ const PaymentHandler = ({
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
       alert("Card number must have 16 digits");
+      return false;
+    }
+    if (cvc.length !== 3) {
+      alert("CVC must have 3 digits");
       return false;
     }
     const currentYear = new Date().getFullYear();

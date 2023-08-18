@@ -20,7 +20,7 @@ const Quiz = ({ route }) => {
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [remainingTime, setRemainingTime] = useState(20);
+  const [remainingTime, setRemainingTime] = useState(150);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -71,12 +71,16 @@ const Quiz = ({ route }) => {
 
     saveScoreToBackend(quiz._id, score);
 
-    Alert.alert("Quiz Completed", `Your score: ${score}/${questions.length}`, [
-      {
-        text: "OK",
-        onPress: () => navigation.goBack(),
-      },
-    ]);
+    Alert.alert(
+      "Quiz Completed",
+      `Your score: ${score}/${questions.length * 2}`,
+      [
+        {
+          text: "OK",
+          onPress: () => navigation.goBack(),
+        },
+      ]
+    );
   };
 
   const saveScoreToBackend = async (quizId, score) => {

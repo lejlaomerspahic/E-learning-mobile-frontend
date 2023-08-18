@@ -28,8 +28,6 @@ const Cart = () => {
         const cartObj = JSON.parse(cartJson);
 
         if (cartObj.userId === user.user._id) {
-          console.log("cartObj");
-          console.log(cartObj);
           setCart(cartObj.cart);
         } else {
           console.log("Cart does not belong to the current user.");
@@ -234,7 +232,6 @@ const Cart = () => {
               cart={cart}
               onClose={() => setIsModalVisible(false)}
               calculateTotalOrderPrice={calculateTotalOrderPrice}
-              remove={remove}
               setCart={setCart}
               getCartFromStorage={getCartFromStorage}
             />
@@ -261,10 +258,11 @@ const styles = StyleSheet.create({
     marginBottom: 1,
   },
   image: {
-    width: 130,
+    width: 100,
     height: 120,
     marginRight: 5,
     margin: 5,
+    borderRadius: 8,
   },
   infoContainer: {
     flex: 1,

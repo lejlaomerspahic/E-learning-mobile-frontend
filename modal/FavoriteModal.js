@@ -13,18 +13,18 @@ import { COLORS, SIZES } from "../constants/index";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-import ipAddress from "../variable";
 import { useUser } from "../hook/useUser";
 const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigation = useNavigation();
-  console.log("favorites");
-  console.log(favorites);
+  const { user } = useUser();
+
   const navigateToCourseDetails = (item) => {
     navigation.navigate("Course", { course: item });
+    onClose();
   };
-  const { user } = useUser();
   const navigateToProductDetails = (item) => {
-    navigation.navigate("ProductDetails", { product: item });
+    navigation.navigate("ProductDetails", { item: item });
+    onClose();
   };
 
   const renderFavoriteItem = ({ item }) => {
@@ -39,14 +39,15 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
       >
         {isCourse ? (
           <View style={styles.courseContainer}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={{ uri: item.imageUrl }}
-                style={styles.courseImage}
-              />
-            </View>
             <View style={styles.infoContainer}>
-              <Text style={styles.courseTitle}>{item.name}</Text>
+              <View style={styles.iconTitle}>
+                <Text style={styles.courseTitle}>{item.name}</Text>
+                <Image
+                  style={{ width: 28, height: 25, marginLeft: 3 }}
+                  source={{ uri: item.icon }}
+                ></Image>
+              </View>
+
               <Text style={styles.courseDescription} numberOfLines={3}>
                 {item.description}
               </Text>
@@ -73,7 +74,7 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
             <View style={styles.imageContainer}>
               <Image
                 source={{ uri: item.imageUrl }}
-                style={styles.courseImage}
+                style={styles.productImage}
               />
             </View>
             <View style={styles.infoContainer}>
@@ -201,6 +202,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     right: 10,
+  },
+  productImage: {
+    width: 70,
+    height: 100,
+    resizeMode: "cover",
+    borderRadius: 8,
+  },
+  iconTitle: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

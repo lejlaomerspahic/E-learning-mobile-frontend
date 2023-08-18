@@ -18,8 +18,13 @@ const ProductDetails = () => {
   const { item } = route.params;
   const [count, setCount] = useState(1);
   const navigate = useNavigation();
-
+  const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useUser();
+  const id = item._id;
+  const data = {
+    id: item._id,
+  };
+
   const increment = () => {
     setCount(count + 1);
   };
@@ -27,12 +32,6 @@ const ProductDetails = () => {
     setCount(count - 1);
   };
 
-  const [isFavorite, setIsFavorite] = useState(false);
-  const id = item._id;
-
-  const data = {
-    id: item._id,
-  };
   const toggleFavorite = async () => {
     const token = await AsyncStorage.getItem("token");
     const config = {
@@ -81,8 +80,6 @@ const ProductDetails = () => {
     try {
       const cartJson = await AsyncStorage.getItem("cart");
       const cartObj = JSON.parse(cartJson);
-      console.log("productDetails cartObj");
-      console.log(cartObj);
       if (cartObj == null) throw new Exception();
       const index = cartObj.cart.findIndex(
         (item) => item._id === cartStorage._id
@@ -119,7 +116,7 @@ const ProductDetails = () => {
           <Ionicons
             name={isFavorite ? "heart" : "heart-outline"}
             size={30}
-            color={isFavorite ? COLORS.red : COLORS.gray}
+            color={isFavorite ? COLORS.red : COLORS.white}
             style={{ marginLeft: 290 }}
             onPress={toggleFavorite}
           />

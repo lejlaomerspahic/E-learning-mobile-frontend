@@ -109,11 +109,9 @@ const ProfilePage = () => {
     }
   };
 
-  console.log("favorites");
-  console.log(favorites);
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigate.goBack()}>
+      <TouchableOpacity onPress={() => navigate.navigate("Welcome")}>
         <Ionicons
           name="chevron-back-circle"
           size={30}

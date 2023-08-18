@@ -8,24 +8,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    padding: SIZES.medium,
+    padding: 10,
     borderRadius: SIZES.small,
-    backgroundColor: COLORS.white,
-    ...SHADOWS.medium,
-    shadowColor: COLORS.lightWhite,
-    margin: 10,
+    backgroundColor: COLORS.secondary,
   },
   image: {
-    width: 70,
-    backgroundColor: COLORS.secondary,
     borderRadius: SIZES.medium,
     justifyContent: "center",
     alignContent: "center",
   },
   productImg: {
-    width: "100%",
-    height: 65,
-    borderRadius: SIZES.small,
+    width: 85,
+    height: 100,
+    borderRadius: 8,
     resizeMode: "cover",
   },
   textContainer: {
@@ -37,11 +32,15 @@ const styles = StyleSheet.create({
     fontFamily: "bold",
     color: COLORS.primary,
   },
-  supplierandprice: {
-    fontSize: SIZES.small + 2,
+  price: {
+    fontSize: SIZES.medium,
     color: COLORS.gray,
-    fontFamily: "regular",
-    marginTop: -2,
+    fontFamily: "semibold",
+    marginLeft: 5,
+  },
+  iconPrice: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
 });
 

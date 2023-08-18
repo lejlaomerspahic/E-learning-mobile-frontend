@@ -100,7 +100,7 @@ const Welcome = ({ favoriteList }) => {
           <Blank />
         </>
       ) : (
-        <View>
+        <View style={{ margin: 10 }}>
           {searchResult.map((item) => (
             <SearchTile key={item._id} item={item} />
           ))}

@@ -3,34 +3,36 @@ import { COLORS, SIZES } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    width: 175,
-    height: 200,
+    width: 155,
+    height: 220,
     marginEnd: 10,
     marginTop: 20,
-    padding: 5,
+    padding: 10,
     borderRadius: SIZES.medium,
     backgroundColor: COLORS.secondary,
+    alignItems: "center",
   },
 
   imageContainer: {
-    width: 160,
-    height: 120,
-    margin: SIZES.xSmall - 7,
+    width: 120,
+    height: 130,
+    alignItems: "center",
     borderRadius: SIZES.small,
     overflow: "hidden",
   },
   image: {
+    width: 110,
+    height: 130,
     aspectRatio: 1,
     resizeMode: "cover",
   },
   details: {
     justifyContent: "center",
-    marginTop: 5,
-    marginHorizontal: 5,
+    overflow: "hidden",
   },
   title: {
     fontFamily: "bold",
-    fontSize: SIZES.large - 5,
+    fontSize: 16,
     marginBottom: 2.5,
     marginTop: 1,
     color: COLORS.gray,
@@ -38,7 +40,6 @@ const styles = StyleSheet.create({
   supplier: {
     fontFamily: "regular",
     fontSize: SIZES.small,
-    marginBottom: 2,
     color: COLORS.gray,
   },
   price: {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     marginLeft: 5,
   },
-  addBtn: { marginLeft: 65, marginTop: -5 },
+  addBtn: { marginLeft: 20, marginTop: -5 },
 });
 
 export default styles;
