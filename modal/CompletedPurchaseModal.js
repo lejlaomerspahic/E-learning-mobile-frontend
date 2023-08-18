@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-
     justifyContent: "center",
   },
   productContainer: {
@@ -137,6 +136,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 5,
+    width: 100,
   },
   iconContainer: {
     flexDirection: "row",

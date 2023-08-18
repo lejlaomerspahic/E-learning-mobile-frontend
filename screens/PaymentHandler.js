@@ -22,6 +22,7 @@ const PaymentHandler = ({
   onClose,
   remove,
   setCart,
+  getCartFromStorage,
 }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
@@ -103,44 +104,29 @@ const PaymentHandler = ({
       const currentDate = new Date();
 
       try {
-        const response = await axios
-          .put(
-            `${ipAddress}/api/user/update/products`,
-            {
-              productIds,
-              date: currentDate.toISOString(),
-              counts,
-              price,
-            },
-            config
-          )
-          .then((response) => {
-            const data = response.data;
+        const response = await axios.put(
+          `${ipAddress}/api/user/update/products`,
+          {
+            productIds,
+            date: currentDate.toISOString(),
+            counts,
+            price,
+          },
+          config
+        );
 
-            const updatedCart = cart.filter(
-              (item) => !productIds.includes(item._id)
-            );
+        if (response.status === 200) {
+          const updateCart = await AsyncStorage.removeItem("cart");
+          setCart(updateCart);
 
-            setCart(updatedCart);
+          onClose();
 
-            console.log("productIds");
-            console.log(productIds);
+          getCartFromStorage();
 
-            console.log("updatedCart");
-            console.log(updatedCart);
-            productIds.forEach((productId) => {
-              console.log("productId");
-              console.log(productId);
-              remove(productId);
-              console.log("prosao");
-            });
-
-            alert("Purchase successful!");
-            onClose();
-            setTimeout(() => {
-              navigation.goBack();
-            }, 2000);
-          });
+          alert("Purchase successful!");
+        } else {
+          alert("Failed to update products. Please try again.");
+        }
       } catch (error) {
         console.error("Error:", error);
       }

@@ -26,6 +26,9 @@ const Cart = () => {
       const cartJson = await AsyncStorage.getItem("cart");
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
+
+        console.log("cartObj.cart");
+        console.log(cartObj.cart);
         setCart(cartObj.cart);
       }
     } catch (error) {
@@ -228,6 +231,7 @@ const Cart = () => {
               calculateTotalOrderPrice={calculateTotalOrderPrice}
               remove={remove}
               setCart={setCart}
+              getCartFromStorage={getCartFromStorage}
             />
           </Modal>
         </View>
@@ -290,6 +294,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 5,
+    marginRight: 10,
   },
   iconContainer: {
     flexDirection: "row",
