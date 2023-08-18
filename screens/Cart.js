@@ -27,9 +27,14 @@ const Cart = () => {
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
 
-        console.log("cartObj.cart");
-        console.log(cartObj.cart);
-        setCart(cartObj.cart);
+        if (cartObj.userId === user.user._id) {
+          console.log("cartObj");
+          console.log(cartObj);
+          setCart(cartObj.cart);
+        } else {
+          console.log("Cart does not belong to the current user.");
+          setCart([]);
+        }
       }
     } catch (error) {
       console.error("Error getting cart from AsyncStorage:", error);

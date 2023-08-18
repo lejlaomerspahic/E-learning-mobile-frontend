@@ -17,7 +17,9 @@ import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";
 
 import ipAddress from "../variable";
+
 const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
+  const { user } = useUser();
   const formatDate = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
     const formattedDate = dateTime.toLocaleDateString();
@@ -25,8 +27,6 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
     return `${formattedDate}`;
   };
 
-  console.log("products");
-  console.log(products);
   const formatTime = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
 

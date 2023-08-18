@@ -90,16 +90,8 @@ const ProductDetails = () => {
       if (index !== -1) {
         cartObj.cart[index].count += cartStorage.count;
       } else {
-        // console.log("PRODUCT cartObj.cart");
-        // console.log(cartObj.cart);
-        // console.log("PRODUCT cartObj");
-        // console.log(cartObj);
-        console.log("usao");
-
         cartObj.cart.push(cartStorage);
       }
-      console.log("PRODUCT cartObj");
-      console.log(cartObj);
       await AsyncStorage.setItem("cart", JSON.stringify(cartObj));
     } catch (error) {
       const cartWithUserId = { userId, cart: [cartStorage] };

@@ -108,7 +108,9 @@ const ProfilePage = () => {
       console.error("Error uploading image:", error.message);
     }
   };
-  console.log(user.user);
+
+  console.log("favorites");
+  console.log(favorites);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>

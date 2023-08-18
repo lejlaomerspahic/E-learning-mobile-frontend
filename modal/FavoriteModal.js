@@ -14,13 +14,15 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 import ipAddress from "../variable";
+import { useUser } from "../hook/useUser";
 const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigation = useNavigation();
-
+  console.log("favorites");
+  console.log(favorites);
   const navigateToCourseDetails = (item) => {
     navigation.navigate("Course", { course: item });
   };
-
+  const { user } = useUser();
   const navigateToProductDetails = (item) => {
     navigation.navigate("ProductDetails", { product: item });
   };
@@ -111,12 +113,14 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
           <Ionicons name="close" size={30} color={COLORS.primary} />
         </TouchableOpacity>
         <View style={styles.modalContent}>
-          <FlatList
-            style={styles.items}
-            data={favorites?.courses?.concat(favorites?.products) || []}
-            keyExtractor={(item) => item._id.toString()}
-            renderItem={renderFavoriteItem}
-          />
+          {favorites.user === user.user._id ? (
+            <FlatList
+              style={styles.items}
+              data={favorites?.courses?.concat(favorites?.products) || []}
+              keyExtractor={(item) => item._id.toString()}
+              renderItem={renderFavoriteItem}
+            />
+          ) : null}
         </View>
       </View>
     </Modal>
