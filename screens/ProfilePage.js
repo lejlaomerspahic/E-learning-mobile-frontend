@@ -7,7 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../constants";
 import styles from "./profile.style";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import EditModal from "../modal/EditModal";
 import ScoreModal from "../modal/ScoreModal";
 import FavoriteModal from "../modal/FavoriteModal";
@@ -25,6 +25,31 @@ const ProfilePage = () => {
   const [showModalFavorites, setShowModalFavorites] = useState(false);
   const [showModalPurchase, setShowModalPurchase] = useState(false);
   const { favorites } = useFavorites();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchToken = async () => {
+        const token = await AsyncStorage.getItem("token");
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        axios
+          .get(`${ipAddress}/api/user/get`, config)
+          .then((response) => {
+            setUser(response.data);
+          })
+          .catch((error) => {
+            console.error("Login Error:", error.message);
+          });
+      };
+
+      fetchToken();
+    }, [])
+  );
 
   const toggleModalPurchase = () => {
     setShowModalPurchase(!showModalPurchase);
@@ -83,7 +108,7 @@ const ProfilePage = () => {
       console.error("Error uploading image:", error.message);
     }
   };
-
+  console.log(user.user);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate.goBack()}>

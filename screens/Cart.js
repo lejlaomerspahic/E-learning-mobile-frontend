@@ -26,8 +26,7 @@ const Cart = () => {
       const cartJson = await AsyncStorage.getItem("cart");
       if (cartJson !== null) {
         const cartObj = JSON.parse(cartJson);
-        const updatedCart = cartObj.cart ? cartObj.cart : cartObj;
-        setCart(updatedCart);
+        setCart(cartObj.cart);
       }
     } catch (error) {
       console.error("Error getting cart from AsyncStorage:", error);
@@ -48,22 +47,10 @@ const Cart = () => {
         const updatedCart = [...cart];
         updatedCart.splice(itemIndex, 1);
         setCart(updatedCart);
-        // const cartjson = await AsyncStorage.getItem("cart");
-        // const cartObject = JSON.parse(cartjson);
-        // cartObject.cart = updatedCart;
 
-        console.log("updatedCart");
-        console.log(updatedCart);
         const object = { userId: user.user._id, cart: [...updatedCart] };
         await AsyncStorage.setItem("cart", JSON.stringify(object));
-
-        const cartJson = await AsyncStorage.getItem("cart");
-        if (cartJson !== null) {
-          const cartObj = JSON.parse(cartJson);
-          console.log("cartObj");
-          console.log(cartObj);
-          setCart(cartObj.cart);
-        }
+        getCartFromStorage();
       }
     } catch (error) {
       console.error(`Error removing data with key ${itemId}:`, error);
@@ -124,7 +111,7 @@ const Cart = () => {
 
   return (
     <View style={styles.container}>
-      {cart !== undefined ? (
+      {cart !== undefined && cart.length > 0 ? (
         cart.map((item) => (
           <View style={styles.itemContainer} key={item._id}>
             <Image

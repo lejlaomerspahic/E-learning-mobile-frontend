@@ -25,6 +25,8 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
     return `${formattedDate}`;
   };
 
+  console.log("products");
+  console.log(products);
   const formatTime = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
 
@@ -110,25 +112,26 @@ const styles = StyleSheet.create({
     right: 10,
   },
   container: {
-    backgroundColor: COLORS.secondary,
     alignItems: "center",
-    borderRadius: 8,
-    marginVertical: 10,
+
     justifyContent: "center",
   },
   productContainer: {
+    backgroundColor: COLORS.secondary,
     flexDirection: "row",
     alignItems: "center",
+    borderRadius: 8,
     margin: 10,
   },
   productImage: {
-    width: 100,
-    height: 100,
-    marginRight: 20,
+    width: 90,
+    height: 90,
     borderRadius: 10,
+    margin: 15,
   },
   productDetails: {
     flex: 1,
+    marginRight: 15,
   },
   productName: {
     fontSize: 18,

@@ -120,10 +120,19 @@ const PaymentHandler = ({
             const updatedCart = cart.filter(
               (item) => !productIds.includes(item._id)
             );
+
             setCart(updatedCart);
 
+            console.log("productIds");
+            console.log(productIds);
+
+            console.log("updatedCart");
+            console.log(updatedCart);
             productIds.forEach((productId) => {
+              console.log("productId");
+              console.log(productId);
               remove(productId);
+              console.log("prosao");
             });
 
             alert("Purchase successful!");
