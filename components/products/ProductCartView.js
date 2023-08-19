@@ -23,35 +23,28 @@ const ProductCartView = ({ item }) => {
             style={styles.image}
           />
         </View>
-        <View style={styles.details}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={styles.title}>{item.title}</Text>
-          </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Text style={styles.title}>{item.title}</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Ionicons name="location" size={20} color={COLORS.red}></Ionicons>
+          <Text style={{ color: COLORS.gray }}>{item.product_location}</Text>
+          <TouchableOpacity
+            style={styles.addBtn}
+            onPress={() => navigate.navigate("ProductDetails", { item })}
           >
-            <Ionicons name="location" size={20} color={COLORS.red}></Ionicons>
-            <Text style={{ color: COLORS.gray }}>{item.product_location}</Text>
-            <TouchableOpacity
-              style={styles.addBtn}
-              onPress={() => navigate.navigate("ProductDetails", { item })}
-            >
-              <Ionicons
-                name="add-circle"
-                size={30}
-                color={COLORS.primary}
-              ></Ionicons>
-            </TouchableOpacity>
-          </View>
+            <Ionicons
+              name="add-circle"
+              size={30}
+              color={COLORS.primary}
+            ></Ionicons>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>

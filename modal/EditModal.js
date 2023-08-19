@@ -21,7 +21,7 @@ const EditProfile = ({ isVisible, onClose, user }) => {
   const navigate = useNavigation();
   const [name, setName] = useState(user.user.name);
   const [email, setEmail] = useState(user.user.email);
-  const [password, setPassword] = useState(user.user.password);
+  const [password, setPassword] = useState("");
   const [location, setLocation] = useState(user.user.location);
 
   const updateUserOnBackend = async (newData) => {
@@ -51,23 +51,31 @@ const EditProfile = ({ isVisible, onClose, user }) => {
 
   const handleSubmit = async () => {
     try {
-      await updateUserOnBackend({
+      const updatedData = {
         name: name,
         email: email,
-        password: password,
         location: location,
-      });
+      };
 
-      user.user.name = name;
-      user.user.email = email;
-      user.user.password = password;
-      user.user.location = location;
-      setUser(user);
+      if (password.trim() !== "") {
+        updatedData.password = password;
+      } else {
+        updatedData.password = user.user.password;
+      }
+
+      await updateUserOnBackend(updatedData);
 
       if (email !== user.user.email || password !== user.user.password) {
         signOutUser();
         navigate.navigate("LoginScreen");
       }
+
+      user.user.name = name;
+      user.user.email = email;
+      user.user.password = password;
+      user.user.location = location;
+
+      setUser(user);
 
       onClose();
     } catch (error) {
@@ -96,9 +104,10 @@ const EditProfile = ({ isVisible, onClose, user }) => {
             style={styles.modalInput}
             value={password}
             onChangeText={setPassword}
-            secureTextEntry
             placeholder="Password"
+            secureTextEntry
           />
+
           <TextInput
             style={styles.modalInput}
             value={location}

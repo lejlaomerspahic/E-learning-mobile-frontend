@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import { React, useState } from "react";
 import styles from "./productDetails.style";
 import { Ionicons, SimpleLineIcons, Fontisto } from "@expo/vector-icons";
@@ -24,6 +24,9 @@ const ProductDetails = () => {
   const data = {
     id: item._id,
   };
+  const [rating, setRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
+  const [numRatings, setNumRatings] = useState(0);
 
   const increment = () => {
     setCount(count + 1);
@@ -101,6 +104,60 @@ const ProductDetails = () => {
   const handleAddToCart = (product, count) => {
     saveCartToStorage(user.user._id, { ...product, count });
   };
+  const checkRating = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get(
+        `${ipAddress}/api/products/${id}/rating`,
+        config
+      );
+
+      if (response.data.userRating !== undefined) {
+        setRating(response.data.userRating.rating);
+      }
+
+      if (response.data.averageRating !== undefined) {
+        setAverageRating(response.data.averageRating);
+      }
+
+      if (response.data.numRatings !== undefined) {
+        setNumRatings(response.data.numRatings);
+      }
+    } catch (error) {
+      console.error("Error checking rating:", error);
+    }
+  };
+
+  const submitRating = async (rating) => {
+    if (rating > 0) {
+      const token = await AsyncStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        await axios.post(
+          `${ipAddress}/api/products/${id}/rate`,
+          { rating },
+          config
+        );
+        checkRating();
+        console.log("Rating submitted successfully.");
+      } catch (error) {
+        console.error("Error submitting rating:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkRating();
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -138,9 +195,39 @@ const ProductDetails = () => {
         <View style={styles.ratingRow}>
           <View style={styles.rating}>
             {[1, 2, 3, 4, 5].map((i) => (
-              <Ionicons key={i} name="star" size={24} color="gold" />
+              <TouchableOpacity
+                key={i}
+                onPress={() => {
+                  Alert.alert(
+                    "Rate Product",
+                    "Do you want to rate this product?",
+                    [
+                      {
+                        text: "Cancel",
+                        style: "cancel",
+                      },
+                      {
+                        text: "OK",
+                        onPress: () => {
+                          submitRating(i);
+                        },
+                      },
+                    ],
+                    { cancelable: true }
+                  );
+                }}
+                style={styles.starButton}
+              >
+                <Ionicons
+                  name={i <= rating ? "star" : "star-outline"}
+                  size={24}
+                  color={i <= rating ? "gold" : "gray"}
+                />
+              </TouchableOpacity>
             ))}
-            <Text style={styles.ratingText}>(4.9)</Text>
+            <Text style={styles.ratingText}>
+              {`(${averageRating.toFixed(1)})`}
+            </Text>
           </View>
 
           <View style={styles.rating}>

@@ -83,7 +83,10 @@ const Course = ({ route }) => {
       <View style={styles.videoContainer}>
         <YouTubeIframe videoId={courses.videoId} webViewStyle={styles.video} />
       </View>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.courseInfoContainer}>
           <Text style={styles.courseName}>{courses.name}</Text>
           <Text style={styles.courseInfo}>{courses.info}</Text>

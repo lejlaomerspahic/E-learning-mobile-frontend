@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   Modal,
+  Alert,
 } from "react-native";
 import { useConfirmPayment } from "@stripe/stripe-react-native";
 import { useStripe } from "@stripe/stripe-react-native";
@@ -125,14 +126,36 @@ const PaymentHandler = ({
           onClose();
 
           getCartFromStorage();
-
-          alert("Purchase successful!");
         } else {
           alert("Failed to update products. Please try again.");
         }
       } catch (error) {
         console.error("Error:", error);
       }
+    }
+  };
+
+  const handleTransaction = () => {
+    try {
+      Alert.alert(
+        "Pay for the product",
+        "Are you sure you want to proceed with the transaction?",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          {
+            text: "OK",
+            onPress: async () => {
+              await handlePayPress();
+              alert("Transaction successfully completed!");
+            },
+          },
+        ]
+      );
+    } catch (error) {
+      console.error(`Error showing alert:`, error);
     }
   };
 
@@ -208,7 +231,7 @@ const PaymentHandler = ({
           />
         </View>
         <TouchableOpacity
-          onPress={() => handlePayPress()}
+          onPress={() => handleTransaction()}
           style={styles.payButton}
         >
           <Text style={styles.payButtonText}>

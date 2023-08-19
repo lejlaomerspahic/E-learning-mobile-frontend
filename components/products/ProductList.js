@@ -26,6 +26,7 @@ const ProductList = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={data}
         numColumns={2}
         renderItem={({ item }) => (

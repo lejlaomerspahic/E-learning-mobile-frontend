@@ -3,7 +3,7 @@ import { COLORS, SIZES } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
-    width: 155,
+    width: 160,
     height: 220,
     marginEnd: 10,
     marginTop: 20,
@@ -21,21 +21,18 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   image: {
-    width: 110,
+    width: 120,
     height: 130,
-    aspectRatio: 1,
     resizeMode: "cover",
-  },
-  details: {
-    justifyContent: "center",
-    overflow: "hidden",
   },
   title: {
     fontFamily: "bold",
     fontSize: 16,
     marginBottom: 2.5,
-    marginTop: 1,
+    marginTop: 2,
     color: COLORS.gray,
+    height: 45,
+    width: 110,
   },
   supplier: {
     fontFamily: "regular",
@@ -48,7 +45,7 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     marginLeft: 5,
   },
-  addBtn: { marginLeft: 20, marginTop: -5 },
+  addBtn: { marginLeft: 23, marginTop: -7 },
 });
 
 export default styles;
