@@ -1,30 +1,38 @@
-import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
-import { SliderBox } from "react-native-image-slider-box";
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import Carousel from "react-native-snap-carousel";
 import { COLORS, SIZES } from "../../constants";
+const CarouselComponent = ({ favoriteList }) => {
+  const renderItem = ({ item }) => {
+    const imageWidth = item.videoId ? 330 : 150;
+    const contain = item.videoId ? null : "contain";
 
-import { useFocusEffect } from "@react-navigation/native";
-const Carousel = ({ favoriteList }) => {
-  const imageUrls = [];
-  favoriteList.forEach((item) => {
-    imageUrls.push(item.imageUrl);
-  });
+    return (
+      <Image
+        source={{ uri: item.imageUrl }}
+        style={{
+          borderRadius: 10,
+          resizeMode: contain,
+          width: imageWidth,
+          height: 200,
+          alignSelf: "center",
+        }}
+      />
+    );
+  };
 
   return (
     <View style={styles.carouselContainer}>
       <Text style={styles.headerTitle}>Something for you</Text>
-      {imageUrls && imageUrls.length > 0 ? (
-        <SliderBox
-          images={imageUrls}
-          dotColor={COLORS.gray}
-          inactiveDotColor={COLORS.secondary}
-          ImageComponentStyle={{
-            borderRadius: 15,
-            width: "40%",
-            marginTop: 8,
-          }}
+      {favoriteList.length > 0 ? (
+        <Carousel
+          data={favoriteList}
+          renderItem={renderItem}
+          sliderWidth={400}
+          itemWidth={400}
           autoplay
-          circleLoop
+          loop
+          autoplayInterval={3000}
         />
       ) : (
         <Text style={styles.loading}>...</Text>
@@ -33,8 +41,6 @@ const Carousel = ({ favoriteList }) => {
   );
 };
 
-export default Carousel;
-
 const styles = StyleSheet.create({
   carouselContainer: {
     flex: 1,
@@ -42,14 +48,17 @@ const styles = StyleSheet.create({
   },
   loading: {
     fontSize: 24,
-    color: COLORS.gray2,
+    color: COLORS.gray,
     textAlign: "center",
   },
   headerTitle: {
     fontFamily: "semibold",
     fontSize: SIZES.xLarge - 2,
     color: COLORS.gray,
-    marginLeft: 10,
     marginTop: 10,
+    marginLeft: 10,
+    marginBottom: 10,
   },
 });
+
+export default CarouselComponent;
