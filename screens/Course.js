@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import YouTubeIframe from "react-native-youtube-iframe";
 import { COLORS, SIZES } from "../constants";
@@ -25,8 +26,59 @@ const Course = ({ route }) => {
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
+
   const toggleFavorite = () => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  };
+
+  const checkRating = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get(
+        `${ipAddress}/api/course/${course._id}/rating`,
+        config
+      );
+
+      if (response.data.userRating !== undefined) {
+        setRating(response.data.userRating.rating);
+      }
+
+      if (response.data.averageRating !== undefined) {
+        setAverageRating(response.data.averageRating);
+      }
+
+      if (response.data.numRatings !== undefined) {
+        setNumRatings(response.data.numRatings);
+      }
+    } catch (error) {
+      console.error("Error checking rating:", error);
+    }
+  };
+  const submitRating = async (rating) => {
+    if (rating > 0) {
+      const token = await AsyncStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        await axios.post(
+          `${ipAddress}/api/course/${course._id}/rate`,
+          { rating },
+          config
+        );
+        checkRating();
+        console.log("Rating submitted successfully.");
+      } catch (error) {
+        console.error("Error submitting rating:", error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -68,57 +120,6 @@ const Course = ({ route }) => {
     navigate.navigate("InstructorDetails", { instructorId });
   };
 
-  const checkRating = async () => {
-    const token = await AsyncStorage.getItem("token");
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    try {
-      const response = await axios.get(
-        `${ipAddress}/api/course/${course._id}/rating`,
-        config
-      );
-
-      if (response.data.userRating !== undefined) {
-        setRating(response.data.userRating.rating);
-      }
-
-      if (response.data.averageRating !== undefined) {
-        setAverageRating(response.data.averageRating);
-      }
-
-      if (response.data.numRatings !== undefined) {
-        setNumRatings(response.data.numRatings);
-      }
-    } catch (error) {
-      console.error("Error checking rating:", error);
-    }
-  };
-
-  const submitRating = async (rating) => {
-    if (rating > 0) {
-      const token = await AsyncStorage.getItem("token");
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      try {
-        await axios.post(
-          `${ipAddress}/api/course/${course._id}/rate`,
-          { rating },
-          config
-        );
-        checkRating();
-        console.log("Rating submitted successfully.");
-      } catch (error) {
-        console.error("Error submitting rating:", error);
-      }
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upperRow}>
@@ -143,7 +144,6 @@ const Course = ({ route }) => {
         <View style={styles.courseInfoContainer}>
           <Text style={styles.courseName}>{courses.name}</Text>
           <Text style={styles.courseInfo}>{courses.info}</Text>
-
           <View style={styles.ratingRow}>
             <View style={styles.rating}>
               {[1, 2, 3, 4, 5].map((i) => (
