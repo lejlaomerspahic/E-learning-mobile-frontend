@@ -22,7 +22,9 @@ const Course = ({ route }) => {
   const [courses, setCourses] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigation();
-
+  const [rating, setRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
+  const [numRatings, setNumRatings] = useState(0);
   const toggleFavorite = () => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
@@ -41,7 +43,7 @@ const Course = ({ route }) => {
           config
         );
         setCourses(response.data);
-        console.log(response.data);
+        checkRating();
       } catch (error) {
         console.log(error);
       }
@@ -64,6 +66,57 @@ const Course = ({ route }) => {
 
   const handleInstructorPress = (instructorId) => {
     navigate.navigate("InstructorDetails", { instructorId });
+  };
+
+  const checkRating = async () => {
+    const token = await AsyncStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await axios.get(
+        `${ipAddress}/api/course/${course._id}/rating`,
+        config
+      );
+
+      if (response.data.userRating !== undefined) {
+        setRating(response.data.userRating.rating);
+      }
+
+      if (response.data.averageRating !== undefined) {
+        setAverageRating(response.data.averageRating);
+      }
+
+      if (response.data.numRatings !== undefined) {
+        setNumRatings(response.data.numRatings);
+      }
+    } catch (error) {
+      console.error("Error checking rating:", error);
+    }
+  };
+
+  const submitRating = async (rating) => {
+    if (rating > 0) {
+      const token = await AsyncStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      try {
+        await axios.post(
+          `${ipAddress}/api/course/${course._id}/rate`,
+          { rating },
+          config
+        );
+        checkRating();
+        console.log("Rating submitted successfully.");
+      } catch (error) {
+        console.error("Error submitting rating:", error);
+      }
+    }
   };
 
   return (
@@ -91,6 +144,44 @@ const Course = ({ route }) => {
           <Text style={styles.courseName}>{courses.name}</Text>
           <Text style={styles.courseInfo}>{courses.info}</Text>
 
+          <View style={styles.ratingRow}>
+            <View style={styles.rating}>
+              {[1, 2, 3, 4, 5].map((i) => (
+                <TouchableOpacity
+                  key={i}
+                  onPress={() => {
+                    Alert.alert(
+                      "Rate Product",
+                      "Do you want to rate this product?",
+                      [
+                        {
+                          text: "Cancel",
+                          style: "cancel",
+                        },
+                        {
+                          text: "OK",
+                          onPress: () => {
+                            submitRating(i);
+                          },
+                        },
+                      ],
+                      { cancelable: true }
+                    );
+                  }}
+                  style={styles.starButton}
+                >
+                  <Ionicons
+                    name={i <= rating ? "star" : "star-outline"}
+                    size={24}
+                    color={i <= rating ? "gold" : "gray"}
+                  />
+                </TouchableOpacity>
+              ))}
+              <Text style={styles.ratingText}>
+                {`(${averageRating.toFixed(1)})`}
+              </Text>
+            </View>
+          </View>
           {courses.instructors.map((instructor, index) => (
             <Text key={index} style={styles.createdBy}>
               Created by: {instructor.name}
@@ -308,6 +399,19 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
   },
   iconContainer: { flexDirection: "row", alignItems: "center" },
+  ratingRow: {
+    paddingBottom: SIZES.small,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: SIZES.width - 10,
+  },
+  rating: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  ratingText: { marginLeft: 5 },
 });
 
 export default Course;
