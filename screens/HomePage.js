@@ -1,8 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons, Fontisto } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
 import Welcome from "../components/home/Welcome";
 import { COLORS } from "../constants";
 import { useUser } from "../hook/useUser";
@@ -10,9 +8,10 @@ import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
 import ipAddress from "../variable";
 import { useFavorites } from "../hook/useFavorites";
+import styles from "./home.style";
+
 const HomePage = () => {
   const { user } = useUser();
   const { favorites, setFavorites } = useFavorites();
@@ -106,42 +105,5 @@ const HomePage = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  appBar: {
-    marginTop: 10,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  userWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  greeting: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: COLORS.gray,
-  },
-  userImageWrapper: {
-    width: 50,
-    height: 50,
-    borderRadius: 20,
-    overflow: "hidden",
-    marginLeft: 190,
-  },
-  userImage: {
-    width: "100%",
-    height: "100%",
-  },
-  line: {
-    borderBottomWidth: 2,
-    borderBottomColor: COLORS.secondary,
-    width: 370,
-    marginTop: 3,
-    marginLeft: 25,
-    marginRight: 25,
-  },
-});
 
 export default HomePage;

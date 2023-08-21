@@ -1,43 +1,39 @@
 import { StyleSheet } from "react-native";
 import { COLORS, SIZES } from "../constants";
-
 const styles = StyleSheet.create({
-  textStyle: {
-    fontFamily: "bold",
-    fontSize: 40,
-  },
-  appBarWrapper: {
-    marginHorizontal: 22,
-    marginTop: SIZES.small + 5,
-  },
   appBar: {
-    flexDirection: "row",
+    marginTop: 10,
     justifyContent: "space-between",
     alignItems: "center",
+    flexDirection: "column",
   },
-  location: {
-    fontFamily: "semibold",
-    fontSize: SIZES.medium,
+  userWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  greeting: {
+    fontSize: 24,
+    fontWeight: "bold",
     color: COLORS.gray,
   },
-  cartCount: {
-    position: "absolute",
-    bottom: 16,
-    left: 10,
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    alignItems: "center",
-    backgroundColor: "green",
-    justifyContent: "center",
-    zIndex: 999,
+  userImageWrapper: {
+    width: 50,
+    height: 50,
+    borderRadius: 20,
+    overflow: "hidden",
+    marginLeft: 190,
   },
-  cartNumber: {
-    fontFamily: "regular",
-    fontWeight: "600",
-    fontSize: 10,
-    color: COLORS.lightWhite,
+  userImage: {
+    width: "100%",
+    height: "100%",
+  },
+  line: {
+    borderBottomWidth: 2,
+    borderBottomColor: COLORS.secondary,
+    width: 370,
+    marginTop: 3,
+    marginLeft: 25,
+    marginRight: 25,
   },
 });
-
 export default styles;
