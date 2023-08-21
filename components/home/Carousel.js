@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import Carousel from "react-native-snap-carousel";
-import { COLORS, SIZES } from "../../constants";
+import styles from "./Carousel.style";
+
 const CarouselComponent = ({ favoriteList }) => {
   const renderItem = ({ item }) => {
     const imageWidth = item.videoId ? 330 : 150;
@@ -40,25 +41,5 @@ const CarouselComponent = ({ favoriteList }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  carouselContainer: {
-    flex: 1,
-    marginTop: 10,
-  },
-  loading: {
-    fontSize: 24,
-    color: COLORS.gray,
-    textAlign: "center",
-  },
-  headerTitle: {
-    fontFamily: "semibold",
-    fontSize: SIZES.xLarge - 2,
-    color: COLORS.gray,
-    marginTop: 10,
-    marginLeft: 10,
-    marginBottom: 10,
-  },
-});
 
 export default CarouselComponent;

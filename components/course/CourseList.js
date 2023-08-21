@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-import { COLORS } from "../../constants";
-
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import styles from "./CourseList.style";
 import { useNavigation } from "@react-navigation/native";
 
 const CourseList = () => {
@@ -46,25 +39,5 @@ const CourseList = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-    marginHorizontal: 5,
-  },
-  itemContainer: {
-    padding: 10,
-    backgroundColor: COLORS.secondary,
-    marginHorizontal: 5,
-    borderRadius: 8,
-  },
-  itemText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.gray,
-  },
-});
 
 export default CourseList;
