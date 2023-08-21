@@ -5,6 +5,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import ipAddress from "../../variable";
+import styles from "./CoursesByCategory.style";
+
+import { COLORS } from "../../constants/index";
+
 const CoursesByCategory = ({ route }) => {
   const [courses, setCourses] = useState([]);
   const { category } = route.params;
