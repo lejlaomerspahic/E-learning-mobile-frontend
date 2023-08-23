@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 5,
+    marginTop: 10,
     marginRight: 10,
   },
   iconContainer: {
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   closeIcon: {
     fontSize: 24,
     color: COLORS.primary,
+    left: 5,
   },
   cardContainer: {
     flexDirection: "row",

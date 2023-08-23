@@ -130,7 +130,10 @@ const Cart = () => {
                 onPress={() => handleRemoveItem(item._id)}
                 style={styles.closeButton}
               >
-                <Ionicons name="close" style={styles.closeIcon}></Ionicons>
+                <Ionicons
+                  name="trash-outline"
+                  style={styles.closeIcon}
+                ></Ionicons>
               </TouchableOpacity>
               <View style={styles.iteminfoContainer}>
                 <Text style={styles.name}>{item.title}</Text>

@@ -58,8 +58,10 @@ const HomePage = () => {
       fetchFavorites();
     }, [])
   );
+
   useFocusEffect(
     React.useCallback(() => {
+      console.log(favorites);
       if (isFavoritesLoaded) {
         const sendFavoritesToBackend = async () => {
           const token = await AsyncStorage.getItem("token");
