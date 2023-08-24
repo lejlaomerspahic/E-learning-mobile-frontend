@@ -22,7 +22,6 @@ const PaymentHandler = ({
   const [cardHolderName, setCardHolderName] = useState("");
   const { user } = useUser();
   const { confirmPayment, loading } = useConfirmPayment();
-  const navigation = useNavigation();
   const price = calculateTotalOrderPrice(cart, user.user.location);
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
@@ -98,7 +97,7 @@ const PaymentHandler = ({
       const productIds = cart.map((item) => item._id);
       const counts = cart.map((item) => item.count);
       const currentDate = new Date();
-
+      const places = cart.map((item) => item.product_location);
       try {
         const response = await axios.put(
           `${ipAddress}/api/user/update/products`,
@@ -107,6 +106,8 @@ const PaymentHandler = ({
             date: currentDate.toISOString(),
             counts,
             price,
+            status: "Poslano",
+            places: places,
           },
           config
         );

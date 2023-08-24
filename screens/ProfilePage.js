@@ -26,6 +26,8 @@ const ProfilePage = () => {
   const [showModalPurchase, setShowModalPurchase] = useState(false);
   const { favorites } = useFavorites();
 
+  console.log("user.user.products");
+  console.log(user.user.products);
   useFocusEffect(
     React.useCallback(() => {
       const fetchToken = async () => {
