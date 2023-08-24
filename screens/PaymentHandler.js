@@ -15,6 +15,7 @@ const PaymentHandler = ({
   onClose,
   setCart,
   getCartFromStorage,
+  calculatePriceForCart,
 }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
@@ -23,6 +24,10 @@ const PaymentHandler = ({
   const { user } = useUser();
   const { confirmPayment, loading } = useConfirmPayment();
   const price = calculateTotalOrderPrice(cart, user.user.location);
+  const priceForDifferentLocation = calculatePriceForCart(
+    cart,
+    user.user.location
+  );
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
       alert("Card number must have 16 digits");
@@ -108,6 +113,7 @@ const PaymentHandler = ({
             price,
             status: "Poslano",
             places: places,
+            priceForDifferentLocation: priceForDifferentLocation,
           },
           config
         );

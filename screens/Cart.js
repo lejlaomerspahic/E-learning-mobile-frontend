@@ -98,7 +98,6 @@ const Cart = () => {
     const deliveryCost = deliveryItems.length * 10;
     return deliveryCost;
   };
-
   const calculateTotalItemPrice = (cart) => {
     let totalItemPrice = 0;
     cart.forEach((item) => {
@@ -108,11 +107,28 @@ const Cart = () => {
     return totalItemPrice;
   };
 
+  const userLocation = user.user.location;
   const calculateTotalOrderPrice = (cart, userLocation) => {
     const totalItemPrice = calculateTotalItemPrice(cart);
     const deliveryCost = calculateDeliveryCost(cart, userLocation);
     const totalOrderPrice = totalItemPrice + deliveryCost;
     return totalOrderPrice;
+  };
+
+  const calculatePriceForCart = (cart, userLocation) => {
+    const totalPriceArray = cart.map((item) => {
+      if (item.product_location !== userLocation) {
+        return (
+          calculateTotalPrice(item.price, item.count) +
+          calculateDeliveryCost(cart, userLocation)
+        );
+      } else {
+        return calculateTotalPrice(item.price, item.count);
+      }
+    });
+
+    console.log(totalPriceArray);
+    return totalPriceArray;
   };
 
   return (
@@ -237,6 +253,7 @@ const Cart = () => {
               calculateTotalOrderPrice={calculateTotalOrderPrice}
               setCart={setCart}
               getCartFromStorage={getCartFromStorage}
+              calculatePriceForCart={calculatePriceForCart}
             />
           </Modal>
         </View>
