@@ -121,9 +121,12 @@ const PaymentHandler = ({
         if (response.status === 200) {
           const updateCart = await AsyncStorage.removeItem("cart");
           setCart(updateCart);
-
+          const scheduleResponse = await axios.get(
+            `${ipAddress}/api/user/statusUpdate`
+          );
+          console.log("scheduleResponse");
+          console.log(scheduleResponse.data.message);
           onClose();
-
           getCartFromStorage();
         } else {
           alert("Failed to update products. Please try again.");

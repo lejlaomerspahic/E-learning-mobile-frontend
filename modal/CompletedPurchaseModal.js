@@ -16,8 +16,6 @@ import styles from "./CompletedPurchase.style";
 const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
   const { user } = useUser();
 
-  console.log("products");
-  console.log(products);
   const formatDate = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
     const formattedDate = dateTime.toLocaleDateString();
