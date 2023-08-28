@@ -108,7 +108,7 @@ const PaymentHandler = ({
           date: currentDate.toISOString(),
           counts,
           price,
-          status: "",
+          status: "Narudžba primljena",
           places: places,
           priceForDifferentLocation: priceForDifferentLocation,
         },

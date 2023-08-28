@@ -14,7 +14,7 @@ const OrderTracking = () => {
   const route = useRoute();
   const { item } = route.params;
   const navigate = useNavigation();
-  const [activeStep, setActiveStep] = useState(10);
+  const [activeStep, setActiveStep] = useState(0);
   const [orderStatus, setOrderStatus] = useState("Narudžba primljena");
 
   const steps = [
@@ -34,11 +34,12 @@ const OrderTracking = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-
+        console.log(item._id);
         const response = await axios.get(
           `${ipAddress}/api/user/get/status/${item._id}`,
           config
         );
+
         setOrderStatus(response.data.status);
         if (response.data.status === "Narudžba isporučena") {
           setActiveStep(5);
@@ -54,7 +55,7 @@ const OrderTracking = () => {
           setActiveStep(0);
         }
       } catch (error) {
-        console.error("Error fetching user data:", error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
     fetchUserData();
