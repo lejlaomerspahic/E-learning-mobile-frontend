@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: "90%",
+    height: "70%",
   },
   courseContainer: {
     flexDirection: "row",

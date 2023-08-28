@@ -12,13 +12,15 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     width: "85%",
+
+    height: "60%",
     alignItems: "center",
   },
   quizContainer: {
     marginBottom: 20,
     borderRadius: 10,
     padding: 10,
-    marginTop: 30,
+    marginTop: 10,
     backgroundColor: COLORS.secondary,
     justifyContent: "center",
     alignItems: "center",

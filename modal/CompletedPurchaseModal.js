@@ -8,13 +8,41 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { useUser } from "../hook/useUser";
 import { COLORS } from "../constants";
 import styles from "./CompletedPurchase.style";
-
+import { useEffect } from "react";
+import axios from "axios";
+import ipAddress from "../variable";
+import { useNavigation } from "@react-navigation/native";
 const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
-  const { user } = useUser();
+  const { setUser } = useUser();
+  const navigation = useNavigation();
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const response = await axios.get(`${ipAddress}/api/user/get`, config);
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error.message);
+      }
+    };
+
+    const fetchUserDataInterval = setInterval(fetchUserData, 5000);
+
+    return () => {
+      clearInterval(fetchUserDataInterval);
+    };
+  }, []);
 
   const formatDate = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
@@ -29,7 +57,10 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
     const formattedTime = dateTime.toLocaleTimeString();
     return `${formattedTime}`;
   };
-
+  const navigateToOrderTracking = (item) => {
+    navigation.navigate("Order", { item });
+    onClose();
+  };
   return (
     <Modal visible={isVisible} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
@@ -37,12 +68,26 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
           <Ionicons name="close" size={30} color={COLORS.primary} />
         </TouchableOpacity>
         <View style={styles.modalContent}>
+          <Text
+            style={{
+              textAlign: "center",
+              marginVertical: 10,
+              fontSize: 16,
+              fontFamily: "semibold",
+              color: COLORS.gray,
+            }}
+          >
+            Completed purchase
+          </Text>
           <View style={styles.container}>
             <FlatList
               data={products}
               keyExtractor={(product) => product._id}
               renderItem={({ item }) => (
-                <View style={styles.productContainer}>
+                <TouchableOpacity
+                  onPress={() => navigateToOrderTracking(item)}
+                  style={styles.productContainer}
+                >
                   <FlatList
                     data={item.items}
                     keyExtractor={(item) => item.productId._id}
@@ -117,7 +162,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
                       </View>
                     </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               )}
             />
           </View>

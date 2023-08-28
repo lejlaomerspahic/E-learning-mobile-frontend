@@ -28,6 +28,10 @@ const PaymentHandler = ({
     cart,
     user.user.location
   );
+
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth() + 1;
+  const [inputMonth, inputYear] = expiryDate.split("/").map(Number);
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
       alert("Card number must have 16 digits");
@@ -37,10 +41,6 @@ const PaymentHandler = ({
       alert("CVC must have 3 digits");
       return false;
     }
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-
-    const [inputMonth, inputYear] = expiryDate.split("/").map(Number);
 
     if (
       inputYear + 2000 < currentYear ||
@@ -76,86 +76,86 @@ const PaymentHandler = ({
   };
 
   const handlePayPress = async () => {
-    const isValid = validateCardData();
+    const billingDetails = {
+      name: cardHolderName,
+    };
 
-    if (isValid) {
-      const billingDetails = {
-        name: cardHolderName,
-      };
+    const clientSecret = await fetchPaymentIntentClientSecret();
 
-      const clientSecret = await fetchPaymentIntentClientSecret();
+    const { paymentIntent, error } = await confirmPayment(clientSecret, {
+      paymentMethodType: "Card",
+      paymentMethodData: {
+        billingDetails,
+      },
+    });
+    const token = await AsyncStorage.getItem("token");
 
-      const { paymentIntent, error } = await confirmPayment(clientSecret, {
-        paymentMethodType: "Card",
-        paymentMethodData: {
-          billingDetails,
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const productIds = cart.map((item) => item._id);
+    const counts = cart.map((item) => item.count);
+    const currentDate = new Date();
+    const places = cart.map((item) => item.product_location);
+    try {
+      const response = await axios.put(
+        `${ipAddress}/api/user/update/products`,
+        {
+          productIds,
+          date: currentDate.toISOString(),
+          counts,
+          price,
+          status: "",
+          places: places,
+          priceForDifferentLocation: priceForDifferentLocation,
         },
-      });
-      const token = await AsyncStorage.getItem("token");
+        config
+      );
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      const productIds = cart.map((item) => item._id);
-      const counts = cart.map((item) => item.count);
-      const currentDate = new Date();
-      const places = cart.map((item) => item.product_location);
-      try {
-        const response = await axios.put(
-          `${ipAddress}/api/user/update/products`,
-          {
-            productIds,
-            date: currentDate.toISOString(),
-            counts,
-            price,
-            status: "Poslano",
-            places: places,
-            priceForDifferentLocation: priceForDifferentLocation,
-          },
-          config
-        );
-
-        if (response.status === 200) {
-          const updateCart = await AsyncStorage.removeItem("cart");
-          setCart(updateCart);
-          const scheduleResponse = await axios.get(
-            `${ipAddress}/api/user/statusUpdate`
-          );
-          console.log("scheduleResponse");
-          console.log(scheduleResponse.data.message);
-          onClose();
-          getCartFromStorage();
-        } else {
-          alert("Failed to update products. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+      if (response.status === 200) {
+        const updateCart = await AsyncStorage.removeItem("cart");
+        setCart(updateCart);
+        onClose();
+        alert("Transaction successfully completed!");
+        getCartFromStorage();
+      } else {
+        alert("Failed to update products. Please try again.");
       }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
   const handleTransaction = () => {
+    const isValid = validateCardData();
+
     try {
-      Alert.alert(
-        "Pay for the product",
-        "Are you sure you want to proceed with the transaction?",
-        [
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-          {
-            text: "OK",
-            onPress: async () => {
-              await handlePayPress();
-              alert("Transaction successfully completed!");
+      if (isValid) {
+        Alert.alert(
+          "Pay for the product",
+          "Are you sure you want to proceed with the transaction?",
+          [
+            {
+              text: "Cancel",
+              style: "cancel",
             },
-          },
-        ]
-      );
+            {
+              text: "OK",
+              onPress: async () => {
+                await handlePayPress();
+                const scheduleResponse = await axios.get(
+                  `${ipAddress}/api/user/statusUpdate`
+                );
+                console.log("scheduleResponse");
+                console.log(scheduleResponse.data.message);
+              },
+            },
+          ]
+        );
+      }
     } catch (error) {
       console.error(`Error showing alert:`, error);
     }
@@ -203,6 +203,11 @@ const PaymentHandler = ({
               value={expiryDate}
               onChangeText={setExpiryDate}
             />
+
+            {renderCheckmarkIcon(
+              inputYear + 2000 > currentYear ||
+                (inputYear + 2000 !== currentYear && inputMonth > currentMonth)
+            )}
           </View>
           <View style={[styles.inputContainer, styles.cvcInput]}>
             <View style={styles.inputIcon}>
@@ -219,6 +224,7 @@ const PaymentHandler = ({
               value={cvc}
               onChangeText={setCVC}
             />
+            {renderCheckmarkIcon(cvc.length === 3)}
           </View>
         </View>
         <View style={styles.inputContainer}>
@@ -231,6 +237,7 @@ const PaymentHandler = ({
             value={cardHolderName}
             onChangeText={setCardHolderName}
           />
+          {renderCheckmarkIcon(cardHolderName !== "")}
         </View>
         <TouchableOpacity
           onPress={() => handleTransaction()}

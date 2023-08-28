@@ -88,6 +88,16 @@ const EditProfile = ({ isVisible, onClose, user }) => {
     <Modal visible={isVisible} animationType="slide" transparent={true}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
+          <Text
+            style={{
+              fontSize: 16,
+              marginBottom: 25,
+              fontFamily: "semibold",
+              color: COLORS.gray,
+            }}
+          >
+            Edit Profile
+          </Text>
           <TextInput
             style={styles.modalInput}
             value={name}

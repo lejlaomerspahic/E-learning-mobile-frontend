@@ -112,6 +112,17 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
           <Ionicons name="close" size={30} color={COLORS.primary} />
         </TouchableOpacity>
         <View style={styles.modalContent}>
+          <Text
+            style={{
+              textAlign: "center",
+              marginVertical: 10,
+              fontSize: 16,
+              fontFamily: "semibold",
+              color: COLORS.gray,
+            }}
+          >
+            Favourites
+          </Text>
           {favorites.user === user.user._id ? (
             <FlatList
               style={styles.items}

@@ -58,6 +58,16 @@ const ScoreModal = ({ isVisible, onClose, scores }) => {
           <Ionicons name="close" size={30} color={COLORS.primary} />
         </TouchableOpacity>
         <View style={styles.modalContent}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              fontFamily: "semibold",
+              color: COLORS.gray,
+            }}
+          >
+            Quiz scores
+          </Text>
           <FlatList
             data={scores}
             renderItem={renderItem}

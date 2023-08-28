@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "80%",
     alignItems: "center",
+    justifyContent: "center",
+    height: "50%",
   },
   modalProfileImage: {
     width: 100,

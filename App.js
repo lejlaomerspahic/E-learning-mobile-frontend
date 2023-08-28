@@ -22,7 +22,7 @@ import Quiz from "./screens/Quiz";
 import InstructorPage from "./components/Instructor/Instructor";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import { useEffect } from "react";
-
+import OrderTracking from "./screens/OrderTracking";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -84,6 +84,11 @@ export default function App() {
               <Stack.Screen
                 name="Cart"
                 component={Cart}
+                options={{ headerShown: false }}
+              ></Stack.Screen>
+              <Stack.Screen
+                name="Order"
+                component={OrderTracking}
                 options={{ headerShown: false }}
               ></Stack.Screen>
               <Stack.Screen name="CourseList" component={CourseList} />

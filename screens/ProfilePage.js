@@ -26,35 +26,40 @@ const ProfilePage = () => {
   const [showModalPurchase, setShowModalPurchase] = useState(false);
   const { favorites } = useFavorites();
 
-  console.log("user.user.products");
-  console.log(user.user.products);
-  useFocusEffect(
-    React.useCallback(() => {
-      const fetchToken = async () => {
-        const token = await AsyncStorage.getItem("token");
+  const fetchUserData = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
 
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        axios
-          .get(`${ipAddress}/api/user/get`, config)
-          .then((response) => {
-            setUser(response.data);
-          })
-          .catch((error) => {
-            console.error("Login Error:", error.message);
-          });
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       };
 
-      fetchToken();
+      axios
+        .get(`${ipAddress}/api/user/get`, config)
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch((error) => {
+          console.error("Fetch User Data Error:", error.message);
+        });
+    } catch (error) {
+      console.error("Error fetching user data:", error.message);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchUserData();
     }, [])
   );
 
   const toggleModalPurchase = () => {
     setShowModalPurchase(!showModalPurchase);
+    if (!showModalPurchase) {
+      fetchUserData();
+    }
   };
 
   const toggleModalEdit = () => {

@@ -1,34 +1,17 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../constants";
+import { COLORS, SIZES } from "../constants";
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  closeButton: {
-    position: "absolute",
-    top: 20,
-    right: 20,
-  },
-  modalContent: {
-    width: "90%",
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 10,
-    height: "85%",
-    overflow: "hidden",
-  },
   container: {
     padding: 10,
-    marginBottom: 30,
+    marginTop: 40,
   },
   productContainer: {
     marginBottom: 20,
     padding: 10,
     borderRadius: 5,
+    marginTop: 40,
+
     backgroundColor: COLORS.secondary,
   },
   placeText: {
@@ -47,7 +30,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     marginLeft: 10,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "bold",
   },
   iconContainer: {
@@ -60,8 +43,39 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   dateTimeText: {
-    fontSize: 13,
+    fontSize: 15,
   },
   line: { height: 0.5, backgroundColor: COLORS.gray },
+  upperRow: {
+    width: SIZES.width - 45,
+    marginHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    position: "absolute",
+    backgroundColor: COLORS.primary,
+    borderRadius: SIZES.large,
+  },
+  heading: {
+    fontFamily: "semibold",
+    fontSize: SIZES.medium,
+    color: COLORS.lightWhite,
+    marginLeft: 5,
+  },
+  cont: {
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+  },
+  activeStepText: {
+    color: COLORS.primary,
+  },
+  shape: {
+    borderRadius: 30,
+    backgroundColor: COLORS.red,
+    width: 25,
+    height: 25,
+    marginRight: 20,
+  },
 });
 export default styles;
