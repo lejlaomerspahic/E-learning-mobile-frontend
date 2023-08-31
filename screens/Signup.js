@@ -121,7 +121,7 @@ const SignUpScreen = () => {
           style={[styles.button, styles.buttonWithShadow]}
           onPress={handleSignUp}
         >
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Text style={styles.buttonText}>SIGN UP</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("LoginScreen")}

@@ -61,7 +61,7 @@ const LoginScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.roundedContainer}>
-        <Text style={[styles.title, styles.buttonWithShadoww]}>Login</Text>
+        <Text style={[styles.title, styles.buttonWithShadoww]}>Sign in</Text>
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
           placeholder="Email"
@@ -86,7 +86,7 @@ const LoginScreen = () => {
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>SIGN IN</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

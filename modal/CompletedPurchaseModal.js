@@ -85,6 +85,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
           </Text>
           <View style={styles.container}>
             <FlatList
+              showsVerticalScrollIndicator={false}
               data={products}
               keyExtractor={(product) => product._id}
               renderItem={({ item }) => (
