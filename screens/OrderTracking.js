@@ -9,6 +9,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ipAddress from "../variable";
 import axios from "axios";
+
+import { useToken } from "../hook/useToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const OrderTracking = () => {
   const route = useRoute();
@@ -17,6 +19,7 @@ const OrderTracking = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [orderStatus, setOrderStatus] = useState("Narudžba primljena");
 
+  const { tokenExpired } = useToken();
   const steps = [
     { text: "Narudžba primljena", icon: "checkmark" },
     { text: "Narudžba poslata", icon: "cube" },
@@ -90,7 +93,7 @@ const OrderTracking = () => {
           setActiveStep(0);
         }
       } catch (error) {
-        console.error("Error fetching user data:", error.message);
+        tokenExpired(error);
       }
     };
 

@@ -14,6 +14,7 @@ import FavoriteModal from "../modal/FavoriteModal";
 import { useEffect } from "react";
 import { useFavorites } from "../hook/useFavorites";
 
+import { useToken } from "../hook/useToken";
 import ipAddress from "../variable";
 import CompletedPurchaseModal from "../modal/CompletedPurchaseModal";
 const ProfilePage = () => {
@@ -25,7 +26,7 @@ const ProfilePage = () => {
   const [showModalFavorites, setShowModalFavorites] = useState(false);
   const [showModalPurchase, setShowModalPurchase] = useState(false);
   const { favorites } = useFavorites();
-
+  const { tokenExpired } = useToken();
   const fetchUserData = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
@@ -40,7 +41,7 @@ const ProfilePage = () => {
         setUser(response.data);
       });
     } catch (error) {
-      console.error("Error fetching user data:", error.message);
+      tokenExpired(error);
     }
   };
 

@@ -8,6 +8,8 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
+
+import { useToken } from "../hook/useToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { useUser } from "../hook/useUser";
@@ -20,6 +22,8 @@ import { useNavigation } from "@react-navigation/native";
 const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
   const { setUser } = useUser();
   const navigation = useNavigation();
+
+  const { tokenExpired } = useToken();
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -33,7 +37,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
         const response = await axios.get(`${ipAddress}/api/user/get`, config);
         setUser(response.data);
       } catch (error) {
-        console.error("Error fetching user data:", error.message);
+        tokenExpired(error);
       }
     };
 

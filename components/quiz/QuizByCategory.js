@@ -7,12 +7,13 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import ipAddress from "../../variable";
 import styles from "./QuizByCategory.style";
+import { useToken } from "../../hook/useToken";
 
 const QuizByCategory = ({ route }) => {
   const [quizzes, setQuizzes] = useState([]);
   const { category } = route.params;
   const navigation = useNavigation();
-
+  const { tokenExpired } = useToken();
   const [isFavorite, setIsFavorite] = useState(false);
   const toggleFavorite = () => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
@@ -32,8 +33,7 @@ const QuizByCategory = ({ route }) => {
         );
         setQuizzes(response.data);
       } catch (err) {
-        console.log(err);
-        console.log("Failed to get courses");
+        tokenExpired(err);
       }
     };
     handleSearch();

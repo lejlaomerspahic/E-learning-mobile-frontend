@@ -20,7 +20,7 @@ const LoginScreen = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState("");
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
 
   const handleLogin = async () => {
     setEmailError("");

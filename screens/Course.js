@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./Course.style";
 import ipAddress from "../variable";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useToken } from "../hook/useToken";
 const Course = ({ route }) => {
   const { course } = route.params;
   const [courses, setCourses] = useState(null);
@@ -26,6 +27,7 @@ const Course = ({ route }) => {
   const [averageRating, setAverageRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
 
+  const { tokenExpired } = useToken();
   const toggleFavorite = () => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
@@ -55,7 +57,7 @@ const Course = ({ route }) => {
         setNumRatings(response.data.numRatings);
       }
     } catch (error) {
-      console.error("Error checking rating:", error);
+      tokenExpired(err);
     }
   };
   const submitRating = async (rating) => {
@@ -95,9 +97,7 @@ const Course = ({ route }) => {
         );
         setCourses(response.data);
         checkRating();
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
 
     fetchCourseData();

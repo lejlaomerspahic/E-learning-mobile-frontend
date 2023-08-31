@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ipAddress from "../variable";
 import styles from "./Quiz.style";
+import { useToken } from "../hook/useToken";
 
 const Quiz = ({ route }) => {
   const { quiz } = route.params;
@@ -16,6 +17,7 @@ const Quiz = ({ route }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [remainingTime, setRemainingTime] = useState(150);
   const navigation = useNavigation();
+  const { tokenExpired } = useToken();
 
   useEffect(() => {
     setQuestions(quiz.questions);
@@ -91,8 +93,7 @@ const Quiz = ({ route }) => {
         config
       );
     } catch (error) {
-      console.log(error);
-      console.log("Failed to save score");
+      tokenExpired(error);
     }
   };
 

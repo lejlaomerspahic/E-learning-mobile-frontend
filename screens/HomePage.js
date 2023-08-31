@@ -11,13 +11,14 @@ import axios from "axios";
 import ipAddress from "../variable";
 import { useFavorites } from "../hook/useFavorites";
 import styles from "./home.style";
+import { useToken } from "../hook/useToken";
 
 const HomePage = () => {
   const { user } = useUser();
   const { favorites, setFavorites } = useFavorites();
   const [favoriteList, setFavoriteList] = useState([]);
   const [isFavoritesLoaded, setIsFavoritesLoaded] = useState(false);
-
+  const { tokenExpired } = useToken();
   const defaultImageUrl =
     "https://th.bing.com/th/id/OIP.PIhM1TUFbG1nHHrwpE9ZHwAAAA?pid=ImgDet&w=360&h=360&rs=1";
   const [userImageUrl, setUserImageUrl] = useState("");
@@ -51,8 +52,7 @@ const HomePage = () => {
           setFavorites(response.data);
           setIsFavoritesLoaded(true);
         } catch (err) {
-          console.log(err);
-          console.log("Failed to get favorites");
+          //tokenExpired(err);
         }
       };
       fetchFavorites();
@@ -77,12 +77,7 @@ const HomePage = () => {
               config
             );
             setFavoriteList(response.data);
-          } catch (error) {
-            console.error(
-              "An error occurred while fetching personalized favorites.",
-              error
-            );
-          }
+          } catch (error) {}
         };
         sendFavoritesToBackend();
       }

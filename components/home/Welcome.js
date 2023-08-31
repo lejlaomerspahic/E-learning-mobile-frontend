@@ -40,7 +40,6 @@ const Welcome = ({ favoriteList }) => {
       );
       setSearchResult(response.data);
     } catch (err) {
-      console.log(err);
       console.log("Failed to get product");
     }
   };

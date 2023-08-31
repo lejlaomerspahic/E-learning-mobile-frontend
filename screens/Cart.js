@@ -16,11 +16,13 @@ import { Ionicons } from "@expo/vector-icons";
 import PaymentHandler from "./PaymentHandler";
 import styles from "./Cart.style";
 
+import { useToken } from "../hook/useToken";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const { user } = useUser();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const { tokenExpired } = useToken();
   const getCartFromStorage = async () => {
     try {
       const cartJson = await AsyncStorage.getItem("cart");

@@ -32,9 +32,7 @@ const InstructorPage = ({ route }) => {
           config
         );
         setInstructor(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
 
     fetchInstructor();

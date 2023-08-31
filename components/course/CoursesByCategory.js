@@ -2,62 +2,66 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import ipAddress from "../../variable";
 import styles from "./CoursesByCategory.style";
 
 import { COLORS } from "../../constants/index";
+import { useToken } from "../../hook/useToken";
 
 const CoursesByCategory = ({ route }) => {
   const [courses, setCourses] = useState([]);
   const { category } = route.params;
   const navigation = useNavigation();
   const [favorites, setFavorites] = useState({});
+  const { tokenExpired } = useToken();
+  useFocusEffect(
+    React.useCallback(() => {
+      const handleSearch = async () => {
+        try {
+          const token = await AsyncStorage.getItem("token");
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          const response = await axios.get(
+            `${ipAddress}/api/course/search/${category}`,
+            config
+          );
 
-  useEffect(() => {
-    const handleSearch = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const response = await axios.get(
-          `${ipAddress}/api/course/search/${category}`,
-          config
-        );
+          const favoriteStatus = {};
+          const checkFavoriteStatus = async (id) => {
+            try {
+              const response = await axios.get(
+                `${ipAddress}/api/favorites/check/${id}`,
+                config
+              );
 
-        const favoriteStatus = {};
-        const checkFavoriteStatus = async (id) => {
-          try {
-            const response = await axios.get(
-              `${ipAddress}/api/favorites/check/${id}`,
-              config
-            );
+              return response.data.isFavorite;
+            } catch (error) {
+              console.error("Error checking favorite:", error);
+              return false;
+            }
+          };
 
-            return response.data.isFavorite;
-          } catch (error) {
-            console.error("Error checking favorite:", error);
-            return false;
+          for (const course of response.data) {
+            const isFavorite = await checkFavoriteStatus(course._id);
+            favoriteStatus[course._id] = isFavorite;
           }
-        };
 
-        for (const course of response.data) {
-          const isFavorite = await checkFavoriteStatus(course._id);
-          favoriteStatus[course._id] = isFavorite;
+          setFavorites(favoriteStatus);
+          setCourses(response.data);
+        } catch (err) {
+          console.log(err);
+          tokenExpired(err);
+          console.log("Failed to get courses");
         }
-
-        setFavorites(favoriteStatus);
-        setCourses(response.data);
-      } catch (err) {
-        console.log(err);
-        console.log("Failed to get courses");
-      }
-    };
-    handleSearch();
-  }, [category]);
+      };
+      handleSearch();
+    }, [category])
+  );
 
   const toggleFavorite = async (id) => {
     const token = await AsyncStorage.getItem("token");

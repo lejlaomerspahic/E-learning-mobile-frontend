@@ -13,6 +13,7 @@ import { useUser } from "../hook/useUser";
 import { executeNativeBackPress } from "react-native-screens";
 
 import ipAddress from "../variable";
+import { useToken } from "../hook/useToken";
 const ProductDetails = () => {
   const route = useRoute();
   const { item } = route.params;
@@ -24,6 +25,7 @@ const ProductDetails = () => {
   const data = {
     id: item._id,
   };
+  const { tokenExpired } = useToken();
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [numRatings, setNumRatings] = useState(0);
@@ -71,9 +73,7 @@ const ProductDetails = () => {
           config
         );
         setIsFavorite(response.data.isFavorite);
-      } catch (error) {
-        console.error("Error checking favorite:", error);
-      }
+      } catch (error) {}
     };
 
     checkFavorite();
@@ -129,7 +129,7 @@ const ProductDetails = () => {
         setNumRatings(response.data.numRatings);
       }
     } catch (error) {
-      console.error("Error checking rating:", error);
+      tokenExpired(error);
     }
   };
 

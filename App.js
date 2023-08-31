@@ -22,7 +22,7 @@ import Quiz from "./screens/Quiz";
 import InstructorPage from "./components/Instructor/Instructor";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import OrderTracking from "./screens/OrderTracking";
-import GlobalExceptionHandler from "./hook/GlobalExceptionHandler";
+import TokenProvider from "./hook/useToken";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -47,10 +47,10 @@ export default function App() {
 
   return (
     <StripeProvider publishableKey="pk_test_51Nc9U6CNsQ61mmLfnEsi87ZXBGI0XLTutgjddx4yjTb56spTA1cdOPpZtkL1oGYJStASxmj8wnGcLDPXnE0qxhTo00PH4cBsdI">
-      <GlobalExceptionHandler>
-        <UseProvider>
-          <FavoritesProvider>
-            <NavigationContainer>
+      <UseProvider>
+        <FavoritesProvider>
+          <NavigationContainer>
+            <TokenProvider>
               <Stack.Navigator headerMode="none">
                 <Stack.Screen
                   name="FirstPage"
@@ -136,10 +136,10 @@ export default function App() {
                   options={{ headerShown: false }}
                 ></Stack.Screen>
               </Stack.Navigator>
-            </NavigationContainer>
-          </FavoritesProvider>
-        </UseProvider>
-      </GlobalExceptionHandler>
+            </TokenProvider>
+          </NavigationContainer>
+        </FavoritesProvider>
+      </UseProvider>
     </StripeProvider>
   );
 }
