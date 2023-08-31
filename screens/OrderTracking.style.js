@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 3,
   },
   cont: {
-    padding: 10,
+    padding: 8,
     flexDirection: "row",
     justifyContent: "flex-start",
   },

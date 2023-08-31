@@ -51,13 +51,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: COLORS.primary,
-    borderRadius: 10,
+    elevation: 2,
+    borderRadius: 5,
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
   startButtonText: {
     color: COLORS.white,
     marginLeft: 5,
+    fontFamily: "bold",
   },
   courses: { marginTop: 50 },
   upperRow: {

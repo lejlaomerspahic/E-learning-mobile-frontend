@@ -68,7 +68,7 @@ const QuizByCategory = ({ route }) => {
           onPress={handleCoursePress}
         >
           <Ionicons name="play" size={24} color={COLORS.white} />
-          <Text style={styles.startButtonText}>Start</Text>
+          <Text style={styles.startButtonText}>START</Text>
         </TouchableOpacity>
       </View>
     );

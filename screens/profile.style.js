@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.lightWhite,
     paddingVertical: 20,
     borderRadius: 10,
+    elevation: 2,
   },
   sectionText: {
     marginTop: 10,
@@ -85,12 +86,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "50%",
   },
-  modalProfileImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginBottom: 20,
-  },
   modalInput: {
     width: "100%",
     borderWidth: 1,
@@ -106,11 +101,12 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     marginTop: 10,
+    elevation: 4,
   },
   modalButtonText: {
     color: COLORS.white,
     fontWeight: "bold",
-    fontSize: SIZES.h3,
+    fontSize: 15,
   },
   modalCloseButton: {
     position: "absolute",

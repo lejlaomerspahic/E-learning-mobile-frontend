@@ -125,7 +125,7 @@ const EditProfile = ({ isVisible, onClose, user }) => {
             placeholder="Location"
           />
           <TouchableOpacity style={styles.modalButton} onPress={handleSubmit}>
-            <Text style={styles.modalButtonText}>Submit</Text>
+            <Text style={styles.modalButtonText}>SUBMIT</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>

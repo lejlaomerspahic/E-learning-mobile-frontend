@@ -1,15 +1,15 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import styles from "./OrderTracking.style";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants";
-import { ScrollView } from "react-native-gesture-handler";
 import { useState } from "react";
 import { useEffect } from "react";
 import ipAddress from "../variable";
 import axios from "axios";
-
 import { useToken } from "../hook/useToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const OrderTracking = () => {
@@ -21,12 +21,11 @@ const OrderTracking = () => {
 
   const { tokenExpired } = useToken();
   const steps = [
-    { text: "Narudžba primljena", icon: "checkmark" },
-    { text: "Narudžba poslata", icon: "cube" },
-    { text: "Narudžba u tranzitu", icon: "car" },
-    { text: "Narudžba stigla na odredište", icon: "checkmark-done" },
-    { text: "Narudžba u procesu dostave", icon: "checkmark-done" },
-    { text: "Narudžba isporučena", icon: "checkmark-done" },
+    { text: "Narudžba primljena", icon: "archive-check-outline" },
+    { text: "Narudžba poslata", icon: "truck-delivery" },
+    { text: "Narudžba stigla na odredište", icon: "package-variant-closed" },
+    { text: "Narudžba u procesu dostave", icon: "truck-fast" },
+    { text: "Narudžba isporučena", icon: "check-all" },
   ];
   useEffect(() => {
     const fetchUserData = async () => {
@@ -45,12 +44,10 @@ const OrderTracking = () => {
 
         setOrderStatus(response.data.status);
         if (response.data.status === "Narudžba isporučena") {
-          setActiveStep(5);
-        } else if (response.data.status === "Narudžba u procesu dostave") {
           setActiveStep(4);
-        } else if (response.data.status === "Narudžba stigla na odredište") {
+        } else if (response.data.status === "Narudžba u procesu dostave") {
           setActiveStep(3);
-        } else if (response.data.status === "Narudžba u tranzitu") {
+        } else if (response.data.status === "Narudžba stigla na odredište") {
           setActiveStep(2);
         } else if (response.data.status === "Narudžba poslata") {
           setActiveStep(1);
@@ -97,11 +94,7 @@ const OrderTracking = () => {
       }
     };
 
-    const fetchUserDataInterval = setInterval(fetchUserData, 5000);
-
-    return () => {
-      clearInterval(fetchUserDataInterval);
-    };
+    fetchUserData();
   }, []);
 
   const formatDate = (dateTimeString) => {
@@ -117,7 +110,7 @@ const OrderTracking = () => {
   };
 
   return (
-    <View style={{ backgroundColor: COLORS.white }}>
+    <View style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.upperRow}>
           <TouchableOpacity onPress={() => navigate.goBack()}>
@@ -200,37 +193,46 @@ const OrderTracking = () => {
             </View>
           </View>
         </View>
-        <View>
-          <View
+        <View
+          style={{
+            padding: 10,
+            marginTop: -20,
+          }}
+        >
+          <Text
             style={{
+              fontSize: 18,
               padding: 10,
-              marginTop: -10,
             }}
           >
-            <Text
-              style={{
-                fontSize: 18,
-                padding: 10,
-              }}
-            >
-              Track Order
-            </Text>
-            <View
-              style={{
-                height: 0.5,
-                backgroundColor: COLORS.gray2,
-                marginBottom: 10,
-              }}
-            ></View>
-            {steps.map((step, index) => (
-              <View key={index} style={styles.cont}>
+            Track Order
+          </Text>
+          <View
+            style={{
+              height: 0.5,
+              backgroundColor: COLORS.gray2,
+              marginBottom: 5,
+            }}
+          ></View>
+          {steps.map((step, index) => (
+            <View key={index} style={styles.cont}>
+              <View
+                style={{
+                  borderRadius: 30,
+                  backgroundColor:
+                    index <= activeStep ? COLORS.green2 : COLORS.gray,
+                  width: 45,
+                  height: 45,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <View
                   style={{
                     borderRadius: 30,
-                    backgroundColor:
-                      index <= activeStep ? COLORS.green2 : COLORS.gray,
-                    width: 45,
-                    height: 45,
+                    backgroundColor: COLORS.white,
+                    width: 35,
+                    height: 35,
                     justifyContent: "center",
                     alignItems: "center",
                   }}
@@ -238,46 +240,35 @@ const OrderTracking = () => {
                   <View
                     style={{
                       borderRadius: 30,
-                      backgroundColor: COLORS.white,
-                      width: 35,
-                      height: 35,
+                      backgroundColor:
+                        index <= activeStep ? COLORS.green : COLORS.gray3,
+                      width: 30,
+                      height: 30,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
                   >
-                    <View
-                      style={{
-                        borderRadius: 30,
-                        backgroundColor:
-                          index <= activeStep ? COLORS.green : COLORS.gray3,
-                        width: 30,
-                        height: 30,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Ionicons
-                        name={step.icon}
-                        size={25}
-                        color={COLORS.white}
-                      />
-                    </View>
+                    <MaterialCommunityIcons
+                      name={step.icon}
+                      size={25}
+                      color={COLORS.white}
+                    />
                   </View>
                 </View>
-                <Text
-                  style={{
-                    marginTop: 15,
-                    marginLeft: 10,
-                    color: index <= activeStep ? COLORS.green : COLORS.gray,
-
-                    fontSize: 15,
-                  }}
-                >
-                  {step.text}
-                </Text>
               </View>
-            ))}
-          </View>
+              <Text
+                style={{
+                  marginTop: 15,
+                  marginLeft: 10,
+                  color: index <= activeStep ? COLORS.green : COLORS.gray,
+
+                  fontSize: 15,
+                }}
+              >
+                {step.text}
+              </Text>
+            </View>
+          ))}
         </View>
       </View>
     </View>

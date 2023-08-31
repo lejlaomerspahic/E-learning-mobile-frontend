@@ -3,7 +3,7 @@ import React from "react";
 import { Feather } from "@expo/vector-icons";
 import styles from "./welcome.style";
 import { COLORS, SIZES } from "../../constants";
-import { TextInput, ScrollView, FlatList } from "react-native-gesture-handler"; // Import ScrollView
+import { TextInput, ScrollView, FlatList } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
@@ -96,6 +96,104 @@ const Welcome = ({ favoriteList }) => {
           <ProductRow />
           <HeadingsQuiz></HeadingsQuiz>
           <QuizList></QuizList>
+
+          <View
+            style={{
+              marginHorizontal: 10,
+              borderRadius: 10,
+              padding: 5,
+              elevation: 1,
+              backgroundColor: COLORS.lightWhite,
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+
+                fontFamily: "bold",
+                color: COLORS.gray,
+              }}
+            >
+              Support
+            </Text>
+            <View
+              style={{
+                height: 0.5,
+                backgroundColor: COLORS.gray2,
+                marginBottom: 7,
+              }}
+            ></View>
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "row",
+                width: 148,
+              }}
+            >
+              <Ionicons
+                name="call"
+                size={24}
+                style={{ width: 30, marginLeft: 5 }}
+                color={COLORS.primary}
+              ></Ionicons>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "semibold",
+                  color: COLORS.gray,
+                }}
+              >
+                060 000 0000
+              </Text>
+            </View>
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "row",
+                width: 223,
+              }}
+            >
+              <Ionicons
+                name="mail"
+                size={24}
+                style={{ width: 30, marginLeft: 5 }}
+                color={COLORS.primary}
+              ></Ionicons>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "semibold",
+                  color: COLORS.gray,
+                }}
+              >
+                elearning@gmail.com
+              </Text>
+            </View>
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "row",
+                width: 225,
+              }}
+            >
+              <Ionicons
+                name="location"
+                size={24}
+                style={{ width: 30, marginLeft: 5 }}
+                color={COLORS.primary}
+              ></Ionicons>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "semibold",
+                  color: COLORS.gray,
+                }}
+              >
+                Dolac na Lašvi, Travnik
+              </Text>
+            </View>
+          </View>
           <Blank />
         </>
       ) : (

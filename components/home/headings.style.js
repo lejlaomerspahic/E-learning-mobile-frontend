@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headerTitle: {
-    fontFamily: "semibold",
-    fontSize: SIZES.xLarge - 2,
+    fontSize: 22,
+    fontFamily: "bold",
     color: COLORS.gray,
   },
 });
