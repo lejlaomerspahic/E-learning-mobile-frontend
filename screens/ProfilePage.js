@@ -36,14 +36,9 @@ const ProfilePage = () => {
         },
       };
 
-      axios
-        .get(`${ipAddress}/api/user/get`, config)
-        .then((response) => {
-          setUser(response.data);
-        })
-        .catch((error) => {
-          console.error("Fetch User Data Error:", error.message);
-        });
+      axios.get(`${ipAddress}/api/user/get`, config).then((response) => {
+        setUser(response.data);
+      });
     } catch (error) {
       console.error("Error fetching user data:", error.message);
     }
@@ -216,7 +211,7 @@ const ProfilePage = () => {
           navigate.navigate("LoginScreen");
         }}
       >
-        <Text style={styles.logoutText}>Logout</Text>
+        <Text style={styles.logoutText}>LOGOUT</Text>
         <View style={styles.whiteIconContainer}>
           <Ionicons name="log-out-outline" size={24} color={COLORS.gray2} />
         </View>

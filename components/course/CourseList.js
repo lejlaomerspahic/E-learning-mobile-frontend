@@ -20,7 +20,7 @@ const CourseList = () => {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.itemContainer}
+      style={[styles.itemContainer, styles.shadow]}
       onPress={() => handleCoursePress(item.title)}
     >
       <Text style={styles.itemText}>{item.title}</Text>

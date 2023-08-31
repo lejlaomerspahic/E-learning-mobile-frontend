@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: 5,
   },
+
   itemContainer: {
     padding: 10,
     backgroundColor: COLORS.secondary,

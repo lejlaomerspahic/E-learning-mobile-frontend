@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    marginTop: 10,
+    marginTop: 8,
   },
   sectionTitle: {
     fontFamily: "bold",
@@ -116,8 +116,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     marginTop: 30,
-    width: 130,
+    width: 150,
+    height: 50,
     justifyContent: "flex-end",
+    elevation: 5,
+    shadowColor: "black",
   },
   buttonContent: {
     flexDirection: "row",
@@ -126,9 +129,11 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     flex: 1,
-    marginLeft: 5,
+    marginLeft: 7,
+    marginTop: 4,
+    fontFamily: "bold",
   },
   centerContainer: {
     flex: 1,

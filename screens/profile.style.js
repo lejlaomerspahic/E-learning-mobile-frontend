@@ -125,6 +125,8 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginRight: 30,
     paddingLeft: 10,
+    elevation: 4,
+    height: 45,
   },
   whiteIconContainer: {
     backgroundColor: COLORS.lightWhite,
@@ -138,8 +140,8 @@ const styles = StyleSheet.create({
   logoutText: {
     margin: 12,
     color: COLORS.white,
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontFamily: "bold",
   },
 });
 

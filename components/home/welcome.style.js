@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   searchInput: {
     fontFamily: "regular",
     paddingHorizontal: SIZES.small,
+    marginTop: 3,
   },
   searchButton: {
     width: 40,

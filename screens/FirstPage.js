@@ -28,9 +28,7 @@ const FirstPage = () => {
           setUser(response.data);
           navigation.navigate("Bottom Navigation");
         })
-        .catch((error) => {
-          console.error("Login Error:", error.message);
-        });
+        .catch((error) => {});
     };
 
     fetchToken();

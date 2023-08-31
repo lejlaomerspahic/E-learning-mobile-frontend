@@ -8,12 +8,14 @@ const COLORS = {
 
   gray: "#484848",
   gray2: "#C1C0C8",
+  gray3: "#888888",
 
   offwhite: "#F3F4F8",
   white: "#FFFFFF",
   black: "#000000",
   red: "#e81e4d",
-  green: "#00C135",
+  green: "#006A4E",
+  green2: "#1B4D3E",
   lightWhite: "#FAFAFC",
 };
 

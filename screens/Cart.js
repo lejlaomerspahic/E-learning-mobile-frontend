@@ -237,8 +237,8 @@ const Cart = () => {
               onPress={() => setIsModalVisible(true)}
             >
               <View style={styles.buttonContent}>
-                <Ionicons name="cart-outline" size={24} color="white" />
-                <Text style={styles.checkoutButtonText}>Checkout</Text>
+                <Ionicons name="cart" size={24} color="white" />
+                <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
               </View>
             </TouchableOpacity>
           </View>

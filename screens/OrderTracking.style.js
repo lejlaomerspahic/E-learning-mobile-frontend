@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 40,
-
     backgroundColor: COLORS.secondary,
   },
   placeText: {
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     color: COLORS.lightWhite,
     marginLeft: 5,
+    marginTop: 3,
   },
   cont: {
     padding: 10,

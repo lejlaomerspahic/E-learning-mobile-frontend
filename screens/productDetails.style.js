@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
   },
   price: {
+    textShadowRadius: 4,
     fontFamily: "semibold",
     fontSize: SIZES.large,
-    color: COLORS.gray,
+    color: "#006A4E",
   },
   priceWrapper: {
     padding: 7,
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginTop: 10,
     backgroundColor: COLORS.primary,
+    elevation: 4,
   },
   cartTitle: {
     fontFamily: "bold",
@@ -116,6 +118,7 @@ const styles = StyleSheet.create({
     color: COLORS.offwhite,
   },
   addCart: {
+    elevation: 4,
     width: 40,
     height: 40,
     borderRadius: 50,

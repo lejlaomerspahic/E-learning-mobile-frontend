@@ -56,7 +56,6 @@ const LoginScreen = () => {
         setEmailError("");
         setPasswordError("");
         setError("User does not exist.");
-        console.error("Login Error:", error.message);
       });
   };
   return (

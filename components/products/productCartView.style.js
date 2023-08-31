@@ -45,7 +45,10 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     marginLeft: 5,
   },
-  addBtn: { marginLeft: 23, marginTop: -7 },
+  addBtn: {
+    marginLeft: 23,
+    marginTop: -7,
+  },
 });
 
 export default styles;

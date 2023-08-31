@@ -225,7 +225,7 @@ const OrderTracking = () => {
                   style={{
                     borderRadius: 30,
                     backgroundColor:
-                      index <= activeStep ? COLORS.green : COLORS.gray,
+                      index <= activeStep ? COLORS.green2 : COLORS.gray,
                     width: 45,
                     height: 45,
                     justifyContent: "center",
@@ -246,7 +246,7 @@ const OrderTracking = () => {
                       style={{
                         borderRadius: 30,
                         backgroundColor:
-                          index <= activeStep ? COLORS.green : COLORS.gray,
+                          index <= activeStep ? COLORS.green : COLORS.gray3,
                         width: 30,
                         height: 30,
                         justifyContent: "center",
