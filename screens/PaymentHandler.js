@@ -199,8 +199,18 @@ const PaymentHandler = ({
             />
 
             {renderCheckmarkIcon(
-              inputYear + 2000 > currentYear ||
-                (inputYear + 2000 !== currentYear && inputMonth > currentMonth)
+              expiryDate.includes("/") &&
+                expiryDate.length === 5 &&
+                inputYear >= 0 &&
+                inputYear <= 99 &&
+                inputMonth >= 1 &&
+                inputMonth <= 12 &&
+                ((inputYear + 2000 > currentYear &&
+                  inputMonth >= 1 &&
+                  inputMonth <= 12) ||
+                  (inputYear + 2000 === currentYear &&
+                    (inputMonth > currentMonth ||
+                      (inputMonth >= 1 && inputMonth <= 12))))
             )}
           </View>
           <View style={[styles.inputContainer, styles.cvcInput]}>
