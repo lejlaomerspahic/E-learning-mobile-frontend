@@ -5,7 +5,6 @@ import styles from "./welcome.style";
 import { COLORS, SIZES } from "../../constants";
 import { TextInput, ScrollView, FlatList } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import SearchTile from "../../screens/SearchTile";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,7 +20,6 @@ import QuizList from "../quiz/QuizList";
 import ipAddress from "../../variable";
 
 const Welcome = ({ favoriteList }) => {
-  const navigation = useNavigation();
   const [searchKey, setSearchKey] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 

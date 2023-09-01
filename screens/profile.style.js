@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     width: "80%",
     alignItems: "center",
     justifyContent: "center",
-    height: "50%",
+    height: 400,
   },
   modalInput: {
     width: "100%",

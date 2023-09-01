@@ -65,7 +65,12 @@ const EditProfile = ({ isVisible, onClose, user }) => {
 
       await updateUserOnBackend(updatedData);
 
-      if (email !== user.user.email || password !== user.user.password) {
+      console.log(email);
+      console.log(password);
+      console.log(name);
+      console.log(location);
+
+      if (email !== user.user.email || password !== "") {
         signOutUser();
         navigate.navigate("LoginScreen");
       }

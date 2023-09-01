@@ -61,6 +61,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
     const formattedTime = dateTime.toLocaleTimeString();
     return `${formattedTime}`;
   };
+
   const navigateToOrderTracking = (item) => {
     navigation.navigate("Order", { item });
     onClose();
