@@ -36,7 +36,6 @@ const OrderTracking = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        console.log(item._id);
         const response = await axios.get(
           `${ipAddress}/api/user/get/status/${item._id}`,
           config
@@ -54,9 +53,7 @@ const OrderTracking = () => {
         } else if (response.data.status === "Narudžba primljena") {
           setActiveStep(0);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error.message);
-      }
+      } catch (error) {}
     };
     fetchUserData();
   }, []);

@@ -8,7 +8,6 @@ export default TokenProvider = ({ children }) => {
   const navigate = useNavigation();
   const tokenExpired = (err) => {
     if (err.response.status === 401) {
-      console.log("Token expired or invalid. Logging out...");
       AsyncStorage.removeItem("token");
       navigate.navigate("LoginScreen");
     }

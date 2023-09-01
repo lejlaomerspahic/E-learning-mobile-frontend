@@ -70,11 +70,8 @@ const SignUpScreen = () => {
       })
       .then((response) => {
         navigation.navigate("LoginScreen");
-        console.log("Sign Up Successful!", response.data);
       })
-      .catch((error) => {
-        console.error("Sign Up Error:", error.message);
-      });
+      .catch((error) => {});
   };
 
   return (

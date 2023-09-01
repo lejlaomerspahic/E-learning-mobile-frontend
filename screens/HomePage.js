@@ -52,7 +52,7 @@ const HomePage = () => {
           setFavorites(response.data);
           setIsFavoritesLoaded(true);
         } catch (err) {
-          //tokenExpired(err);
+          tokenExpired(err);
         }
       };
       fetchFavorites();
@@ -61,7 +61,6 @@ const HomePage = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log(favorites);
       if (isFavoritesLoaded) {
         const sendFavoritesToBackend = async () => {
           const token = await AsyncStorage.getItem("token");

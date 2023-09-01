@@ -75,10 +75,7 @@ const Course = ({ route }) => {
           config
         );
         checkRating();
-        console.log("Rating submitted successfully.");
-      } catch (error) {
-        console.error("Error submitting rating:", error);
-      }
+      } catch (error) {}
     }
   };
 

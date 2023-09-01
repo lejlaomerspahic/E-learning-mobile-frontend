@@ -124,9 +124,7 @@ const PaymentHandler = ({
       } else {
         alert("Failed to update products. Please try again.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    } catch (error) {}
   };
 
   const handleTransaction = () => {
@@ -149,16 +147,12 @@ const PaymentHandler = ({
                 const scheduleResponse = await axios.get(
                   `${ipAddress}/api/user/statusUpdate`
                 );
-                console.log("scheduleResponse");
-                console.log(scheduleResponse.data.message);
               },
             },
           ]
         );
       }
-    } catch (error) {
-      console.error(`Error showing alert:`, error);
-    }
+    } catch (error) {}
   };
 
   const renderCheckmarkIcon = (isValid) => {

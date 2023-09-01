@@ -53,9 +53,7 @@ const ProductDetails = () => {
         await axios.post(`${ipAddress}/api/favorites`, data, config);
         setIsFavorite(true);
       }
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -98,7 +96,6 @@ const ProductDetails = () => {
       const cartJson = JSON.stringify(cartWithUserId);
       await AsyncStorage.setItem("cart", cartJson);
     }
-    console.log("Cart successfully saved to AsyncStorage.");
   };
 
   const handleAddToCart = (product, count) => {
@@ -148,10 +145,7 @@ const ProductDetails = () => {
           config
         );
         checkRating();
-        console.log("Rating submitted successfully.");
-      } catch (error) {
-        console.error("Error submitting rating:", error);
-      }
+      } catch (error) {}
     }
   };
 

@@ -87,7 +87,6 @@ const ProfilePage = () => {
   const handleUploadImage = async () => {
     try {
       if (!imageUrl) {
-        console.log("Please select an image first");
         return;
       }
 
@@ -102,14 +101,9 @@ const ProfilePage = () => {
         .then((response) => {
           user.user.imageUrl = imageUrl;
           setUser(user);
-          console.log("Image URL saved successfully!", response.data);
         })
-        .catch((error) => {
-          console.error("Error saving image URL:", error.message);
-        });
-    } catch (error) {
-      console.error("Error uploading image:", error.message);
-    }
+        .catch((error) => {});
+    } catch (error) {}
   };
 
   return (

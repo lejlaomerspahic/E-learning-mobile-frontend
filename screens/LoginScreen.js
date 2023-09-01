@@ -30,9 +30,16 @@ const LoginScreen = () => {
     if (!email) {
       setEmailError("Email is required.");
       hasError = true;
+    } else if (!email.includes("@") || !email.endsWith(".com")) {
+      setEmailError("Invalid email format.");
+      hasError = true;
     }
+
     if (!password) {
       setPasswordError("Password is required.");
+      hasError = true;
+    } else if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long.");
       hasError = true;
     }
 

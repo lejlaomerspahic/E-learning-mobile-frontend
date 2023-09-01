@@ -11,10 +11,7 @@ export default UserProvider = ({ children }) => {
     try {
       await AsyncStorage.removeItem("token");
       setUser(null);
-      console.log("User signed out successfully.");
-    } catch (error) {
-      console.error("Error signing out:", error.message);
-    }
+    } catch (error) {}
   };
 
   return (

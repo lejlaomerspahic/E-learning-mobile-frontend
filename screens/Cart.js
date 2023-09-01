@@ -32,13 +32,10 @@ const Cart = () => {
         if (cartObj.userId === user.user._id) {
           setCart(cartObj.cart);
         } else {
-          console.log("Cart does not belong to the current user.");
           setCart([]);
         }
       }
-    } catch (error) {
-      console.error("Error getting cart from AsyncStorage:", error);
-    }
+    } catch (error) {}
   };
 
   useFocusEffect(
@@ -60,9 +57,7 @@ const Cart = () => {
         await AsyncStorage.setItem("cart", JSON.stringify(object));
         getCartFromStorage();
       }
-    } catch (error) {
-      console.error(`Error removing data with key ${itemId}:`, error);
-    }
+    } catch (error) {}
   };
 
   const handleRemoveItem = (itemId) => {
@@ -84,9 +79,7 @@ const Cart = () => {
           },
         ]
       );
-    } catch (error) {
-      console.error(`Error showing alert:`, error);
-    }
+    } catch (error) {}
   };
   const calculateTotalPrice = (priceWithSign, count) => {
     const price = parseFloat(priceWithSign.replace("$", ""));
@@ -129,7 +122,6 @@ const Cart = () => {
       }
     });
 
-    console.log(totalPriceArray);
     return totalPriceArray;
   };
 

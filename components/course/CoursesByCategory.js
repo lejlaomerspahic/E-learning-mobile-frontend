@@ -41,7 +41,6 @@ const CoursesByCategory = ({ route }) => {
 
               return response.data.isFavorite;
             } catch (error) {
-              console.error("Error checking favorite:", error);
               return false;
             }
           };
@@ -54,9 +53,7 @@ const CoursesByCategory = ({ route }) => {
           setFavorites(favoriteStatus);
           setCourses(response.data);
         } catch (err) {
-          console.log(err);
           tokenExpired(err);
-          console.log("Failed to get courses");
         }
       };
       handleSearch();
@@ -88,9 +85,7 @@ const CoursesByCategory = ({ route }) => {
           [id]: true,
         }));
       }
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-    }
+    } catch (error) {}
   };
 
   const renderCourseItem = ({ item }) => {

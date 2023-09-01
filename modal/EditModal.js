@@ -40,15 +40,12 @@ const EditProfile = ({ isVisible, onClose, user }) => {
       );
 
       setUser((prevUser) => ({
-        ...prevUser,
         user: { ...prevUser.user, ...updatedUser.data.user },
       }));
     } catch (error) {
-      console.error("Error updating user:", error.message);
       Alert.alert("Error", "Failed to update user data. Please try again.");
     }
   };
-
   const handleSubmit = async () => {
     try {
       const updatedData = {
@@ -65,11 +62,6 @@ const EditProfile = ({ isVisible, onClose, user }) => {
 
       await updateUserOnBackend(updatedData);
 
-      console.log(email);
-      console.log(password);
-      console.log(name);
-      console.log(location);
-
       if (email !== user.user.email || password !== "") {
         signOutUser();
         navigate.navigate("LoginScreen");
@@ -84,7 +76,6 @@ const EditProfile = ({ isVisible, onClose, user }) => {
 
       onClose();
     } catch (error) {
-      console.error("Error encrypting password:", error.message);
       Alert.alert("Error", "Failed to update user data. Please try again.");
     }
   };
