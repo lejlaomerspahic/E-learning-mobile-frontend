@@ -58,42 +58,6 @@ const OrderTracking = () => {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        const response = await axios.get(
-          `${ipAddress}/api/user/get/status/${item._id}`,
-          config
-        );
-        setOrderStatus(response.data.status);
-        if (response.data.status === "Narudžba isporučena") {
-          setActiveStep(5);
-        } else if (response.data.status === "Narudžba u procesu dostave") {
-          setActiveStep(4);
-        } else if (response.data.status === "Narudžba stigla na odredište") {
-          setActiveStep(3);
-        } else if (response.data.status === "Narudžba u tranzitu") {
-          setActiveStep(2);
-        } else if (response.data.status === "Narudžba poslata") {
-          setActiveStep(1);
-        } else if (response.data.status === "Narudžba primljena") {
-          setActiveStep(0);
-        }
-      } catch (error) {
-        tokenExpired(error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
   const formatDate = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
     const formattedDate = dateTime.toLocaleDateString();
