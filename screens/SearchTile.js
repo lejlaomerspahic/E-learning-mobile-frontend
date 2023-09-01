@@ -26,28 +26,21 @@ const SearchTile = ({ item }) => {
         <View style={styles.textContainer}>
           <Text style={styles.productTitle}>{item.title}</Text>
 
-          <View style={{ flexDirection: "row" }}>
-            <MaterialCommunityIcons
-              name="truck-delivery-outline"
-              size={24}
-              marginRight={5}
-              color={COLORS.gray}
-            ></MaterialCommunityIcons>
-            <Text
-              style={{
-                marginTop: 3,
-                color: COLORS.gray,
-                fontFamily: "regular",
-              }}
-            >
-              {item.supplier}
-            </Text>
+          <View>
+            <Text numberOfLines={4}>{item.description}</Text>
           </View>
+          <View
+            style={{
+              height: 1,
+              backgroundColor: COLORS.gray2,
+              marginVertical: 5,
+            }}
+          ></View>
           <View style={styles.iconPrice}>
             <Ionicons
               name="cash-outline"
               size={20}
-              color={COLORS.gray}
+              color={COLORS.green2}
               style={{ marginTop: 3, marginLeft: 3 }}
             />
             <Text style={styles.price}>{item.price}</Text>

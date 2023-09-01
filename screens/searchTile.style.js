@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   productImg: {
-    width: 85,
-    height: 100,
+    width: 90,
+    height: 125,
     borderRadius: 8,
     resizeMode: "cover",
   },
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: SIZES.medium,
-    color: COLORS.gray,
+    color: COLORS.green2,
     fontFamily: "semibold",
     marginLeft: 5,
   },
