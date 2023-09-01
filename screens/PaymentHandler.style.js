@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
   expiryInput: {
     flex: 1,
     marginRight: 20,
+    width: 300,
   },
   cvcInput: {
     flex: 1,

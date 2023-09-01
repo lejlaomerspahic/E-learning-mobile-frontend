@@ -159,9 +159,9 @@ const PaymentHandler = ({
     return (
       <Ionicons
         name={isValid ? "checkmark-circle-outline" : "alert-circle-outline"}
-        size={24}
+        size={20}
         color={isValid ? COLORS.green : COLORS.red}
-        style={{ marginLeft: 10 }}
+        style={{ marginLeft: 5 }}
       />
     );
   };
