@@ -193,8 +193,8 @@ const ProductDetails = () => {
                 key={i}
                 onPress={() => {
                   Alert.alert(
-                    "Rate Product",
-                    "Do you want to rate this product?",
+                    "Ocjenjivanje proizvoda",
+                    "Da li želite ocijeniti ovaj proizvod?",
                     [
                       {
                         text: "Cancel",

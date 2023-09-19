@@ -74,7 +74,7 @@ const ProfilePage = () => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissionResult.granted) {
-      alert("Permission to access media library is required!");
+      alert("Potrebna je dozvola za pristup medijskoj biblioteci!");
       return;
     }
 
