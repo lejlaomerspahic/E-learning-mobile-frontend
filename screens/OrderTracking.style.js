@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
   },
   line: { height: 0.5, backgroundColor: COLORS.gray },
   upperRow: {
-    width: SIZES.width - 45,
-    marginHorizontal: 10,
+    width: 360,
+    marginHorizontal: 15,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",

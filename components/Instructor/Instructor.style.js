@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginTop: 3,
   },
   instructorContainer: {
-    marginTop: 90,
+    marginTop: 80,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,

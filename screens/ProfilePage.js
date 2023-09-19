@@ -119,9 +119,9 @@ const ProfilePage = () => {
       <View style={styles.profileImageContainer}>
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.profileImage} />
-        ) : user.user && user.user.imageUrl ? (
+        ) : user?.user?.imageUrl ? (
           <Image
-            source={{ uri: user.user.imageUrl }}
+            source={{ uri: user?.user?.imageUrl }}
             style={styles.profileImage}
           />
         ) : (
@@ -132,7 +132,6 @@ const ProfilePage = () => {
             style={styles.profileImage}
           />
         )}
-
         <View style={styles.iconContainer}>
           <TouchableOpacity
             style={styles.chooseIcon}
@@ -154,11 +153,11 @@ const ProfilePage = () => {
         </View>
       </View>
       <View style={styles.userInfo}>
-        {user && user.user && user.user.name ? (
-          <Text style={styles.userName}>{user.user.name}</Text>
+        {user?.user?.name ? (
+          <Text style={styles.userName}>{user?.user?.name}</Text>
         ) : null}
-        {user && user.user && user.user.email ? (
-          <Text style={styles.userEmail}>{user.user.email}</Text>
+        {user?.user?.email ? (
+          <Text style={styles.userEmail}>{user?.user?.email}</Text>
         ) : null}
       </View>
       <View style={styles.sectionContainer}>

@@ -22,7 +22,7 @@ const WelcomeScreen = ({ navigation }) => {
           style={styles.skipButton}
           onPress={handleFinishWelcome}
         >
-          <Text style={styles.skipButtonText}>Preskoči</Text>
+          <Text style={styles.skipButtonText}>Dalje</Text>
         </TouchableOpacity>
       );
     }
