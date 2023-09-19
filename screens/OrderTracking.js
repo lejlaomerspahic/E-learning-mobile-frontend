@@ -82,7 +82,7 @@ const OrderTracking = () => {
               style={{ marginLeft: 5 }}
             />
           </TouchableOpacity>
-          <Text style={styles.heading}>Go back</Text>
+          <Text style={styles.heading}>Nazad</Text>
         </View>
         <View style={styles.productContainer}>
           <FlatList
@@ -97,7 +97,7 @@ const OrderTracking = () => {
                 <View>
                   <Text style={styles.itemText}>{item.productId.title}</Text>
                   <Text style={{ marginLeft: 10, fontSize: 16 }}>
-                    Quantity: {item.count}
+                    Količina: {item.count}
                   </Text>
                 </View>
               </View>
@@ -119,7 +119,7 @@ const OrderTracking = () => {
             </View>
 
             <View style={{ marginLeft: 180, marginTop: -25 }}>
-              <Text style={{ fontSize: 16 }}>Bought:</Text>
+              <Text style={{ fontSize: 16 }}>Kupljeno:</Text>
               <View style={styles.dateTimeContainer}>
                 <Text style={styles.dateTimeText}>{formatDate(item.date)}</Text>
                 <Text style={styles.dateTimeText}>{formatTime(item.date)}</Text>
@@ -133,7 +133,7 @@ const OrderTracking = () => {
                 justifyContent: "space-between",
               }}
             >
-              <Text style={{ fontSize: 16 }}>Price:</Text>
+              <Text style={{ fontSize: 16 }}>Cijena:</Text>
               <View style={styles.iconContainer}>
                 <Ionicons
                   name="cash-outline"
@@ -166,7 +166,7 @@ const OrderTracking = () => {
               padding: 10,
             }}
           >
-            Track Order
+            Praćenje narudžbe
           </Text>
           <View
             style={{

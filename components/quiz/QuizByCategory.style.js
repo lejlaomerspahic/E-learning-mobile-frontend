@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     marginLeft: 5,
     fontFamily: "bold",
+    marginTop: 3,
   },
   courses: { marginTop: 50 },
   upperRow: {

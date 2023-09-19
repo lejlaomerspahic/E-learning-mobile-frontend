@@ -82,7 +82,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
               color: COLORS.gray,
             }}
           >
-            Completed purchase
+            Obavljene kupovine
           </Text>
           <View style={styles.container}>
             <FlatList
@@ -108,7 +108,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
                             {item.productId.title}
                           </Text>
                           <Text style={{ marginLeft: 10, fontSize: 14 }}>
-                            Quantity: {item.count}
+                            Količina: {item.count}
                           </Text>
                         </View>
                       </View>
@@ -129,8 +129,8 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
                       </Text>
                     </View>
 
-                    <View style={{ marginLeft: 180, marginTop: -25 }}>
-                      <Text style={{ fontSize: 14 }}>Bought:</Text>
+                    <View style={{ marginLeft: 170, marginTop: -25 }}>
+                      <Text style={{ fontSize: 14 }}>Kupljeno:</Text>
                       <View style={styles.dateTimeContainer}>
                         <Text style={styles.dateTimeText}>
                           {formatDate(item.date)}
@@ -148,7 +148,7 @@ const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Text>Price:</Text>
+                      <Text>Cijena:</Text>
                       <View style={styles.iconContainer}>
                         <Ionicons
                           name="cash-outline"

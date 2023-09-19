@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   userWrapper: {
     flexDirection: "row",
     alignItems: "center",
+    marginHorizontal: 15,
   },
   greeting: {
     fontSize: 24,
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 20,
     overflow: "hidden",
-    marginLeft: 190,
+    marginLeft: 170,
   },
   userImage: {
     width: "100%",

@@ -45,7 +45,7 @@ const ScoreModal = ({ isVisible, onClose, scores }) => {
           style={{ marginRight: 5 }}
         />
         <Text style={styles.infoTextScore}>
-          Score: {item.score}/{item.quizId.totalPoints}
+          Rezultat: {item.score}/{item.quizId.totalPoints}
         </Text>
       </View>
     </View>
@@ -66,7 +66,7 @@ const ScoreModal = ({ isVisible, onClose, scores }) => {
               color: COLORS.gray,
             }}
           >
-            Quiz scores
+            Rezultati kvizova
           </Text>
           <FlatList
             data={scores}

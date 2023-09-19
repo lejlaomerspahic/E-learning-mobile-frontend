@@ -22,7 +22,7 @@ const WelcomeScreen = ({ navigation }) => {
           style={styles.skipButton}
           onPress={handleFinishWelcome}
         >
-          <Text style={styles.skipButtonText}>Skip</Text>
+          <Text style={styles.skipButtonText}>Preskoči</Text>
         </TouchableOpacity>
       );
     }
@@ -48,12 +48,14 @@ const WelcomeScreen = ({ navigation }) => {
             style={styles.image}
             resizeMode="cover"
           />
-          <Text style={styles.slideTextOne}>Diverse Learning Materials</Text>
+          <Text style={styles.slideTextOne}>
+            Raznoliki materijali za učenje
+          </Text>
           <Text style={styles.slideDescription}>
-            Explore an extensive collection of books, study notes, and learning
-            resources tailored to your academic needs. From comprehensive
-            textbooks to concise study guides, find everything you need to
-            succeed in your studies.
+            Istražite obimnu kolekciju knjiga, bilješki za učenje i resursa
+            prilagođenih vašim akademskim potrebama. Od sveobuhvatnih udžbenika
+            do sažetih vodiča za učenje, pronađite sve što vam je potrebno za
+            uspjeh u vašem učenju.
           </Text>
         </View>
 
@@ -64,13 +66,12 @@ const WelcomeScreen = ({ navigation }) => {
             resizeMode="cover"
           />
           <Text style={styles.slideTextTwo}>
-            Interactive Learning Experience
+            Interaktivno iskustvo u učenju
           </Text>
           <Text style={styles.slideDescription}>
-            Immerse yourself in interactive video lessons and engaging quizzes.
-            Learn at your own pace, track your progress, and reinforce your
-            understanding of various topics through a dynamic and enjoyable
-            learning experience.
+            Zaronite u interaktivne video lekcije i angažirajuće kvizove. Učite
+            u svom ritmu, pratite svoj napredak i učvrstite svoje razumijevanje
+            različitih tema putem dinamičnog i uživajućeg iskustva u učenju.
           </Text>
         </View>
 
@@ -80,12 +81,12 @@ const WelcomeScreen = ({ navigation }) => {
             style={styles.image}
             resizeMode="cover"
           />
-          <Text style={styles.slideTextThree}>Expert Tutoring Services</Text>
+          <Text style={styles.slideTextThree}>Usluge stručnih instruktora</Text>
           <Text style={styles.slideDescription}>
-            Connect with skilled professors and experienced tutors ready to
-            provide personalized instruction and academic support. Whether you
-            need help with a specific subject or want to enhance your skills,
-            our tutors are here to guide you.
+            Povežite se s iskusnim profesorima i stručnim instruktorima spremnim
+            da pruže personaliziranu nastavu i akademsku podršku. Bez obzira
+            trebate li pomoć za određeni predmet ili želite unaprijediti svoje
+            vještine, naši instruktori su ovdje da vas vode.
           </Text>
         </View>
       </Swiper>

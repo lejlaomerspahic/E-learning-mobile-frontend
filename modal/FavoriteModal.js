@@ -121,7 +121,7 @@ const FavoriteModal = ({ isVisible, onClose, favorites }) => {
               color: COLORS.gray,
             }}
           >
-            Favourites
+            Favoriti
           </Text>
           {favorites.user === user.user._id ? (
             <FlatList

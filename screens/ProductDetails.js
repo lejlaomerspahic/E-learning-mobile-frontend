@@ -236,7 +236,7 @@ const ProductDetails = () => {
           </View>
         </View>
         <View style={styles.descriptionWrapper}>
-          <Text style={styles.description}>Description</Text>
+          <Text style={styles.description}>Opis proizvoda</Text>
           <Text style={styles.desc} numberOfLines={10}>
             {item.description}
           </Text>
@@ -260,8 +260,8 @@ const ProductDetails = () => {
                 style={{ marginTop: 3, color: COLORS.gray, fontFamily: "bold" }}
               >
                 {item.product_location === user.user.location
-                  ? "Free Delivery"
-                  : "$10"}
+                  ? "Besplatna poštarina"
+                  : "10KM"}
               </Text>
             </View>
           </View>
@@ -271,7 +271,7 @@ const ProductDetails = () => {
             onPress={() => handleAddToCart(item, count)}
             style={styles.cartBtn}
           >
-            <Text style={styles.cartTitle}>ADD TO CART</Text>
+            <Text style={styles.cartTitle}>DODAJ U KORPU</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => handleAddToCart(item, count)}

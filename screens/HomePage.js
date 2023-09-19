@@ -87,7 +87,7 @@ const HomePage = () => {
     <SafeAreaView style={{ backgroundColor: "white" }}>
       <View style={styles.appBar}>
         <View style={styles.userWrapper}>
-          <Text style={styles.greeting}>Hello, {userName}</Text>
+          <Text style={styles.greeting}>Zdravo, {userName}</Text>
           {userImageUrl ? (
             <View style={styles.userImageWrapper}>
               <Image source={{ uri: userImageUrl }} style={styles.userImage} />

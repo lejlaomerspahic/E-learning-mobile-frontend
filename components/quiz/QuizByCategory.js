@@ -55,7 +55,7 @@ const QuizByCategory = ({ route }) => {
           <View style={styles.quizInfoContainer}>
             <View style={styles.quizInfo}>
               <Ionicons name="time-outline" size={16} color={COLORS.gray} />
-              <Text style={styles.infoText}>150 seconds</Text>
+              <Text style={styles.infoText}>150 sekundi</Text>
             </View>
             <View style={styles.quizInfo}>
               <Ionicons name="barbell-outline" size={16} color={COLORS.gray} />
@@ -68,7 +68,7 @@ const QuizByCategory = ({ route }) => {
           onPress={handleCoursePress}
         >
           <Ionicons name="play" size={24} color={COLORS.white} />
-          <Text style={styles.startButtonText}>START</Text>
+          <Text style={styles.startButtonText}>ZAPOČNITE KVIZ</Text>
         </TouchableOpacity>
       </View>
     );

@@ -10,7 +10,7 @@ const Headings = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Books</Text>
+        <Text style={styles.headerTitle}>Knjige</Text>
         <TouchableOpacity onPress={() => navigate.navigate("ProductList")}>
           <Ionicons name="ios-grid" size={24} color={COLORS.gray}></Ionicons>
         </TouchableOpacity>

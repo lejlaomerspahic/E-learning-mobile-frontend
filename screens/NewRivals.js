@@ -21,7 +21,7 @@ const NewRivals = () => {
               style={{ marginLeft: 5 }}
             ></Ionicons>
           </TouchableOpacity>
-          <Text style={styles.heading}>Products</Text>
+          <Text style={styles.heading}>Proizvodi</Text>
         </View>
         <ProductList></ProductList>
       </View>

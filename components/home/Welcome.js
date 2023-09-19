@@ -47,9 +47,11 @@ const Welcome = ({ favoriteList }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.welcomeTxt(COLORS.gray)}>Embrace the Endless</Text>
-        <Text style={styles.welcomeTxt(COLORS.primary, -10)}>
-          World of Knowledge
+        <Text style={styles.welcomeTxt(COLORS.gray, 5)}>
+          Otkrijte beskrajni
+        </Text>
+        <Text style={styles.welcomeTxt(COLORS.primary, -13)}>
+          svijet znanja.
         </Text>
       </View>
 
@@ -65,7 +67,7 @@ const Welcome = ({ favoriteList }) => {
             style={styles.searchInput}
             value={searchKey}
             onChangeText={setSearchKey}
-            placeholder="What are you looking for"
+            placeholder="Proizvodi koji te zanimaju?"
           ></TextInput>
         </View>
 
@@ -111,7 +113,7 @@ const Welcome = ({ favoriteList }) => {
                 color: COLORS.gray,
               }}
             >
-              Support
+              Podrška
             </Text>
             <View
               style={{

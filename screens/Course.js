@@ -147,8 +147,8 @@ const Course = ({ route }) => {
                   key={i}
                   onPress={() => {
                     Alert.alert(
-                      "Rate Product",
-                      "Do you want to rate this product?",
+                      "Dodavanje ocjene",
+                      "Želite li ocijeniti ovaj kurs?",
                       [
                         {
                           text: "Cancel",
@@ -180,7 +180,7 @@ const Course = ({ route }) => {
           </View>
           {courses.instructors.map((instructor, index) => (
             <Text key={index} style={styles.createdBy}>
-              Created by: {instructor.name}
+              Kreirao: {instructor.name}
             </Text>
           ))}
 
@@ -188,7 +188,7 @@ const Course = ({ route }) => {
             <View style={styles.iconTextContainer}>
               <Ionicons name="time" size={22} color={COLORS.gray} />
               <Text style={styles.update}>
-                Last Updated: {courses.lastUpdated}
+                Ažurirano: {courses.lastUpdated}
               </Text>
             </View>
             <View style={styles.iconTextContainer}>
@@ -199,7 +199,7 @@ const Course = ({ route }) => {
         </View>
 
         <View style={styles.cont}>
-          <Text style={styles.learnText}>What you'll learn?</Text>
+          <Text style={styles.learnText}>Šta ćeš naučiti?</Text>
           {descriptionSentences.map((sentence, index) => (
             <View key={index} style={styles.descriptionContainer}>
               <Ionicons
@@ -211,7 +211,7 @@ const Course = ({ route }) => {
             </View>
           ))}
         </View>
-        <Text style={styles.instructor}>Instructor:</Text>
+        <Text style={styles.instructor}>Instruktor:</Text>
         {courses.instructors.map((instructor, index) => (
           <TouchableOpacity
             key={index}

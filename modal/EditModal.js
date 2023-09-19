@@ -43,7 +43,10 @@ const EditProfile = ({ isVisible, onClose, user }) => {
         user: { ...prevUser.user, ...updatedUser.data.user },
       }));
     } catch (error) {
-      Alert.alert("Error", "Failed to update user data. Please try again.");
+      Alert.alert(
+        "Greška",
+        "Nije uspelo ažuriranje korisničkih podataka. Molimo pokušajte ponovo."
+      );
     }
   };
   const handleSubmit = async () => {
@@ -76,7 +79,10 @@ const EditProfile = ({ isVisible, onClose, user }) => {
 
       onClose();
     } catch (error) {
-      Alert.alert("Error", "Failed to update user data. Please try again.");
+      Alert.alert(
+        "Greška",
+        "Nije uspelo ažuriranje korisničkih podataka. Molimo pokušajte ponovo."
+      );
     }
   };
 
@@ -92,13 +98,13 @@ const EditProfile = ({ isVisible, onClose, user }) => {
               color: COLORS.gray,
             }}
           >
-            Edit Profile
+            Uredi profil
           </Text>
           <TextInput
             style={styles.modalInput}
             value={name}
             onChangeText={setName}
-            placeholder="Name"
+            placeholder="Ime"
           />
           <TextInput
             style={styles.modalInput}
@@ -110,7 +116,7 @@ const EditProfile = ({ isVisible, onClose, user }) => {
             style={styles.modalInput}
             value={password}
             onChangeText={setPassword}
-            placeholder="Password"
+            placeholder="Lozinka"
             secureTextEntry
           />
 
@@ -118,10 +124,10 @@ const EditProfile = ({ isVisible, onClose, user }) => {
             style={styles.modalInput}
             value={location}
             onChangeText={setLocation}
-            placeholder="Location"
+            placeholder="Lokacija"
           />
           <TouchableOpacity style={styles.modalButton} onPress={handleSubmit}>
-            <Text style={styles.modalButtonText}>SUBMIT</Text>
+            <Text style={styles.modalButtonText}>SPREMI</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>

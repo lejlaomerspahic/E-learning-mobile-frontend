@@ -34,11 +34,11 @@ const PaymentHandler = ({
   const [inputMonth, inputYear] = expiryDate.split("/").map(Number);
   const validateCardData = () => {
     if (cardNumber.length !== 16) {
-      alert("Card number must have 16 digits");
+      alert("Broj kartice mora imati 16 cifara.");
       return false;
     }
     if (cvc.length !== 3) {
-      alert("CVC must have 3 digits");
+      alert("CVC mora imati 3 cifre.");
       return false;
     }
 
@@ -46,12 +46,12 @@ const PaymentHandler = ({
       inputYear + 2000 < currentYear ||
       (inputYear + 2000 === currentYear && inputMonth < currentMonth)
     ) {
-      alert("Card expiration date is invalid");
+      alert("Rok važenja kartice nije važeći.");
       return false;
     }
 
     if (!cvc || !cardHolderName) {
-      alert("Please fill in all fields");
+      alert("Molimo popunite sva polja.");
       return false;
     }
 
@@ -119,10 +119,10 @@ const PaymentHandler = ({
         const updateCart = await AsyncStorage.removeItem("cart");
         setCart(updateCart);
         onClose();
-        alert("Transaction successfully completed!");
+        alert("Transakcija uspješno završena!");
         getCartFromStorage();
       } else {
-        alert("Failed to update products. Please try again.");
+        alert("Neuspelo ažuriranje proizvoda. Molimo pokušajte ponovo.");
       }
     } catch (error) {}
   };
@@ -133,8 +133,8 @@ const PaymentHandler = ({
     try {
       if (isValid) {
         Alert.alert(
-          "Pay for the product",
-          "Are you sure you want to proceed with the transaction?",
+          "Plaćanje proizvod",
+          "Da li ste sigurni da želite nastaviti transakciju?",
           [
             {
               text: "Cancel",
@@ -172,14 +172,14 @@ const PaymentHandler = ({
         <Ionicons name="close" size={30} color={COLORS.primary} />
       </TouchableOpacity>
       <View style={styles.modalContent}>
-        <Text style={styles.modalTitle}>Payment Details</Text>
+        <Text style={styles.modalTitle}>Detalji plaćanja</Text>
         <View style={styles.inputContainer}>
           <View style={styles.inputIcon}>
             <Ionicons name="card-outline" size={24} color={COLORS.gray} />
           </View>
           <TextInput
             style={styles.input}
-            placeholder="Card Number"
+            placeholder="Broj kartice"
             keyboardType="numeric"
             value={cardNumber}
             onChangeText={setCardNumber}
@@ -237,7 +237,7 @@ const PaymentHandler = ({
           </View>
           <TextInput
             style={styles.input}
-            placeholder="Name"
+            placeholder="Ime"
             value={cardHolderName}
             onChangeText={setCardHolderName}
           />
@@ -248,7 +248,7 @@ const PaymentHandler = ({
           style={styles.payButton}
         >
           <Text style={styles.payButtonText}>
-            Pay ${calculateTotalOrderPrice(cart, user.user.location)}
+            PLATI {calculateTotalOrderPrice(cart, user.user.location)}KM
           </Text>
         </TouchableOpacity>
       </View>

@@ -7,11 +7,11 @@ const CourseList = () => {
   const navigation = useNavigation();
 
   const data = [
-    { id: 1, title: "Technology" },
-    { id: 2, title: "Math" },
-    { id: 3, title: "Physic" },
-    { id: 4, title: "Chemistry" },
-    { id: 5, title: "English" },
+    { id: 1, title: "Tehnologija" },
+    { id: 2, title: "Matematika" },
+    { id: 3, title: "Fizika" },
+    { id: 4, title: "Hemija" },
+    { id: 5, title: "Engleski" },
   ];
 
   const handleCoursePress = (category) => {

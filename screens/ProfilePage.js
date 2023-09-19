@@ -167,7 +167,7 @@ const ProfilePage = () => {
           onPress={() => setShowModalEdit(true)}
         >
           <Ionicons name="create-outline" size={30} color={COLORS.primary} />
-          <Text style={styles.sectionText}>Edit profile</Text>
+          <Text style={styles.sectionText}>Uredi profil</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -175,7 +175,7 @@ const ProfilePage = () => {
           onPress={() => setShowModalFavorites(true)}
         >
           <Ionicons name="heart-outline" size={30} color={COLORS.primary} />
-          <Text style={styles.sectionText}>Favorites</Text>
+          <Text style={styles.sectionText}>Favoriti</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.sectionContainer}>
@@ -188,7 +188,7 @@ const ProfilePage = () => {
             size={30}
             color={COLORS.primary}
           />
-          <Text style={styles.sectionText}>Completed Purchases</Text>
+          <Text style={styles.sectionText}>Obavljene kupovine</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -196,7 +196,7 @@ const ProfilePage = () => {
           onPress={() => setShowModalScore(true)}
         >
           <Ionicons name="trophy-outline" size={30} color={COLORS.primary} />
-          <Text style={styles.sectionText}>Quiz</Text>
+          <Text style={styles.sectionText}>Kvizovi</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
@@ -206,7 +206,7 @@ const ProfilePage = () => {
           navigate.navigate("LoginScreen");
         }}
       >
-        <Text style={styles.logoutText}>LOGOUT</Text>
+        <Text style={styles.logoutText}>ODJAVA</Text>
         <View style={styles.whiteIconContainer}>
           <Ionicons name="log-out-outline" size={24} color={COLORS.gray2} />
         </View>

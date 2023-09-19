@@ -32,28 +32,28 @@ const SignUpScreen = () => {
     setPasswordError("");
     setLocationError("");
     if (!name) {
-      setNameError("Name is required.");
+      setNameError("Ime je obavezno polje.");
       hasError = true;
     }
 
     if (!email) {
-      setEmailError("Email is required.");
+      setEmailError("Email je obavezno polje.");
       hasError = true;
     } else if (!email.includes("@") || !email.endsWith(".com")) {
-      setEmailError("Invalid email format.");
+      setEmailError("Nevažeći e-mail format.");
       hasError = true;
     }
 
     if (!password) {
-      setPasswordError("Password is required.");
+      setPasswordError("Lozinka je obavezno polje.");
       hasError = true;
     } else if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters long.");
+      setPasswordError("Lozinka mora sadržavati najmanje 6 karaktera.");
       hasError = true;
     }
 
     if (!location) {
-      setLocationError("Location is required.");
+      setLocationError("Lokacija je obavezno polje.");
       hasError = true;
     }
 
@@ -77,10 +77,12 @@ const SignUpScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.roundedContainer}>
-        <Text style={[styles.title, styles.buttonWithShadoww]}>Sign Up</Text>
+        <Text style={[styles.title, styles.buttonWithShadoww]}>
+          Registracija
+        </Text>
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
-          placeholder="Name"
+          placeholder="Ime"
           onChangeText={(text) => setName(text)}
           value={name}
           autoCapitalize="none"
@@ -97,7 +99,7 @@ const SignUpScreen = () => {
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
-          placeholder="Password"
+          placeholder="Lozinka"
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry
@@ -107,7 +109,7 @@ const SignUpScreen = () => {
         ) : null}
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
-          placeholder="Location"
+          placeholder="Lokacija"
           onChangeText={(text) => setLocation(text)}
           value={location}
         />
@@ -118,15 +120,15 @@ const SignUpScreen = () => {
           style={[styles.button, styles.buttonWithShadow]}
           onPress={handleSignUp}
         >
-          <Text style={styles.buttonText}>SIGN UP</Text>
+          <Text style={styles.buttonText}>REGISTRACIJA</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("LoginScreen")}
           style={styles.loginLink}
         >
           <Text style={styles.loginText}>
-            Already have an account?
-            <Text style={styles.boldBlueText}> Login here.</Text>
+            Već imate račun?
+            <Text style={styles.boldBlueText}> Prijavite se ovdje.</Text>
           </Text>
         </TouchableOpacity>
       </View>

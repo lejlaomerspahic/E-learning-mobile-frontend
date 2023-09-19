@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     color: COLORS.lightWhite,
     marginLeft: 5,
+    marginTop: 3,
   },
   videoContainer: {
     marginTop: 60,

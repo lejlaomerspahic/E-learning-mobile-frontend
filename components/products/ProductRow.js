@@ -14,7 +14,7 @@ const ProductRow = () => {
       {isLoading ? (
         <ActivityIndicator></ActivityIndicator>
       ) : error ? (
-        <Text style={{ marginLeft: 10 }}>Something went wrong</Text>
+        <Text style={{ marginLeft: 10 }}>Nešto je pošlo po zlu</Text>
       ) : (
         <FlatList
           data={data}

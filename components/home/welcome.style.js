@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
 
   welcomeTxt: (color, top) => ({
     fontFamily: "bold",
-    fontSize: SIZES.xxLarge - 9,
+    fontSize: 40,
     marginTop: top,
-    marginLeft: SIZES.xSmall,
+    marginHorizontal: SIZES.xSmall,
     color: color,
   }),
   searchContariner: {

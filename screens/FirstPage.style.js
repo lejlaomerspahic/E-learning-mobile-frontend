@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#fff",
-    marginLeft: 100,
+    marginLeft: 85,
   },
   buttonIcon: {
-    width: 60,
+    width: 70,
     justifyContent: "center",
     alignItems: "center",
   },

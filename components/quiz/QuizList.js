@@ -6,12 +6,12 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./QuizList.style";
 
 const data = [
-  { id: 1, title: "English", icon: "ios-language" },
-  { id: 2, title: "General", icon: "ios-book" },
-  { id: 3, title: "Technology", icon: "ios-laptop" },
-  { id: 4, title: "Math", icon: "ios-calculator" },
-  { id: 5, title: "Chemistry", icon: "ios-flask" },
-  { id: 6, title: "Physics", icon: "ios-rocket" },
+  { id: 1, title: "Engleski", icon: "ios-language" },
+  { id: 2, title: "Općenito", icon: "ios-book" },
+  { id: 3, title: "Tehnologija", icon: "ios-laptop" },
+  { id: 4, title: "Matematika", icon: "ios-calculator" },
+  { id: 5, title: "Hemija", icon: "ios-flask" },
+  { id: 6, title: "Fizika", icon: "ios-rocket" },
 ];
 
 const QuizList = () => {

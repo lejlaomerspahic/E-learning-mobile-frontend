@@ -6,7 +6,7 @@ const HeadingsCourse = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Courses</Text>
+        <Text style={styles.headerTitle}>Kursevi</Text>
       </View>
     </View>
   );

@@ -51,19 +51,18 @@ const FirstPage = () => {
         ></ImageBackground>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Welcome</Text>
-        <Text style={styles.subTitle}>Are you ready to learn?</Text>
+        <Text style={styles.title}>Dobrodošli!</Text>
+        <Text style={styles.subTitle}>Jeste li spremni da učite?</Text>
       </View>
       <View style={styles.buttonContainer}>
         <Text style={styles.content}>
-          This app contains a wealth of content that will make your learning
-          easier
+          Ova aplikacija sadrži mnoštvo sadržaja koji će olakšati vaše učenje
         </Text>
         <TouchableOpacity
           style={[styles.button, styles.buttonWithShadow]}
           onPress={handleLogin}
         >
-          <Text style={styles.buttonText}>Sign in</Text>
+          <Text style={styles.buttonText}>Prijavite se</Text>
           <View style={styles.buttonIcon}>
             <Ionicons name="log-in-outline" size={24} color="#fff" />
           </View>
@@ -72,7 +71,7 @@ const FirstPage = () => {
           style={[styles.button, styles.buttonWithShadow]}
           onPress={handleRegistration}
         >
-          <Text style={styles.buttonText}>Sign up</Text>
+          <Text style={styles.buttonText}>Registrujte se</Text>
           <View style={styles.buttonIcon}>
             <Ionicons name="person-add-outline" size={24} color="#fff" />
           </View>

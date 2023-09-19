@@ -72,7 +72,7 @@ const InstructorPage = ({ route }) => {
             style={{ marginLeft: 5 }}
           />
         </TouchableOpacity>
-        <Text style={styles.heading}>Instructor</Text>
+        <Text style={styles.heading}>Instruktor</Text>
       </View>
 
       <View style={styles.instructorContainer}>
@@ -119,17 +119,17 @@ const InstructorPage = ({ route }) => {
       </View>
 
       <View style={[styles.section, styles.aboutMeSection]}>
-        <Text style={styles.title}>About Me</Text>
+        <Text style={styles.title}>O meni</Text>
         <Text style={styles.infoText}>{instructor.bio}</Text>
       </View>
 
       <View style={styles.workHourlyContainer}>
         <View style={[styles.section, styles.workModeContainer]}>
-          <Text style={styles.subtitle}>Work Mode</Text>
+          <Text style={styles.subtitle}>Režim rada</Text>
           <Text style={styles.infoText}>{instructor.workingMode}</Text>
         </View>
         <View style={[styles.section, styles.hourlyRateContainer]}>
-          <Text style={styles.subtitle}>Hourly Rate</Text>
+          <Text style={styles.subtitle}>Cijena časa</Text>
           <Text style={(styles.infoText, styles.price)}>
             ${instructor.hourlyRate}
           </Text>
@@ -137,7 +137,7 @@ const InstructorPage = ({ route }) => {
       </View>
 
       <View style={[styles.section, styles.coursesSection]}>
-        <Text style={styles.titleCourse}>Courses</Text>
+        <Text style={styles.titleCourse}>Kursevi</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {instructor.courses.map((course) => (
             <TouchableOpacity

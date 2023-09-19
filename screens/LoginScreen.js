@@ -28,18 +28,18 @@ const LoginScreen = () => {
     let hasError = false;
 
     if (!email) {
-      setEmailError("Email is required.");
+      setEmailError("Email je obavezno polje.");
       hasError = true;
     } else if (!email.includes("@") || !email.endsWith(".com")) {
-      setEmailError("Invalid email format.");
+      setEmailError("Nevažeći e-mail format.");
       hasError = true;
     }
 
     if (!password) {
-      setPasswordError("Password is required.");
+      setPasswordError("Password je obavezno polje.");
       hasError = true;
     } else if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters long.");
+      setPasswordError("Lozinka mora sadržavati najmanje 6 karaktera.");
       hasError = true;
     }
 
@@ -62,13 +62,13 @@ const LoginScreen = () => {
       .catch((error) => {
         setEmailError("");
         setPasswordError("");
-        setError("User does not exist.");
+        setError("Korisnik ne postoji.");
       });
   };
   return (
     <View style={styles.container}>
       <View style={styles.roundedContainer}>
-        <Text style={[styles.title, styles.buttonWithShadoww]}>Sign in</Text>
+        <Text style={[styles.title, styles.buttonWithShadoww]}>Prijava</Text>
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
           placeholder="Email"
@@ -81,7 +81,7 @@ const LoginScreen = () => {
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
         <TextInput
           style={[styles.input, styles.inputWithShadow]}
-          placeholder="Password"
+          placeholder="Lozinka"
           placeholderTextColor="#999"
           onChangeText={(text) => setPassword(text)}
           value={password}
@@ -93,7 +93,7 @@ const LoginScreen = () => {
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>SIGN IN</Text>
+          <Text style={styles.buttonText}>PRIJAVA</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -101,8 +101,8 @@ const LoginScreen = () => {
           style={styles.registerLink}
         >
           <Text style={styles.registerText}>
-            Don't have an account?
-            <Text style={styles.boldBlueText}> Register here.</Text>
+            Još nemate račun?
+            <Text style={styles.boldBlueText}> Registrujte se ovdje.</Text>
           </Text>
         </TouchableOpacity>
       </View>

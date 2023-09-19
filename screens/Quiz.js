@@ -49,7 +49,7 @@ const Quiz = ({ route }) => {
   };
 
   const handleTimeUp = () => {
-    Alert.alert("Time Up", "Your time has expired.", [
+    Alert.alert("Vrijeme isteklo", "Vaše vrijeme je isteklo.", [
       {
         text: "OK",
         onPress: () => navigation.goBack(),
@@ -68,8 +68,8 @@ const Quiz = ({ route }) => {
     saveScoreToBackend(quiz._id, score);
 
     Alert.alert(
-      "Quiz Completed",
-      `Your score: ${score}/${questions.length * 2}`,
+      "Kviz završten",
+      `Tvoj rezultat: ${score}/${questions.length * 2}`,
       [
         {
           text: "OK",
@@ -121,7 +121,7 @@ const Quiz = ({ route }) => {
     return questions.map((question, index) => (
       <View key={index} style={styles.questionContainer}>
         <View style={styles.questionHeader}>
-          <Text style={styles.questionHeaderText}>Question {index + 1}</Text>
+          <Text style={styles.questionHeaderText}>Pitanje {index + 1}</Text>
         </View>
         <View style={styles.questionInnerContainer}>
           <Image source={{ uri: quiz.imageUrl }} style={styles.quizImage} />
@@ -137,7 +137,7 @@ const Quiz = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.timerContainer}>
-        <Text style={styles.timerText}>{remainingTime} seconds</Text>
+        <Text style={styles.timerText}>{remainingTime} sekundi</Text>
       </View>
       <Swiper
         style={styles.swiper}
@@ -157,7 +157,7 @@ const Quiz = ({ route }) => {
         }
       >
         <Text style={styles.nextButtonText}>
-          {currentIndex < questions.length - 1 ? "Next" : "Finish Quiz"}
+          {currentIndex < questions.length - 1 ? "Dalje" : "Završi kviz"}
         </Text>
       </TouchableOpacity>
     </View>

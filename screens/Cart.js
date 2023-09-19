@@ -63,8 +63,8 @@ const Cart = () => {
   const handleRemoveItem = (itemId) => {
     try {
       Alert.alert(
-        "Delete Product",
-        "Are you sure you want to delete this product?",
+        "Brisanje proizvoda",
+        "Jeste li sigurni da želite izbrisati ovaj proizvod?",
         [
           {
             text: "Cancel",
@@ -74,7 +74,7 @@ const Cart = () => {
             text: "OK",
             onPress: async () => {
               await remove(itemId);
-              alert("Product successfully deleted");
+              alert("Proizvod uspješno obrisan.");
             },
           },
         ]
@@ -160,7 +160,7 @@ const Cart = () => {
                   </Text>
                 </View>
               </View>
-              <Text style={styles.count}>Quantity: {item.count}</Text>
+              <Text style={styles.count}>Količina: {item.count}</Text>
 
               <View style={styles.iconContainerLocation}>
                 <Ionicons
@@ -175,7 +175,7 @@ const Cart = () => {
               </View>
               <View style={styles.line} />
               <View style={styles.iconContainer}>
-                <Text>Total price:</Text>
+                <Text>Ukupna cijena:</Text>
                 <View style={styles.cardContainer}>
                   <Ionicons name="card-outline" size={20} color={COLORS.gray} />
                   <Text
@@ -196,21 +196,21 @@ const Cart = () => {
       ) : (
         <View style={styles.centerContainer}>
           <Text style={styles.noItemsText}>
-            ...no items currently available in your shopping cart
+            ...trenutno nema dostupnih stavki u vašoj korpi za kupovinu
           </Text>
         </View>
       )}
       {cart !== undefined && cart.length > 0 && (
         <View style={styles.containerDPT}>
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Delivery</Text>
+            <Text style={styles.sectionTitle}>Poštarina</Text>
             <Text style={styles.sectionValue}>
               ${calculateDeliveryCost(cart, user.user.location)}
             </Text>
           </View>
 
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Price</Text>
+            <Text style={styles.sectionTitle}>Cijena</Text>
             <Text style={styles.sectionValue}>
               ${calculateTotalItemPrice(cart)}
             </Text>
@@ -219,7 +219,7 @@ const Cart = () => {
           <View style={styles.separator} />
 
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionTitle}>Total price</Text>
+            <Text style={styles.sectionTitle}>Ukupna cijena</Text>
             <Text style={styles.sectionValue}>
               ${calculateTotalOrderPrice(cart, user.user.location)}
             </Text>
@@ -232,7 +232,7 @@ const Cart = () => {
             >
               <View style={styles.buttonContent}>
                 <Ionicons name="cart" size={24} color="white" />
-                <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
+                <Text style={styles.checkoutButtonText}>PLAĆANJE</Text>
               </View>
             </TouchableOpacity>
           </View>

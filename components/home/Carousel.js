@@ -40,7 +40,7 @@ const CarouselComponent = ({ favoriteList }) => {
 
   return (
     <View style={styles.carouselContainer}>
-      <Text style={styles.headerTitle}>Something for you</Text>
+      <Text style={styles.headerTitle}>Nešto za vas</Text>
       {favoriteList.length > 0 ? (
         <Carousel
           data={favoriteList}

@@ -6,7 +6,7 @@ const HeadingsQuiz = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Quiz</Text>
+        <Text style={styles.headerTitle}>Kvizovi</Text>
       </View>
     </View>
   );
