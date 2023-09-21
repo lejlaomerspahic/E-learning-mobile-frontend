@@ -38,7 +38,10 @@ const SignUpScreen = () => {
     if (!email) {
       setEmailError("Email je obavezno polje.");
       hasError = true;
-    } else if (!email.includes("@") || !email.endsWith(".com")) {
+    } else if (
+      !email.includes("@") ||
+      (!email.endsWith(".com") && !email.endsWith(".ba"))
+    ) {
       setEmailError("Nevažeći e-mail format.");
       hasError = true;
     }
