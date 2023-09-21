@@ -23,6 +23,7 @@ import InstructorPage from "./components/Instructor/Instructor";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import OrderTracking from "./screens/OrderTracking";
 import TokenProvider from "./hook/useToken";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

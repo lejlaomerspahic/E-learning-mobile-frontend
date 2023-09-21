@@ -1,10 +1,7 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
 import ProductCartView from "./ProductCartView";
 import useFetch from "../../hook/useFetch";
-import { useNavigation } from "@react-navigation/native";
 import styles from "./productList.style";
 import { ActivityIndicator } from "react-native";
 import { COLORS, SIZES } from "../../constants";

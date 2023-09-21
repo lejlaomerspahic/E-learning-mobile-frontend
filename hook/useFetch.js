@@ -1,10 +1,9 @@
-import { View, Text } from "react-native";
-import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ipAddress from "../variable";
 import { useToken } from "./useToken";
+
 const useFetch = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

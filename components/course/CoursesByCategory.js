@@ -6,7 +6,6 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import ipAddress from "../../variable";
 import styles from "./CoursesByCategory.style";
-
 import { COLORS } from "../../constants/index";
 import { useToken } from "../../hook/useToken";
 

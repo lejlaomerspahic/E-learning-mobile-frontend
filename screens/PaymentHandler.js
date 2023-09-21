@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, Alert } from "react-native";
 import styles from "./PaymentHandler.style";
 import { useConfirmPayment } from "@stripe/stripe-react-native";
@@ -8,7 +8,7 @@ import { useUser } from "../hook/useUser";
 import ipAddress from "../variable";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+
 const PaymentHandler = ({
   cart,
   calculateTotalOrderPrice,

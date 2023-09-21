@@ -11,12 +11,11 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import EditModal from "../modal/EditModal";
 import ScoreModal from "../modal/ScoreModal";
 import FavoriteModal from "../modal/FavoriteModal";
-import { useEffect } from "react";
 import { useFavorites } from "../hook/useFavorites";
-
 import { useToken } from "../hook/useToken";
 import ipAddress from "../variable";
 import CompletedPurchaseModal from "../modal/CompletedPurchaseModal";
+
 const ProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const { user, setUser, signOutUser } = useUser();

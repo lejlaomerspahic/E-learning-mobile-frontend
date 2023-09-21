@@ -14,8 +14,8 @@ import styles from "../screens/profile.style";
 import { useUser } from "../hook/useUser";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";
-
 import ipAddress from "../variable";
+
 const EditProfile = ({ isVisible, onClose, user }) => {
   const { setUser, signOutUser } = useUser();
   const navigate = useNavigation();

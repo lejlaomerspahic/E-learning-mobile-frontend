@@ -10,10 +10,9 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import { useUser } from "../hook/useUser";
-import { executeNativeBackPress } from "react-native-screens";
-
 import ipAddress from "../variable";
 import { useToken } from "../hook/useToken";
+
 const ProductDetails = () => {
   const route = useRoute();
   const { item } = route.params;

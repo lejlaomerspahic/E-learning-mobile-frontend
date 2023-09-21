@@ -6,7 +6,6 @@ import {
   Modal,
   Image,
   FlatList,
-  StyleSheet,
 } from "react-native";
 
 import { useToken } from "../hook/useToken";
@@ -22,8 +21,8 @@ import { useNavigation } from "@react-navigation/native";
 const CompletedPurchaseModal = ({ isVisible, onClose, products }) => {
   const { setUser } = useUser();
   const navigation = useNavigation();
-
   const { tokenExpired } = useToken();
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {

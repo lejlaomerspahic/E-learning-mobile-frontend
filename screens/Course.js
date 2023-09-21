@@ -11,13 +11,13 @@ import YouTubeIframe from "react-native-youtube-iframe";
 import { COLORS, SIZES } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
-import Blank from "../components/course/Blank";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./Course.style";
 import ipAddress from "../variable";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useToken } from "../hook/useToken";
+
 const Course = ({ route }) => {
   const { course } = route.params;
   const [courses, setCourses] = useState(null);

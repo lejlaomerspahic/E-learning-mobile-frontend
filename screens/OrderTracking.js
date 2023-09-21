@@ -1,5 +1,4 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import styles from "./OrderTracking.style";
@@ -12,6 +11,7 @@ import ipAddress from "../variable";
 import axios from "axios";
 import { useToken } from "../hook/useToken";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const OrderTracking = () => {
   const route = useRoute();
   const { item } = route.params;

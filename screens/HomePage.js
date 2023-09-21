@@ -1,8 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Welcome from "../components/home/Welcome";
-import { COLORS } from "../constants";
 import { useUser } from "../hook/useUser";
 import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";

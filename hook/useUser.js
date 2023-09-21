@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useState, useContext, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { createContext, useState, useContext } from "react";
 
 const UserContext = createContext();
 

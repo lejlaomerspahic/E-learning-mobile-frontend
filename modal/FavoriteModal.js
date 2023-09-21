@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./FavouriteModal.style";
 import { useUser } from "../hook/useUser";
+
 const FavoriteModal = ({ isVisible, onClose, favorites }) => {
   const navigation = useNavigation();
   const { user } = useUser();

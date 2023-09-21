@@ -1,13 +1,12 @@
 import {
   View,
   Text,
-  StyleSheet,
   Image,
   TouchableOpacity,
   Modal,
   Alert,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useUser } from "../hook/useUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -15,8 +14,8 @@ import { COLORS } from "../constants";
 import { Ionicons } from "@expo/vector-icons";
 import PaymentHandler from "./PaymentHandler";
 import styles from "./Cart.style";
-
 import { useToken } from "../hook/useToken";
+
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const { user } = useUser();
