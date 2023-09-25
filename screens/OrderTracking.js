@@ -148,7 +148,7 @@ const OrderTracking = () => {
                     fontSize: 16,
                   }}
                 >
-                  ${item.price}
+                  {item.price}KM
                 </Text>
               </View>
             </View>

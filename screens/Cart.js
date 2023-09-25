@@ -81,7 +81,7 @@ const Cart = () => {
     } catch (error) {}
   };
   const calculateTotalPrice = (priceWithSign, count) => {
-    const price = parseFloat(priceWithSign.replace("$", ""));
+    const price = parseFloat(priceWithSign.replace("KM", ""));
     return price * count;
   };
 
@@ -185,7 +185,7 @@ const Cart = () => {
                       fontSize: 16,
                     }}
                   >
-                    ${calculateTotalPrice(item.price, item.count)}
+                    {calculateTotalPrice(item.price, item.count)}KM
                   </Text>
                 </View>
               </View>
@@ -204,14 +204,14 @@ const Cart = () => {
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Poštarina</Text>
             <Text style={styles.sectionValue}>
-              ${calculateDeliveryCost(cart, user.user.location)}
+              {calculateDeliveryCost(cart, user.user.location)}KM
             </Text>
           </View>
 
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Cijena</Text>
             <Text style={styles.sectionValue}>
-              ${calculateTotalItemPrice(cart)}
+              {calculateTotalItemPrice(cart)}KM
             </Text>
           </View>
 
@@ -220,7 +220,7 @@ const Cart = () => {
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Ukupna cijena</Text>
             <Text style={styles.sectionValue}>
-              ${calculateTotalOrderPrice(cart, user.user.location)}
+              {calculateTotalOrderPrice(cart, user.user.location)}KM
             </Text>
           </View>
 

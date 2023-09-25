@@ -25,6 +25,7 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     setEmailError("");
     setPasswordError("");
+    setError("");
     let hasError = false;
 
     if (!email) {
