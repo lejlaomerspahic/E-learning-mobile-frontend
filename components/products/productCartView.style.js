@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "bold",
     fontSize: 16,
-    marginBottom: 2.5,
+    marginBottom: 3,
     marginTop: 2,
     color: COLORS.gray,
     height: 45,
-    width: 110,
+    width: 122,
   },
   supplier: {
     fontFamily: "regular",
