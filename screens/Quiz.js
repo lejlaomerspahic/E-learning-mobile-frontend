@@ -68,7 +68,7 @@ const Quiz = ({ route }) => {
     saveScoreToBackend(quiz._id, score);
 
     Alert.alert(
-      "Kviz završten",
+      "Kviz završen",
       `Tvoj rezultat: ${score}/${questions.length * 2}`,
       [
         {
