@@ -9,9 +9,8 @@ const styles = StyleSheet.create({
   courseContainer: {
     backgroundColor: COLORS.secondary,
     borderRadius: 10,
-    marginBottom: 10,
     padding: 10,
-    marginTop: 30,
+    marginTop: 25,
   },
   courseImage: {
     width: "100%",
